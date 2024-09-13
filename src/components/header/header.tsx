@@ -13,7 +13,7 @@ export function Header() {
 
 			<SearchInput placeholder="Pesquisar..." className="hidden md:flex" />
 
-			<div className="flex gap-2">
+			<div className="flex gap-3">
 				<ThemeSwitcher />
 				<Menu />
 			</div>

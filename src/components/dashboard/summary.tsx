@@ -1,13 +1,13 @@
 import { SummaryCard } from "./summary-card";
-import { ArrowDownCircle, ArrowUpCircle, Wallet2 } from "lucide-react";
+import { Users, Pill, Hospital, NotepadTextDashed } from "lucide-react";
 
 export function Summary() {
 	return (
 		<section id="summary" className="grid gap-6 md:grid-cols-4">
 			<SummaryCard
-				title="Entradas"
-				icon={<ArrowDownCircle size={20} />}
-				value={3234.78}
+				title="Pacientes"
+				icon={<Users size={20} />}
+				value={5}
 				description={
 					<p>
 						<span className="text-emerald-500 dark:text-emerald-400">
@@ -19,9 +19,9 @@ export function Summary() {
 			/>
 
 			<SummaryCard
-				title="Saídas"
-				icon={<ArrowUpCircle size={20} />}
-				value={2315.78}
+				title="Prontuários"
+				icon={<NotepadTextDashed size={20} />}
+				value={8}
 				description={
 					<p>
 						<span className="text-red-500 dark:text-red-400">-6.34%</span> a
@@ -31,9 +31,9 @@ export function Summary() {
 			/>
 
 			<SummaryCard
-				title="Saldo Total"
-				icon={<Wallet2 size={20} />}
-				value={1115.6}
+				title="Unidades"
+				icon={<Hospital size={20} />}
+				value={3}
 				description={
 					<p>
 						<span className="text-emerald-500 dark:text-emerald-400">
@@ -45,9 +45,9 @@ export function Summary() {
 			/>
 
 			<SummaryCard
-				title="Saldo Total"
-				icon={<Wallet2 size={20} />}
-				value={1115.6}
+				title="Medicamentos"
+				icon={<Pill size={20} />}
+				value={27}
 				description={
 					<p>
 						<span className="text-emerald-500 dark:text-emerald-400">

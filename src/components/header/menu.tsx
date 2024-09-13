@@ -12,7 +12,7 @@ import {
 import {
 	Cloud,
 	CreditCard,
-	Github,
+	GitCommit,
 	LifeBuoy,
 	LogOut,
 	Settings,
@@ -32,43 +32,25 @@ export function Menu() {
 			</DropdownMenuTrigger>
 
 			<DropdownMenuContent className="w-56 mr-4">
-				<DropdownMenuLabel>Izaías Lima</DropdownMenuLabel>
+				<DropdownMenuLabel>Izaías Morais</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
-					<DropdownMenuItem disabled className="cursor-pointer">
-						<User className="mr-2 h-4 w-4" />
-						<span>Perfil</span>
-					</DropdownMenuItem>
-					<DropdownMenuItem disabled>
-						<CreditCard className="mr-2 h-4 w-4" />
-						<span>Assinatura</span>
-					</DropdownMenuItem>
 					<DropdownMenuItem disabled className="cursor-pointer">
 						<Settings className="mr-2 h-4 w-4" />
 						<span>Configurações</span>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 
-				<DropdownMenuSeparator />
-
 				<DropdownMenuItem className="cursor-pointer">
 					<a
 						href="https://github.com/izaiasmorais"
 						className="flex items-center"
 					>
-						<Github className="mr-2 h-4 w-4" />
+						<GitCommit className="mr-2 h-4 w-4" />
 						<span>GitHub</span>
 					</a>
 				</DropdownMenuItem>
-				<DropdownMenuItem disabled className="cursor-pointer">
-					<LifeBuoy className="mr-2 h-4 w-4" />
-					<span>Suporte</span>
-				</DropdownMenuItem>
-				<DropdownMenuItem disabled>
-					<Cloud className="mr-2 h-4 w-4" />
-					<span>API</span>
-				</DropdownMenuItem>
-				<DropdownMenuSeparator />
+
 				<DropdownMenuItem className="cursor-pointer" asChild>
 					<Link href="/auth/log-in">
 						<LogOut className="mr-2 h-4 w-4" />

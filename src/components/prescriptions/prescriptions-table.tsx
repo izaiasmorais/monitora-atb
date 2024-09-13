@@ -105,7 +105,7 @@ export function PrescriptionsTable() {
 				<Pagination
 					pageIndex={result.meta.pageIndex - 1}
 					perPage={result.meta.perPage}
-					totalCount={result.meta.totalCount}
+					totalCount={8}
 					onPageChange={handlePaginate}
 				/>
 			)}

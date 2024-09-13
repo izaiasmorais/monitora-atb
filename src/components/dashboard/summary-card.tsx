@@ -23,12 +23,12 @@ export function SummaryCard({
 			</div>
 
 			<h1 className="text-xl md:text-2xl mt-4 font-bold leading-tight">
-				{formatCurrency(value)}
+				{value}
 			</h1>
 
-			<span className="text-muted-foreground font-medium text-xs">
+			{/* <span className="text-muted-foreground font-medium text-xs">
 				{description}
-			</span>
+			</span> */}
 		</Card>
 	);
 }

@@ -17,9 +17,11 @@ import { DateRange } from "react-day-picker";
 import { z } from "zod";
 
 const patientFilterSchema = z.object({
-	id: z.string().optional(),
+	medicalRecord: z.string().optional(),
 	name: z.string().optional(),
-	status: z.string().optional(),
+	unit: z.string().optional(),
+	medicine: z.string().optional(),
+	posology: z.string().optional(),
 });
 
 type PatientFilterSchema = z.infer<typeof patientFilterSchema>;
@@ -40,25 +42,35 @@ export function PrescriptionsTableFilters({
 	const id = searchParams.get("id");
 	const name = searchParams.get("name");
 	const status = searchParams.get("status");
+	const medicine = searchParams.get("medicine");
+	const posology = searchParams.get("posology");
 
 	const { register, handleSubmit, control, reset } =
 		useForm<PatientFilterSchema>({
 			// @ts-ignore
 			resolver: zodResolver(patientFilterSchema),
 			defaultValues: {
-				id: id ?? "",
+				medicalRecord: id ?? "",
 				name: name ?? "",
-				status: status ?? "all",
+				unit: status ?? "all",
+				medicine: medicine ?? "all",
+				posology: posology ?? "all",
 			},
 		});
 
-	function handleFilter({ id, name, status }: PatientFilterSchema) {
+	function handleFilter({
+		medicalRecord,
+		medicine,
+		name,
+		posology,
+		unit,
+	}: PatientFilterSchema) {
 		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
-		if (id) {
-			state.set("id", id);
+		if (medicalRecord) {
+			state.set("medicalRecord", medicalRecord);
 		} else {
-			state.delete("id");
+			state.delete("medicalRecord");
 		}
 
 		if (name) {
@@ -67,10 +79,22 @@ export function PrescriptionsTableFilters({
 			state.delete("name");
 		}
 
-		if (status) {
-			state.set("status", status);
+		if (medicine) {
+			state.set("medicine", medicine);
 		} else {
-			state.delete("status");
+			state.delete("medicine");
+		}
+
+		if (posology) {
+			state.set("posology", posology);
+		} else {
+			state.delete("posology");
+		}
+
+		if (unit) {
+			state.set("unit", unit);
+		} else {
+			state.delete("unit");
 		}
 
 		state.set("page", "1");
@@ -89,9 +113,11 @@ export function PrescriptionsTableFilters({
 		state.set("page", "1");
 
 		reset({
-			id: "",
+			medicalRecord: "",
 			name: "",
-			status: "all",
+			unit: "all",
+			medicine: "all",
+			posology: "all",
 		});
 
 		const search = state.toString();
@@ -108,39 +134,93 @@ export function PrescriptionsTableFilters({
 			<span className="text-sm font-semibold hidden lg:block">Filtros: </span>
 
 			<Input
-				className="h-8"
-				placeholder="Número do Protuário"
-				{...register("id")}
+				className="h-9"
+				placeholder="Prontuário"
+				{...register("medicalRecord")}
 			/>
 
-			<Input
-				className="h-8"
-				placeholder="Nome da paciente"
-				{...register("name")}
-			/>
+			<Input className="h-9" placeholder="Nome" {...register("name")} />
 
 			<Controller
 				control={control}
-				name="status"
-				defaultValue="Status"
+				name="unit"
+				defaultValue="Unidade"
 				render={({ field: { name, onChange, value, disabled } }) => {
 					return (
 						<Select
 							defaultValue="all"
-							name={name}
 							onValueChange={onChange}
+							name={name}
 							value={value}
 							disabled={disabled}
 						>
-							<SelectTrigger className="h-8">
+							<SelectTrigger className="h-9">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="all">Status</SelectItem>
-								<SelectItem value="deposit">Pendente</SelectItem>
-								<SelectItem value="patient">Pago</SelectItem>
-								<SelectItem value="withdrawal">Atrasado</SelectItem>
-								<SelectItem value="payment">Adiada</SelectItem>
+								<SelectItem value="all">Unidade</SelectItem>
+								<SelectItem value="1">Posto 1</SelectItem>
+								<SelectItem value="2">Posto 2</SelectItem>
+								<SelectItem value="3">Posto 3</SelectItem>
+								<SelectItem value="uti">UTI</SelectItem>
+								<SelectItem value="unacon">UNACON</SelectItem>
+							</SelectContent>
+						</Select>
+					);
+				}}
+			/>
+
+			<Controller
+				control={control}
+				name="medicine"
+				defaultValue="Medicamento"
+				render={({ field: { name, onChange, value, disabled } }) => {
+					return (
+						<Select
+							defaultValue="all"
+							onValueChange={onChange}
+							name={name}
+							value={value}
+							disabled={disabled}
+						>
+							<SelectTrigger className="h-9">
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="all">Medicamento</SelectItem>
+								<SelectItem value="1">Polimixina B1</SelectItem>
+								<SelectItem value="2">Ciprofloxacino Inj</SelectItem>
+								<SelectItem value="3">Metronidazol Inj</SelectItem>
+								<SelectItem value="4">Cefepime</SelectItem>
+								<SelectItem value="5"> Tazobactam</SelectItem>
+							</SelectContent>
+						</Select>
+					);
+				}}
+			/>
+
+			<Controller
+				control={control}
+				name="posology"
+				defaultValue="Posologia"
+				render={({ field: { name, onChange, value, disabled } }) => {
+					return (
+						<Select
+							defaultValue="all"
+							onValueChange={onChange}
+							name={name}
+							value={value}
+							disabled={disabled}
+						>
+							<SelectTrigger className="h-9">
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="all">Posologia</SelectItem>
+								<SelectItem value="1">6/6h</SelectItem>
+								<SelectItem value="2">8/8h</SelectItem>
+								<SelectItem value="3">12/12h</SelectItem>
+								<SelectItem value="uti">24/24h</SelectItem>
 							</SelectContent>
 						</Select>
 					);
@@ -149,7 +229,7 @@ export function PrescriptionsTableFilters({
 
 			<Button type="submit" variant="secondary" size="sm">
 				<Search className="mr-2 h-4 w-4" />
-				Filtrar resultados
+				Filtrar
 			</Button>
 
 			<Button
@@ -159,7 +239,7 @@ export function PrescriptionsTableFilters({
 				onClick={() => handleClearFilters()}
 			>
 				<X className="mr-2 h-4 w-4" />
-				Limpar resultados
+				Limpar
 			</Button>
 		</form>
 	);
