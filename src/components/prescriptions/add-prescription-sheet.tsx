@@ -39,7 +39,7 @@ export function AddPrescriptionSheet() {
 					</SheetDescription> */}
 				</SheetHeader>
 
-				<div className="grid gap-6 py-8">
+				<div className="grid gap-5 py-8">
 					<div className="flex flex-col gap-3">
 						<Label htmlFor="medicalReport">Número do Prontuário</Label>
 						<Input id="medicalReport" placeholder="534047/6" />
@@ -70,7 +70,7 @@ export function AddPrescriptionSheet() {
 						<Label htmlFor="unit">Medicamento</Label>
 						<Select name="unit">
 							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Selecione um Medicamento" />
+								<SelectValue placeholder="Selecione um medicamento" />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectItem value="1">Polimixina B1</SelectItem>
@@ -86,7 +86,7 @@ export function AddPrescriptionSheet() {
 						<Label htmlFor="via">Via de administração</Label>
 						<Select name="via">
 							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Selecione a Via" />
+								<SelectValue placeholder="Selecione a via" />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectItem value="1">EV</SelectItem>
@@ -106,7 +106,7 @@ export function AddPrescriptionSheet() {
 						<Label htmlFor="unit">Posologia</Label>
 						<Select name="unit">
 							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Selecione a Posologia" />
+								<SelectValue placeholder="Selecione a posologia" />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectItem value="1">6/6h</SelectItem>
@@ -119,7 +119,7 @@ export function AddPrescriptionSheet() {
 
 					<div className="flex flex-col gap-3">
 						<Label htmlFor="dose">Dias de tratamento</Label>
-						<Button>Selecionar dias</Button>
+						<Button>Definir dias</Button>
 					</div>
 				</div>
 

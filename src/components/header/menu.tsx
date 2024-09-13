@@ -10,13 +10,9 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-	Cloud,
-	CreditCard,
-	GitCommit,
-	LifeBuoy,
+	FolderGit,
 	LogOut,
 	Settings,
-	User,
 } from "lucide-react";
 import { Avatar } from "./avatar";
 import { Button } from "../ui/button";
@@ -46,7 +42,7 @@ export function Menu() {
 						href="https://github.com/izaiasmorais"
 						className="flex items-center"
 					>
-						<GitCommit className="mr-2 h-4 w-4" />
+						<FolderGit className="mr-2 h-4 w-4" />
 						<span>GitHub</span>
 					</a>
 				</DropdownMenuItem>

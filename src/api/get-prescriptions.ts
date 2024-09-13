@@ -1,12 +1,6 @@
 import { api } from "@/lib/axios";
 
-export type PatientstatusType =
-	| "deposit"
-	| "withdrawal"
-	| "patient"
-	| "payment";
-
-export interface GetPatientsQuery {
+export interface GetPrescriptionsQuery {
 	pageIndex?: number;
 	perPage?: number;
 	id?: string | null;
@@ -41,7 +35,7 @@ export async function getPatients({
 	email,
 	id,
 	name,
-}: GetPatientsQuery) {
+}: GetPrescriptionsQuery) {
 	const data = await api.get<IPrescription[]>("/patients", {
 		params: {
 			id,

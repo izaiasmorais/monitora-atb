@@ -15,6 +15,7 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateRange } from "react-day-picker";
 import { z } from "zod";
+import { AddPrescriptionSheet } from "./add-prescription-sheet";
 
 const patientFilterSchema = z.object({
 	medicalRecord: z.string().optional(),
@@ -237,6 +238,8 @@ export function PrescriptionsTableFilters({
 				<X className="mr-2 h-4 w-4" />
 				Limpar
 			</Button>
+
+			<AddPrescriptionSheet />
 		</form>
 	);
 }

@@ -23,6 +23,7 @@ export default function Providers({ children }: { children: ReactNode }) {
 				height="4px"
 				color="#3b82f6"
 				showOnShallow
+				options={{ showSpinner: false }}
 			/>
 		</>
 	);

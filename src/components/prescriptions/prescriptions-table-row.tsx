@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
 import { PatientDetails } from "./prescription-details-modal";
-import { IPrescription } from "@/api/get-patients";
+import { IPrescription } from "@/api/get-prescriptions";
 
 export interface PrescriptionsTableRowProps {
 	prescription: IPrescription;
@@ -23,6 +23,8 @@ export function PrescriptionsTableRow({
 			<TableCell>{prescription.unit}</TableCell>
 
 			<TableCell>{prescription.medicine}</TableCell>
+
+			<TableCell>{prescription.via}</TableCell>
 
 			<TableCell className="text-muted-foreground">
 				{prescription.dose}

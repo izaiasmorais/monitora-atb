@@ -9,17 +9,15 @@ import {
 import { PrescriptionsTableRow } from "./prescriptions-table-row";
 import { Pagination } from "../global/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { getPatients } from "@/api/get-patients";
+import { getPatients } from "@/api/get-prescriptions";
 import { PrescriptionsTableFilters } from "@/components/prescriptions/prescriptions-table-filters";
 import { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { subDays } from "date-fns";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
-import { AddPrescriptionModal } from "./add-prescription-modal";
 import { prescriptions } from "../../mocks/prescriptions";
 import { z } from "zod";
-import { AddPrescriptionSheet } from "./add-prescription-sheet";
 
 export function PrescriptionsTable() {
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -68,8 +66,6 @@ export function PrescriptionsTable() {
 					dateRange={dateRange}
 					setDateRange={setDateRange}
 				/>
-
-				<AddPrescriptionSheet />
 			</div>
 
 			<div className="rounded-md border">
@@ -77,11 +73,12 @@ export function PrescriptionsTable() {
 					<TableHeader>
 						<TableRow>
 							<TableHead className="w-[200px]">Prontuário</TableHead>
-							<TableHead className="w-[350px]">Nome</TableHead>
-							<TableHead className="w-[120px]">Unidade</TableHead>
+							<TableHead className="min-w-[350px]">Nome</TableHead>
+							<TableHead className="w-[150px]">Unidade</TableHead>
 							<TableHead className="w-[150px]">Medicamento</TableHead>
-							<TableHead className="w-[120px]">Dose</TableHead>
-							<TableHead className="w-[180px]">Posologia</TableHead>
+							<TableHead className="w-[150px]">Via</TableHead>
+							<TableHead className="w-[150px]">Dose</TableHead>
+							<TableHead className="w-[150px]">Posologia</TableHead>
 							<TableHead className="w-[50px]"></TableHead>
 							<TableHead className="w-[50px]"></TableHead>
 						</TableRow>

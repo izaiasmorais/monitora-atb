@@ -13,10 +13,6 @@ import { useEffect } from "react";
 export function ThemeSwitcher() {
 	const { setTheme, theme } = useTheme();
 
-	useEffect(() => {
-		console.log(theme);
-	}, []);
-
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className="border w-10 h-10 flex items-center justify-center rounded-md">

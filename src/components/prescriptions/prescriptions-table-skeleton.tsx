@@ -23,6 +23,9 @@ export function PrescriptionsTableSkeleton() {
 					<Skeleton className="h-4 w-[50px]" />
 				</TableCell>
 				<TableCell>
+					<Skeleton className="h-4 w-[50px]" />
+				</TableCell>
+				<TableCell>
 					<Skeleton className="h-4 w-[80px]" />
 				</TableCell>
 				<TableCell>
