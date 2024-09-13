@@ -61,7 +61,7 @@ export function PieChartContainer() {
 		<Card className="flex flex-col h-[450px]">
 			<CardHeader className="items-center pb-0">
 				<CardTitle>Pacientes por Unidade</CardTitle>
-				<CardDescription>Abril - Setembro 2024</CardDescription>
+				<CardDescription>Pacientes ativos no mês de Setembro 2024</CardDescription>
 			</CardHeader>
 			<CardContent className="flex-1 pb-0">
 				<ChartContainer
@@ -120,7 +120,7 @@ export function PieChartContainer() {
 					<TrendingUp className="h-4 w-4" />
 				</div>
 				<div className="leading-none text-muted-foreground">
-					Mostrando dados dos últimos 6 meses
+					Mostrando dados do mês de setembro
 				</div>
 			</CardFooter>
 		</Card>

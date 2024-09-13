@@ -7,7 +7,7 @@ export function Summary() {
 			<SummaryCard
 				title="Pacientes"
 				icon={<Users size={20} />}
-				value={5}
+				value={20}
 				description={
 					<p>
 						<span className="text-emerald-500 dark:text-emerald-400">
@@ -21,7 +21,7 @@ export function Summary() {
 			<SummaryCard
 				title="Prescrições"
 				icon={<NotepadTextDashed size={20} />}
-				value={8}
+				value={56}
 				description={
 					<p>
 						<span className="text-red-500 dark:text-red-400">-6.34%</span> a
@@ -33,7 +33,7 @@ export function Summary() {
 			<SummaryCard
 				title="Unidades"
 				icon={<Hospital size={20} />}
-				value={3}
+				value={5}
 				description={
 					<p>
 						<span className="text-emerald-500 dark:text-emerald-400">
@@ -46,7 +46,7 @@ export function Summary() {
 
 			<SummaryCard
 				title="Medicamentos"
-				icon={<Pill size={20} />}
+				icon={<Pill size={10} />}
 				value={27}
 				description={
 					<p>

@@ -42,7 +42,7 @@ export function PrescriptionDetailsModal({
 				</div>
 				<div className="flex w-full justify-between items-center">
 					<strong>Dose:</strong>
-					<span>{prescription.dose}</span>
+					<span>{prescription.dose}mg</span>
 				</div>
 				<div className="flex w-full justify-between items-center">
 					<strong>Posologia:</strong>

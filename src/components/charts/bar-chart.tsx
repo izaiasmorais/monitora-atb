@@ -1,7 +1,7 @@
 "use client";
 
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 import {
 	Card,
 	CardContent,
@@ -20,12 +20,16 @@ import {
 export const description = "A multiple bar chart";
 
 const chartData = [
-	{ month: "January", desktop: 186, mobile: 80 },
-	{ month: "February", desktop: 305, mobile: 200 },
-	{ month: "March", desktop: 237, mobile: 120 },
-	{ month: "April", desktop: 73, mobile: 190 },
-	{ month: "May", desktop: 209, mobile: 130 },
-	{ month: "June", desktop: 214, mobile: 140 },
+	{ month: "Polimixina", desktop: 5 },
+	{ month: "Gentamicina", desktop: 3 },
+	{ month: "Ciprofloxacino", desktop: 4 },
+	{ month: "Metronidazol", desktop: 8 },
+	{ month: "Cefepime", desktop: 3 },
+	{ month: "Piperacilina", desktop: 6 },
+	{ month: "Vancomicina", desktop: 7 },
+	{ month: "Meropenem", desktop: 13 },
+	{ month: "Tigeciclina", desktop: 5 },
+	{ month: "Fluconazol", desktop: 2 },
 ];
 
 const chartConfig = {
@@ -33,47 +37,56 @@ const chartConfig = {
 		label: "Desktop",
 		color: "hsl(var(--chart-1))",
 	},
-	mobile: {
-		label: "Mobile",
-		color: "hsl(var(--chart-2))",
-	},
 } satisfies ChartConfig;
 
 export function BarChartContainer() {
 	return (
 		<Card className="h-[450px]">
 			<CardHeader>
-				<CardTitle>Bar Chart - Multiple</CardTitle>
-				<CardDescription>January - June 2024</CardDescription>
+				<CardTitle>Prescrições por Medicamento</CardTitle>
+				<CardDescription>Setembro 2024</CardDescription>
 			</CardHeader>
 
 			<CardContent>
 				<ChartContainer config={chartConfig} className="h-[250px] w-full">
-					<BarChart accessibilityLayer data={chartData}>
+					<BarChart
+						accessibilityLayer
+						data={chartData}
+						margin={{
+							top: 20,
+						}}
+					>
 						<CartesianGrid vertical={false} />
 						<XAxis
 							dataKey="month"
 							tickLine={false}
 							tickMargin={10}
 							axisLine={false}
-							tickFormatter={(value) => value.slice(0, 3)}
+							tickFormatter={(value) => value.slice(0, 10)}
 						/>
 						<ChartTooltip
 							cursor={false}
 							content={<ChartTooltipContent indicator="dashed" />}
 						/>
-						<Bar dataKey="desktop" fill="#2563eb" radius={4} />
-						<Bar dataKey="mobile" fill="#60a8fb" radius={4} />
+						<Bar dataKey="desktop" fill="#2563eb" radius={0}>
+							<LabelList
+								position="top"
+								offset={12}
+								className="fill-foreground"
+								fontSize={12}
+							/>
+						</Bar>
 					</BarChart>
 				</ChartContainer>
 			</CardContent>
 
 			<CardFooter className="flex-col items-start gap-2 text-sm">
 				<div className="flex gap-2 font-medium leading-none">
-					Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+					A quantidade de prescrições aumentou em 15% este mês.{" "}
+					<TrendingUp className="h-4 w-4" />
 				</div>
 				<div className="leading-none text-muted-foreground">
-					Showing total visitors for the last 6 months
+					Mostrando dados do mês de setembro
 				</div>
 			</CardFooter>
 		</Card>
