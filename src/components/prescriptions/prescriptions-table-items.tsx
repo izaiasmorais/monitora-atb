@@ -2,16 +2,17 @@ import { MoreVertical, Search } from "lucide-react";
 import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
-import { PatientDetails } from "./prescription-details-modal";
+import { PrescriptionDetailsModal } from "./prescription-details-modal";
 import { IPrescription } from "@/api/get-prescriptions";
+import { OptionsButton } from "../global/option-button";
 
-export interface PrescriptionsTableRowProps {
+export interface PrescriptionsTableItemsProps {
 	prescription: IPrescription;
 }
 
-export function PrescriptionsTableRow({
+export function PrescriptionsTableItems({
 	prescription,
-}: PrescriptionsTableRowProps) {
+}: PrescriptionsTableItemsProps) {
 	return (
 		<TableRow>
 			<TableCell className="font-mono text-xs font-medium">
@@ -27,7 +28,7 @@ export function PrescriptionsTableRow({
 			<TableCell>{prescription.via}</TableCell>
 
 			<TableCell className="text-muted-foreground">
-				{prescription.dose}
+				{prescription.dose}mg
 			</TableCell>
 
 			<TableCell className="text-muted-foreground">
@@ -39,17 +40,14 @@ export function PrescriptionsTableRow({
 					<DialogTrigger asChild>
 						<Button variant="outline" size="sm">
 							<Search className="h-4 w-4" />
-							<span className="sr-only">Detalhes do pedido: </span>
 						</Button>
 					</DialogTrigger>
-					<PatientDetails />
+					<PrescriptionDetailsModal prescription={prescription} />
 				</Dialog>
 			</TableCell>
 
 			<TableCell>
-				<Button variant="outline" size="sm">
-					<MoreVertical className="h-4 w-4" />
-				</Button>
+				<OptionsButton />
 			</TableCell>
 		</TableRow>
 	);

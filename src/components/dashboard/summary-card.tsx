@@ -18,11 +18,13 @@ export function SummaryCard({
 	return (
 		<Card className="p-4 md:p-6">
 			<div className="flex justify-between items-center">
-				<span className="text-sm font-semibold">{title}</span>
+				<span className="text-sm text-muted-foreground font-medium">
+					{title}
+				</span>
 				{icon}
 			</div>
 
-			<h1 className="text-xl md:text-2xl mt-4 font-bold leading-tight">
+			<h1 className="text-xl md:text-4xl mt-4 font-semibold leading-tight">
 				{value}
 			</h1>
 

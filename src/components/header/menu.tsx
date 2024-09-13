@@ -48,7 +48,7 @@ export function Menu() {
 				</DropdownMenuItem>
 
 				<DropdownMenuItem className="cursor-pointer" asChild>
-					<Link href="/auth/log-in">
+					<Link href="/entrar">
 						<LogOut className="mr-2 h-4 w-4" />
 						<span>Sair</span>
 					</Link>

@@ -16,7 +16,7 @@ export default function NotFound() {
 	return (
 		<div className={`lg:grid lg:grid-cols-app min-h-screen ${inter.className}`}>
 			<head>
-				<link rel="icon" href="/" sizes="any" />
+				<link rel="icon" href="/logo.png" sizes="any" />
 				<title>404 - Page not found</title>
 			</head>
 			<Sidebar />

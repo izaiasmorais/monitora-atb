@@ -27,7 +27,7 @@ export function AddPrescriptionSheet() {
 			<SheetTrigger asChild>
 				<Button className="flex items-center gap-2" size="sm">
 					<Plus className="w-5 h-5" />
-					Adicionar paciente
+					Adicionar prescrição
 				</Button>
 			</SheetTrigger>
 

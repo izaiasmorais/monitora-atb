@@ -4,7 +4,12 @@ import Providers from "./providers";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+	subsets: ["latin"],
+	display: "swap",
+	weight: ["400", "700", "500", "600"],
+	style: ["normal"],
+});
 
 export const metadata: Metadata = {
 	title: "Prescrições",
@@ -17,12 +22,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className="antialiased" suppressHydrationWarning={true}>
-			{/* <head>
-				<link rel="icon" href="/" sizes="any" />
-			</head> */}
+		<html lang="en" className={inter.className} suppressHydrationWarning={true}>
+			<head>
+				<link rel="icon" href="/logo.png" sizes="any" />
+				<link
+					rel="preload"
+					as="font"
+					href="/fonts/custom-font.woff2"
+					type="font/woff2"
+					crossOrigin="anonymous"
+				/>
+			</head>
 
-			<body className={inter.className}>
+			<body>
 				<Providers>{children}</Providers>
 			</body>
 		</html>

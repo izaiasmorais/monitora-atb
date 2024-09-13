@@ -6,7 +6,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "../ui/table";
-import { PrescriptionsTableRow } from "./prescriptions-table-row";
+import { PrescriptionsTableItems } from "./prescriptions-table-items";
 import { Pagination } from "../global/pagination";
 import { useQuery } from "@tanstack/react-query";
 import { getPatients } from "@/api/get-prescriptions";
@@ -71,16 +71,16 @@ export function PrescriptionsTable() {
 			<div className="rounded-md border">
 				<Table>
 					<TableHeader>
-						<TableRow>
+						<TableRow className="bg-muted/50">
 							<TableHead className="w-[200px]">Prontuário</TableHead>
-							<TableHead className="min-w-[350px]">Nome</TableHead>
+							<TableHead className="min-w-[300px]">Nome</TableHead>
 							<TableHead className="w-[150px]">Unidade</TableHead>
-							<TableHead className="w-[150px]">Medicamento</TableHead>
+							<TableHead className="min-w-[150px]">Medicamento</TableHead>
 							<TableHead className="w-[150px]">Via</TableHead>
 							<TableHead className="w-[150px]">Dose</TableHead>
 							<TableHead className="w-[150px]">Posologia</TableHead>
-							<TableHead className="w-[50px]"></TableHead>
-							<TableHead className="w-[50px]"></TableHead>
+							<TableHead className="w-[100px]"></TableHead>
+							<TableHead className="w-[100px]"></TableHead>
 						</TableRow>
 					</TableHeader>
 
@@ -88,7 +88,7 @@ export function PrescriptionsTable() {
 						{!isLoadingPatients &&
 							prescriptions.map((prescription) => {
 								return (
-									<PrescriptionsTableRow
+									<PrescriptionsTableItems
 										key={prescription.id}
 										prescription={prescription}
 									/>
