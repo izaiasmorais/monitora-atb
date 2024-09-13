@@ -10,7 +10,7 @@ export default function SignUp() {
 		<div className="grid w-full min-h-screen grid-cols-1 md:grid-cols-3 px-4 md:px-0">
 			<div className="min-h-screen bg-muted/50 flex-col hidden md:flex px-2 md:px-0">
 				<div className="flex items-start p-6 justify-start">
-					<h1 className="flex items-center gap-2 text-2xl leading-tight font-medium">
+					<h1 className="flex items-center gap-1 text-2xl leading-tight font-medium">
 						<Image
 							src={"/image.png"}
 							alt="Símbolo da Saúde Azul"

@@ -26,7 +26,13 @@ export function Sidebar() {
 		>
 			<div className="flex items-center justify-between ">
 				<h1 className="text-xl xl:text-2xl font-medium flex items-center gap-2">
-					<Syringe size={28} strokeWidth={1.5} />
+					<Image
+						src={"/image.png"}
+						alt="Símbolo da Saúde Azul"
+						width={512}
+						height={512}
+						className="w-8 h-8"
+					/>
 					Prescrições
 				</h1>
 
