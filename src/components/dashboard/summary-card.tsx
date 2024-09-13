@@ -1,7 +1,5 @@
 import { ReactNode } from "react";
 import { Card } from "../ui/card";
-import { formatCurrency } from "@/utils/formatCurrency";
-
 interface SummaryCardProps {
 	title: string;
 	value: number;
