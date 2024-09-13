@@ -25,7 +25,7 @@ export function ThemeSwitcher() {
 					onClick={() => setTheme("light")}
 				>
 					<Sun size={20} />
-					Light
+					Claro
 				</DropdownMenuItem>
 
 				<DropdownMenuItem
@@ -33,7 +33,7 @@ export function ThemeSwitcher() {
 					onClick={() => setTheme("dark")}
 				>
 					<Moon size={20} />
-					Dark
+					Escuro
 				</DropdownMenuItem>
 
 				<DropdownMenuItem
@@ -41,7 +41,7 @@ export function ThemeSwitcher() {
 					onClick={() => setTheme("system")}
 				>
 					<Monitor size={20} />
-					System
+					Sistema
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

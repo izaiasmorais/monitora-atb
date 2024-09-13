@@ -18,52 +18,50 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export const description = "A donut chart with text";
-
 const chartData = [
-	{ browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-	{ browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-	{ browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-	{ browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-	{ browser: "other", visitors: 190, fill: "var(--color-other)" },
+	{ browser: "Posto 1", visitors: 4, fill: "var(--color-chrome)" },
+	{ browser: "Posto 2", visitors: 3, fill: "var(--color-safari)" },
+	{ browser: "Posto 3", visitors: 6, fill: "var(--color-firefox)" },
+	{ browser: "UTI", visitors: 2, fill: "var(--color-edge)" },
+	{ browser: "UNACON", visitors: 5, fill: "var(--color-other)" },
 ];
 
 const chartConfig = {
 	visitors: {
-		label: "Visitors",
+		label: "Pacientes",
 	},
 	chrome: {
-		label: "Chrome",
+		label: "Posto 1",
 		color: "#172554",
 	},
 	safari: {
-		label: "Safari",
+		label: "Posto 2",
 		color: "#1d4ed8",
 	},
 	firefox: {
-		label: "Firefox",
+		label: "Posto 3",
 		color: "#3b82f6",
 	},
 	edge: {
-		label: "Edge",
+		label: "UTI",
 		color: "#93c5fd",
 	},
 	other: {
-		label: "Other",
+		label: "UNACON",
 		color: "#eff6ff",
 	},
 } satisfies ChartConfig;
 
 export function PieChartContainer() {
-	const totalVisitors = React.useMemo(() => {
+	const totalPatients = React.useMemo(() => {
 		return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
 	}, []);
 
 	return (
 		<Card className="flex flex-col h-[450px]">
 			<CardHeader className="items-center pb-0">
-				<CardTitle>Pie Chart - Donut with Text</CardTitle>
-				<CardDescription>January - June 2024</CardDescription>
+				<CardTitle>Pacientes por Unidade</CardTitle>
+				<CardDescription>Abril - Setembro 2024</CardDescription>
 			</CardHeader>
 			<CardContent className="flex-1 pb-0">
 				<ChartContainer
@@ -97,14 +95,14 @@ export function PieChartContainer() {
 													y={viewBox.cy}
 													className="fill-foreground text-3xl font-bold"
 												>
-													{totalVisitors.toLocaleString()}
+													{totalPatients.toLocaleString()}
 												</tspan>
 												<tspan
 													x={viewBox.cx}
 													y={(viewBox.cy || 0) + 24}
 													className="fill-muted-foreground"
 												>
-													Visitors
+													Pacientes
 												</tspan>
 											</text>
 										);
@@ -118,10 +116,11 @@ export function PieChartContainer() {
 
 			<CardFooter className="flex-col gap-2 text-sm">
 				<div className="flex items-center gap-2 font-medium leading-none">
-					Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+					A quantidade de pacientes aumentou 20.2% neste período{" "}
+					<TrendingUp className="h-4 w-4" />
 				</div>
 				<div className="leading-none text-muted-foreground">
-					Showing total visitors for the last 6 months
+					Mostrando dados dos últimos 6 meses
 				</div>
 			</CardFooter>
 		</Card>

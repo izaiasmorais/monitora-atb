@@ -19,7 +19,7 @@ export function Summary() {
 			/>
 
 			<SummaryCard
-				title="Prontuários"
+				title="Prescrições"
 				icon={<NotepadTextDashed size={20} />}
 				value={8}
 				description={

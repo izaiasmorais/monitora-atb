@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DateRange } from "react-day-picker";
 import { z } from "zod";
 import { AddPrescriptionSheet } from "./add-prescription-sheet";
+import { MedicinesCombobox } from "./medicines-combobox";
 
 const patientFilterSchema = z.object({
 	medicalRecord: z.string().optional(),
@@ -171,32 +172,7 @@ export function PrescriptionsTableFilters({
 				}}
 			/>
 
-			<Controller
-				control={control}
-				name="medicine"
-				render={({ field: { name, onChange, value, disabled } }) => {
-					return (
-						<Select
-							onValueChange={onChange}
-							name={name}
-							value={value ? value : undefined}
-							disabled={disabled}
-						>
-							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Medicamento" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="all">Todos</SelectItem>
-								<SelectItem value="1">Polimixina B1</SelectItem>
-								<SelectItem value="2">Ciprofloxacino Inj</SelectItem>
-								<SelectItem value="3">Metronidazol Inj</SelectItem>
-								<SelectItem value="4">Cefepime</SelectItem>
-								<SelectItem value="5"> Tazobactam</SelectItem>
-							</SelectContent>
-						</Select>
-					);
-				}}
-			/>
+			<MedicinesCombobox />
 
 			<Controller
 				control={control}
