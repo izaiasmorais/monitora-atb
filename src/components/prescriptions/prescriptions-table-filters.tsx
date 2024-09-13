@@ -24,15 +24,15 @@ const patientFilterSchema = z.object({
 
 type PatientFilterSchema = z.infer<typeof patientFilterSchema>;
 
-interface PatientTableFiltersProps {
+interface PrescriptionsTableFiltersProps {
 	dateRange: DateRange | undefined;
 	setDateRange: Dispatch<SetStateAction<DateRange | undefined>>;
 }
 
-export function PatientTableFilters({
+export function PrescriptionsTableFilters({
 	dateRange,
 	setDateRange,
-}: PatientTableFiltersProps) {
+}: PrescriptionsTableFiltersProps) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -107,7 +107,11 @@ export function PatientTableFilters({
 		>
 			<span className="text-sm font-semibold hidden lg:block">Filtros: </span>
 
-			<Input className="h-8" placeholder="Número do Protuário" {...register("id")} />
+			<Input
+				className="h-8"
+				placeholder="Número do Protuário"
+				{...register("id")}
+			/>
 
 			<Input
 				className="h-8"

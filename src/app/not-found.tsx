@@ -8,7 +8,7 @@ import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "ezmoney",
+	title: "Prescrições",
 	description: "Best dashboard for your business out there",
 };
 
@@ -16,7 +16,7 @@ export default function NotFound() {
 	return (
 		<div className={`lg:grid lg:grid-cols-app min-h-screen ${inter.className}`}>
 			<head>
-				<link rel="icon" href="/ezmoney.png" sizes="any" />
+				<link rel="icon" href="/" sizes="any" />
 				<title>404 - Page not found</title>
 			</head>
 			<Sidebar />

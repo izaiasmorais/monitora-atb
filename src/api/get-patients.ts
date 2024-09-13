@@ -15,10 +15,10 @@ export interface GetPatientsQuery {
 	createdAt?: Date | null;
 }
 
-export interface IPatient {
+export interface IPrescription {
 	id: string;
 	medicalRecord: string;
-	patientName: string;
+	name: string;
 	medicine: string;
 	unit: string;
 	dose: number;
@@ -27,7 +27,7 @@ export interface IPatient {
 }
 
 export interface GetPatientsResponse {
-	patients: IPatient[];
+	patients: IPrescription[];
 	meta: {
 		pageIndex: number;
 		perPage: number;
@@ -42,7 +42,7 @@ export async function getPatients({
 	id,
 	name,
 }: GetPatientsQuery) {
-	const data = await api.get<IPatient[]>("/patients", {
+	const data = await api.get<IPrescription[]>("/patients", {
 		params: {
 			id,
 			name,
@@ -52,7 +52,7 @@ export async function getPatients({
 
 	let totalCount;
 
-	const response = await api.get<IPatient[]>("/patients", {
+	const response = await api.get<IPrescription[]>("/patients", {
 		params: {
 			id,
 			name,

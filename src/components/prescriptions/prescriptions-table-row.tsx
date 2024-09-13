@@ -2,19 +2,38 @@ import { MoreVertical, Search } from "lucide-react";
 import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
-import { PatientDetails } from "./patient-details";
-import { Patientstatus } from "./patient-status";
-import { IPatient } from "@/api/get-patients";
+import { PatientDetails } from "./prescription-details-modal";
+import { IPrescription } from "@/api/get-patients";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 
-export interface PatientTableRowProps {
-	patient: IPatient;
+export interface PrescriptionsTableRowProps {
+	prescription: IPrescription;
 }
 
-export function PatientTableRow({ patient }: PatientTableRowProps) {
+export function PrescriptionsTableRow({
+	prescription,
+}: PrescriptionsTableRowProps) {
 	return (
 		<TableRow>
+			<TableCell className="font-mono text-xs font-medium">
+				{prescription.medicalRecord}
+			</TableCell>
+
+			<TableCell className="font-medium">{prescription.name}</TableCell>
+
+			<TableCell>{prescription.unit}</TableCell>
+
+			<TableCell>{prescription.medicine}</TableCell>
+
+			<TableCell className="text-muted-foreground">
+				{prescription.dose}
+			</TableCell>
+
+			<TableCell className="text-muted-foreground">
+				{prescription.posology}
+			</TableCell>
+
 			<TableCell>
 				<Dialog>
 					<DialogTrigger asChild>
@@ -25,14 +44,6 @@ export function PatientTableRow({ patient }: PatientTableRowProps) {
 					</DialogTrigger>
 					<PatientDetails />
 				</Dialog>
-			</TableCell>
-			<TableCell className="font-mono text-xs font-medium">
-				{patient.id}
-			</TableCell>
-			<TableCell className="font-medium">{patient.name}</TableCell>
-			<TableCell className="font-medium">{patient.email}</TableCell>
-			<TableCell className="text-muted-foreground">
-				{format(new Date(patient.createdAt), "dd/MM/yyyy", { locale: ptBR })}
 			</TableCell>
 
 			<TableCell>

@@ -3,7 +3,7 @@ export default function Page() {
 		<div className="grid w-full min-h-screen grid-cols-2">
 			<div className="min-h-screen bg-neutral-900 flex items-center justify-center">
 				<h1 className="text-5xl leading-tight font-extrabold text-white">
-					Bem-vindo ao <br /> EZMoney
+					Bem-vindo ao <br /> Prescrições
 				</h1>
 			</div>
 

@@ -13,7 +13,7 @@ import { Plus } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 
-export function AddPatientModal() {
+export function AddPrescriptionModal() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
