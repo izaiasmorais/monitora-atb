@@ -4,8 +4,6 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
 import { PatientDetails } from "./prescription-details-modal";
 import { IPrescription } from "@/api/get-patients";
-import { format } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
 
 export interface PrescriptionsTableRowProps {
 	prescription: IPrescription;

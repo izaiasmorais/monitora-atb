@@ -52,9 +52,9 @@ export function PrescriptionsTableFilters({
 			defaultValues: {
 				medicalRecord: id ?? "",
 				name: name ?? "",
-				unit: status ?? "all",
-				medicine: medicine ?? "all",
-				posology: posology ?? "all",
+				unit: status ?? "",
+				medicine: medicine ?? "",
+				posology: posology ?? "",
 			},
 		});
 
@@ -107,17 +107,19 @@ export function PrescriptionsTableFilters({
 	function handleClearFilters() {
 		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
-		state.delete("id");
+		state.delete("medicalRecord");
 		state.delete("name");
-		state.delete("status");
+		state.delete("unit");
+		state.delete("medicine");
+		state.delete("posology");
 		state.set("page", "1");
 
 		reset({
 			medicalRecord: "",
 			name: "",
-			unit: "all",
-			medicine: "all",
-			posology: "all",
+			unit: "",
+			medicine: "",
+			posology: "",
 		});
 
 		const search = state.toString();
@@ -144,21 +146,19 @@ export function PrescriptionsTableFilters({
 			<Controller
 				control={control}
 				name="unit"
-				defaultValue="Unidade"
 				render={({ field: { name, onChange, value, disabled } }) => {
 					return (
 						<Select
-							defaultValue="all"
 							onValueChange={onChange}
 							name={name}
-							value={value}
+							value={value ? value : undefined}
 							disabled={disabled}
 						>
 							<SelectTrigger className="h-9">
-								<SelectValue />
+								<SelectValue placeholder="Unidade" />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="all">Unidade</SelectItem>
+								<SelectItem value="all">Todas</SelectItem>
 								<SelectItem value="1">Posto 1</SelectItem>
 								<SelectItem value="2">Posto 2</SelectItem>
 								<SelectItem value="3">Posto 3</SelectItem>
@@ -173,21 +173,19 @@ export function PrescriptionsTableFilters({
 			<Controller
 				control={control}
 				name="medicine"
-				defaultValue="Medicamento"
 				render={({ field: { name, onChange, value, disabled } }) => {
 					return (
 						<Select
-							defaultValue="all"
 							onValueChange={onChange}
 							name={name}
-							value={value}
+							value={value ? value : undefined}
 							disabled={disabled}
 						>
 							<SelectTrigger className="h-9">
-								<SelectValue />
+								<SelectValue placeholder="Medicamento" />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="all">Medicamento</SelectItem>
+								<SelectItem value="all">Todos</SelectItem>
 								<SelectItem value="1">Polimixina B1</SelectItem>
 								<SelectItem value="2">Ciprofloxacino Inj</SelectItem>
 								<SelectItem value="3">Metronidazol Inj</SelectItem>
@@ -202,21 +200,19 @@ export function PrescriptionsTableFilters({
 			<Controller
 				control={control}
 				name="posology"
-				defaultValue="Posologia"
 				render={({ field: { name, onChange, value, disabled } }) => {
 					return (
 						<Select
-							defaultValue="all"
 							onValueChange={onChange}
 							name={name}
-							value={value}
+							value={value ? value : undefined}
 							disabled={disabled}
 						>
 							<SelectTrigger className="h-9">
-								<SelectValue />
+								<SelectValue placeholder="Posologia" />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="all">Posologia</SelectItem>
+								<SelectItem value="all">Todos</SelectItem>
 								<SelectItem value="1">6/6h</SelectItem>
 								<SelectItem value="2">8/8h</SelectItem>
 								<SelectItem value="3">12/12h</SelectItem>

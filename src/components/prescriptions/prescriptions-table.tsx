@@ -19,6 +19,7 @@ import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
 import { AddPrescriptionModal } from "./add-prescription-modal";
 import { prescriptions } from "../../mocks/prescriptions";
 import { z } from "zod";
+import { AddPrescriptionSheet } from "./add-prescription-sheet";
 
 export function PrescriptionsTable() {
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -68,7 +69,7 @@ export function PrescriptionsTable() {
 					setDateRange={setDateRange}
 				/>
 
-				<AddPrescriptionModal />
+				<AddPrescriptionSheet />
 			</div>
 
 			<div className="rounded-md border">
@@ -87,14 +88,15 @@ export function PrescriptionsTable() {
 					</TableHeader>
 
 					<TableBody>
-						{!isLoadingPatients && prescriptions.map((prescription) => {
-							return (
-								<PrescriptionsTableRow
-									key={prescription.id}
-									prescription={prescription}
-								/>
-							);
-						})}
+						{!isLoadingPatients &&
+							prescriptions.map((prescription) => {
+								return (
+									<PrescriptionsTableRow
+										key={prescription.id}
+										prescription={prescription}
+									/>
+								);
+							})}
 
 						{isLoadingPatients && <PrescriptionsTableSkeleton />}
 					</TableBody>
