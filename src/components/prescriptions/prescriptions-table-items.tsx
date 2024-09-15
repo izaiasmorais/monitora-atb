@@ -3,11 +3,11 @@ import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
 import { PrescriptionDetailsModal } from "./prescription-details-modal";
-import { IPrescription } from "@/api/get-prescriptions";
+import { Prescription } from "@/api/get-prescriptions";
 import { OptionsButton } from "../global/option-button";
 
 export interface PrescriptionsTableItemsProps {
-	prescription: IPrescription;
+	prescription: Prescription;
 }
 
 export function PrescriptionsTableItems({

@@ -1,4 +1,4 @@
-import type { IPrescription } from "@/api/get-prescriptions";
+import type { Prescription } from "@/api/get-prescriptions";
 import {
 	DialogContent,
 	DialogDescription,
@@ -7,7 +7,7 @@ import {
 } from "../ui/dialog";
 
 interface PrescriptionDetailsModalProps {
-	prescription: IPrescription;
+	prescription: Prescription;
 }
 
 export function PrescriptionDetailsModal({
