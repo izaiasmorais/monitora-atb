@@ -40,46 +40,50 @@ export function AddPrescriptionSheet() {
 				</SheetHeader>
 
 				<div className="grid gap-5 py-8">
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="medicalReport">Número do Prontuário</Label>
-						<Input id="medicalReport" placeholder="534047/6" />
+					<div className="flex items-center gap-2">
+						<div className="flex flex-col gap-3 w-full">
+							<Label htmlFor="medicalReport">Número do Prontuário</Label>
+							<Input id="medicalReport" placeholder="534047/6" />
+						</div>
+
+						<div className="flex flex-col gap-3 w-full">
+							<Label htmlFor="name">Nome do paciente</Label>
+							<Input id="name" placeholder="Digite um nome" />
+						</div>
 					</div>
 
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="name">Nome do paciente</Label>
-						<Input id="name" placeholder="Digite um nome" />
-					</div>
+					<div className="flex items-center gap-2">
+						<div className="flex flex-col gap-3 w-full">
+							<Label htmlFor="unit">Unidade</Label>
+							<Select name="unit">
+								<SelectTrigger className="h-9">
+									<SelectValue placeholder="Selecione uma unidade" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="1">Posto 1</SelectItem>
+									<SelectItem value="2">Posto 2</SelectItem>
+									<SelectItem value="3">Posto 3</SelectItem>
+									<SelectItem value="uti">UTI</SelectItem>
+									<SelectItem value="unacon">UNACON</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
 
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="unit">Unidade</Label>
-						<Select name="unit">
-							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Selecione uma unidade" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="1">Posto 1</SelectItem>
-								<SelectItem value="2">Posto 2</SelectItem>
-								<SelectItem value="3">Posto 3</SelectItem>
-								<SelectItem value="uti">UTI</SelectItem>
-								<SelectItem value="unacon">UNACON</SelectItem>
-							</SelectContent>
-						</Select>
-					</div>
-
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="unit">Medicamento</Label>
-						<Select name="unit">
-							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Selecione um medicamento" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="1">Polimixina B1</SelectItem>
-								<SelectItem value="2">Ciprofloxacino Inj</SelectItem>
-								<SelectItem value="3">Metronidazol Inj</SelectItem>
-								<SelectItem value="4">Cefepime</SelectItem>
-								<SelectItem value="5"> Tazobactam</SelectItem>
-							</SelectContent>
-						</Select>
+						<div className="flex flex-col gap-3 w-full">
+							<Label htmlFor="unit">Medicamento</Label>
+							<Select name="unit">
+								<SelectTrigger className="h-9">
+									<SelectValue placeholder="Selecione um medicamento" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="1">Polimixina B1</SelectItem>
+									<SelectItem value="2">Ciprofloxacino Inj</SelectItem>
+									<SelectItem value="3">Metronidazol Inj</SelectItem>
+									<SelectItem value="4">Cefepime</SelectItem>
+									<SelectItem value="5"> Tazobactam</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
 					</div>
 
 					<div className="flex flex-col gap-3">

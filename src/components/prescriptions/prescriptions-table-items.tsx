@@ -3,8 +3,8 @@ import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
 import { PrescriptionDetailsModal } from "./prescription-details-modal";
-import { Prescription } from "@/api/get-prescriptions";
 import { OptionsButton } from "../global/option-button";
+import type { Prescription } from "@/models/prescription";
 
 export interface PrescriptionsTableItemsProps {
 	prescription: Prescription;
@@ -13,6 +13,7 @@ export interface PrescriptionsTableItemsProps {
 export function PrescriptionsTableItems({
 	prescription,
 }: PrescriptionsTableItemsProps) {
+
 	return (
 		<TableRow>
 			<TableCell className="font-mono text-xs font-medium">

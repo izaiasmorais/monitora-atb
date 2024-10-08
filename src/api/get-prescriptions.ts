@@ -2,28 +2,22 @@ import { api } from "@/lib/axios";
 import type {
 	Prescription,
 	GetPrescriptionsQuery,
-	GetPatientsResponse,
+	GetPrescriptionsResponse,
 } from "@/models/prescription";
 
-export async function getPatients({
+export async function getPrescriptions({
 	pageIndex,
 	perPage = 10,
 	email,
 	id,
 	name,
 }: GetPrescriptionsQuery) {
-	const { data } = await api.get<Prescription[]>("/patients", {
+	const { data } = await api.get<Prescription[]>("/prescriptions", {
 		params: { id, name, email },
 	});
 
-	const totalCount = Math.min(data.length, 30);
-
-	const { data: patients } = await api.get<Prescription[]>("/patients", {
-		params: { id, name, email, limit: perPage, page: pageIndex },
-	});
-
 	return {
-		patients,
-		meta: { pageIndex, perPage, totalCount },
-	} as GetPatientsResponse;
+		prescriptions: data,
+		meta: { pageIndex: 0, perPage: 10, totalCount: 30 },
+	} as GetPrescriptionsResponse;
 }

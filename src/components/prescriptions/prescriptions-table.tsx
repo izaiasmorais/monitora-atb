@@ -9,14 +9,13 @@ import {
 import { PrescriptionsTableItems } from "./prescriptions-table-items";
 import { Pagination } from "../global/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { getPatients } from "@/api/get-prescriptions";
+import { getPrescriptions } from "@/api/get-prescriptions";
 import { PrescriptionsTableFilters } from "@/components/prescriptions/prescriptions-table-filters";
 import { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { subDays } from "date-fns";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
-import { prescriptions } from "../../mocks/prescriptions";
 import { z } from "zod";
 
 export function PrescriptionsTable() {
@@ -38,10 +37,10 @@ export function PrescriptionsTable() {
 		.transform((page) => page)
 		.parse(searchParams.get("page") ?? 1);
 
-	const { data: result, isLoading: isLoadingPatients } = useQuery({
+	const { data: result, isLoading: isLoadingPrescriptions } = useQuery({
 		queryKey: ["patients", pageIndex, id, name, status],
 		queryFn: () =>
-			getPatients({
+			getPrescriptions({
 				pageIndex,
 				id,
 				name,
@@ -85,8 +84,8 @@ export function PrescriptionsTable() {
 					</TableHeader>
 
 					<TableBody>
-						{!isLoadingPatients &&
-							prescriptions.map((prescription) => {
+						{!isLoadingPrescriptions && result &&
+							result.prescriptions.map((prescription) => {
 								return (
 									<PrescriptionsTableItems
 										key={prescription.id}
@@ -95,7 +94,7 @@ export function PrescriptionsTable() {
 								);
 							})}
 
-						{isLoadingPatients && <PrescriptionsTableSkeleton />}
+						{isLoadingPrescriptions && <PrescriptionsTableSkeleton />}
 					</TableBody>
 				</Table>
 			</div>

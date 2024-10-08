@@ -7,6 +7,7 @@ export interface Prescription {
 	dose: number;
 	via: string;
 	posology: string;
+	posologyDays: string[];
 }
 
 export interface GetPrescriptionsQuery {
@@ -18,8 +19,8 @@ export interface GetPrescriptionsQuery {
 	createdAt?: Date | null;
 }
 
-export interface GetPatientsResponse {
-	patients: Prescription[];
+export interface GetPrescriptionsResponse {
+	prescriptions: Prescription[];
 	meta: {
 		pageIndex: number;
 		perPage: number;
