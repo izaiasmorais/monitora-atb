@@ -1,10 +1,5 @@
-import type { Prescription } from "@/api/get-prescriptions";
-import {
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-} from "../ui/dialog";
+import type { Prescription } from "@/models/prescription";
+import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 interface PrescriptionDetailsModalProps {
 	prescription: Prescription;

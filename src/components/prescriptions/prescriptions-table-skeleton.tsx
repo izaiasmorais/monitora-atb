@@ -11,7 +11,7 @@ export function PrescriptionsTableSkeleton() {
 					<Skeleton className="h-4 w-[100px]" />
 				</TableCell>
 				<TableCell>
-					<Skeleton className="h-4 w-[300px]" />
+					<Skeleton className="h-4 w-[250px]" />
 				</TableCell>
 				<TableCell>
 					<Skeleton className="h-4 w-[50px]" />

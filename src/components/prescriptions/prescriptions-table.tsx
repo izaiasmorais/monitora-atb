@@ -9,7 +9,7 @@ import {
 import { PrescriptionsTableItems } from "./prescriptions-table-items";
 import { Pagination } from "../global/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { getPrescriptions } from "@/api/get-prescriptions";
+import { getPrescriptions } from "@/api/prescriptions/get-prescriptions";
 import { PrescriptionsTableFilters } from "@/components/prescriptions/prescriptions-table-filters";
 import { useState } from "react";
 import { DateRange } from "react-day-picker";
@@ -17,6 +17,7 @@ import { subDays } from "date-fns";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
 import { z } from "zod";
+import { PaginationSkeleton } from "../global/pagination-skeleton";
 
 export function PrescriptionsTable() {
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -84,7 +85,8 @@ export function PrescriptionsTable() {
 					</TableHeader>
 
 					<TableBody>
-						{!isLoadingPrescriptions && result &&
+						{!isLoadingPrescriptions &&
+							result &&
 							result.prescriptions.map((prescription) => {
 								return (
 									<PrescriptionsTableItems
@@ -99,7 +101,9 @@ export function PrescriptionsTable() {
 				</Table>
 			</div>
 
-			{result && (
+			{isLoadingPrescriptions && <PaginationSkeleton />}
+
+			{result && !isLoadingPrescriptions && (
 				<Pagination
 					pageIndex={result.meta.pageIndex - 1}
 					perPage={result.meta.perPage}

@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import axios from "axios";
 
 export const api = axios.create({
@@ -6,7 +7,7 @@ export const api = axios.create({
 
 if (process.env.ENABLE_API_DELAY) {
 	api.interceptors.request.use(async (config) => {
-		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await new Promise((resolve) => setTimeout(resolve, 5000));
 
 		return config;
 	});
