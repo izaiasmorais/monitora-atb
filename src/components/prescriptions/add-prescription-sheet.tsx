@@ -21,8 +21,31 @@ import {
 } from "../ui/select";
 import { PrescriptionDoseCheckbox } from "./prescription-dose-checkbox";
 import { PosologyDaysPicker } from "./posology-days-picker";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import type { FormEvent } from "react";
+
+const createPrescriptionsFormSchema = z.object({
+	medicalReport: z.number().min(1),
+	name: z.string().min(1),
+});
+
+type createPrescriptionFormData = z.infer<typeof createPrescriptionsFormSchema>;
 
 export function AddPrescriptionSheet() {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors, ...formState },
+	} = useForm<createPrescriptionFormData>({
+		resolver: zodResolver(createPrescriptionsFormSchema),
+	});
+
+	const onSubmit: SubmitHandler<createPrescriptionFormData> = (data) =>
+		console.log(data);
+
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -32,7 +55,7 @@ export function AddPrescriptionSheet() {
 				</Button>
 			</SheetTrigger>
 
-			<SheetContent className="flex flex-col">
+			<SheetContent>
 				<SheetHeader>
 					<SheetTitle>Adicionar Prescrição</SheetTitle>
 					{/* <SheetDescription>
@@ -40,16 +63,32 @@ export function AddPrescriptionSheet() {
 					</SheetDescription> */}
 				</SheetHeader>
 
-				<div className="grid gap-8 py-8">
+				<form className="grid gap-8 py-8" onSubmit={handleSubmit(onSubmit)}>
 					<div className="flex items-center gap-4">
 						<div className="flex flex-col gap-3 w-full">
 							<Label htmlFor="medicalReport">Número do Prontuário</Label>
-							<Input id="medicalReport" placeholder="534047/6" />
+							<Input
+								id="medicalReport"
+								placeholder="534047/6"
+								type="number"
+								{...register("medicalReport", { required: true })}
+							/>
+							{errors.medicalReport && (
+								<div>
+									<span className="text-red-500 font-semibold text-sm">
+										Esse campo é obrigatório
+									</span>
+								</div>
+							)}
 						</div>
 
 						<div className="flex flex-col gap-3 w-full">
 							<Label htmlFor="name">Nome do paciente</Label>
-							<Input id="name" placeholder="Digite um nome" />
+							<Input
+								id="name"
+								placeholder="Digite um nome"
+								{...register("name", { required: true })}
+							/>
 						</div>
 					</div>
 
@@ -136,13 +175,17 @@ export function AddPrescriptionSheet() {
 							<PosologyDaysPicker />
 						</div>
 					</div>
-				</div>
 
-				<SheetFooter className="flex-1 flex items-end">
+					<div className="flex-1 flex justify-end">
+						<Button type="submit">Confirmar</Button>
+					</div>
+				</form>
+
+				{/* <SheetFooter className="flex-1 flex items-end">
 					<SheetClose asChild>
 						<Button type="submit">Confirmar</Button>
 					</SheetClose>
-				</SheetFooter>
+				</SheetFooter> */}
 			</SheetContent>
 		</Sheet>
 	);
