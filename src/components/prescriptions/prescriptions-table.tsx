@@ -73,7 +73,7 @@ export function PrescriptionsTable() {
 					<TableHeader>
 						<TableRow className="bg-muted/50">
 							<TableHead className="w-[200px]">Prontuário</TableHead>
-							<TableHead className="min-w-[300px]">Nome</TableHead>
+							<TableHead className="min-w-[300px] xl:w-[300px]">Nome</TableHead>
 							<TableHead className="w-[150px]">Unidade</TableHead>
 							<TableHead className="min-w-[150px]">Medicamento</TableHead>
 							<TableHead className="w-[150px]">Via</TableHead>

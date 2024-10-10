@@ -20,12 +20,13 @@ import {
 	SelectValue,
 } from "../ui/select";
 import { PrescriptionDoseCheckbox } from "./prescription-dose-checkbox";
+import { PosologyDaysPicker } from "./posology-days-picker";
 
 export function AddPrescriptionSheet() {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button className="flex items-center gap-2" size="sm">
+				<Button className="flex items-center gap-4" size="sm">
 					<Plus className="w-5 h-5" />
 					Adicionar prescrição
 				</Button>
@@ -39,8 +40,8 @@ export function AddPrescriptionSheet() {
 					</SheetDescription> */}
 				</SheetHeader>
 
-				<div className="grid gap-5 py-8">
-					<div className="flex items-center gap-2">
+				<div className="grid gap-8 py-8">
+					<div className="flex items-center gap-4">
 						<div className="flex flex-col gap-3 w-full">
 							<Label htmlFor="medicalReport">Número do Prontuário</Label>
 							<Input id="medicalReport" placeholder="534047/6" />
@@ -52,7 +53,7 @@ export function AddPrescriptionSheet() {
 						</div>
 					</div>
 
-					<div className="flex items-center gap-2">
+					<div className="flex items-center gap-4">
 						<div className="flex flex-col gap-3 w-full">
 							<Label htmlFor="unit">Unidade</Label>
 							<Select name="unit">
@@ -101,29 +102,39 @@ export function AddPrescriptionSheet() {
 
 					<div className="flex flex-col gap-3">
 						<Label htmlFor="dose">Dose</Label>
-						<Input type="number" id="dose" placeholder="500mg" />
-						<Button>Definir dose manualmente</Button>
+						<div className="flex items-center gap-4">
+							<Input
+								className="w-full"
+								type="number"
+								id="dose"
+								placeholder="500mg"
+							/>
+							<Button className="w-full">Definir dose manualmente</Button>
+						</div>
 						<PrescriptionDoseCheckbox />
 					</div>
 
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="unit">Posologia</Label>
-						<Select name="unit">
-							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Selecione a posologia" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="1">6/6h</SelectItem>
-								<SelectItem value="2">8/8h</SelectItem>
-								<SelectItem value="3">12/12h</SelectItem>
-								<SelectItem value="uti">24/24h</SelectItem>
-							</SelectContent>
-						</Select>
-					</div>
+					<div className="flex items-center gap-4">
+						<div className="flex flex-col gap-3 w-full">
+							<Label htmlFor="unit">Posologia</Label>
+							<Select name="unit">
+								<SelectTrigger className="h-9">
+									<SelectValue placeholder="Selecione a posologia" />
+								</SelectTrigger>
 
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="dose">Dias de tratamento</Label>
-						<Button>Definir dias</Button>
+								<SelectContent>
+									<SelectItem value="1">6/6h</SelectItem>
+									<SelectItem value="2">8/8h</SelectItem>
+									<SelectItem value="3">12/12h</SelectItem>
+									<SelectItem value="uti">24/24h</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
+
+						<div className="flex flex-col gap-3 w-full">
+							<Label htmlFor="dose">Dias de tratamento</Label>
+							<PosologyDaysPicker />
+						</div>
 					</div>
 				</div>
 
