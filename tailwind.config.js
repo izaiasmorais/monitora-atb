@@ -71,7 +71,7 @@ module.exports = {
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
 			gridTemplateColumns: {
-				app: "20rem 1fr",
+				app: "16rem 1fr",
 			},
 		},
 	},

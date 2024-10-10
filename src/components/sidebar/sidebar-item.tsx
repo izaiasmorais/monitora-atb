@@ -20,7 +20,7 @@ export function SidebarItem({
 
 	const style = pathname.endsWith(href)
 		? "bg-blue-50/50 dark:bg-blue-950/50 text-blue-500"
-		: "";
+		: "tex-muted";
 
 	return (
 		<Link

@@ -17,6 +17,10 @@ export function PosologyDaysPicker() {
 
 	const handleSelect = (dates: Date[] | undefined) => {
 		setSelectedDates(dates || []);
+		const formattedDates = dates?.map((date) => {
+			return date.toISOString();
+		});
+		console.log(formattedDates);
 	};
 
 	return (
@@ -39,12 +43,14 @@ export function PosologyDaysPicker() {
 					)}
 				</Button>
 			</PopoverTrigger>
+
 			<PopoverContent className="w-auto p-0">
 				<Calendar
 					mode="multiple"
 					selected={selectedDates}
 					onSelect={handleSelect}
 					initialFocus
+					locale={ptBR}
 				/>
 			</PopoverContent>
 		</Popover>

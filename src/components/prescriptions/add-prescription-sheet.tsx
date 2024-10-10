@@ -32,7 +32,7 @@ export function AddPrescriptionSheet() {
 				</Button>
 			</SheetTrigger>
 
-			<SheetContent>
+			<SheetContent className="flex flex-col">
 				<SheetHeader>
 					<SheetTitle>Adicionar Prescrição</SheetTitle>
 					{/* <SheetDescription>
@@ -138,7 +138,7 @@ export function AddPrescriptionSheet() {
 					</div>
 				</div>
 
-				<SheetFooter>
+				<SheetFooter className="flex-1 flex items-end">
 					<SheetClose asChild>
 						<Button type="submit">Confirmar</Button>
 					</SheetClose>
