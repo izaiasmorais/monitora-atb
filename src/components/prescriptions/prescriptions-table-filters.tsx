@@ -49,7 +49,6 @@ export function PrescriptionsTableFilters({
 
 	const { register, handleSubmit, control, reset } =
 		useForm<PatientFilterSchema>({
-			// @ts-ignore
 			resolver: zodResolver(patientFilterSchema),
 			defaultValues: {
 				medicalRecord: id ?? "",

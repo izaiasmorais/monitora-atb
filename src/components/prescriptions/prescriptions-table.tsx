@@ -18,6 +18,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
 import { z } from "zod";
 import { PaginationSkeleton } from "../global/pagination-skeleton";
+import { PrescriptionsTableEmptyState } from "./prescriptions-table-empty-state";
 
 export function PrescriptionsTable() {
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -39,7 +40,7 @@ export function PrescriptionsTable() {
 		.parse(searchParams.get("page") ?? 1);
 
 	const { data: result, isLoading: isLoadingPrescriptions } = useQuery({
-		queryKey: ["patients", pageIndex, id, name, status],
+		queryKey: ["prescriptions", pageIndex, id, name, status],
 		queryFn: () =>
 			getPrescriptions({
 				pageIndex,
@@ -79,8 +80,9 @@ export function PrescriptionsTable() {
 							<TableHead className="w-[150px]">Via</TableHead>
 							<TableHead className="w-[150px]">Dose</TableHead>
 							<TableHead className="w-[150px]">Posologia</TableHead>
-							<TableHead className="w-[100px]"></TableHead>
-							<TableHead className="w-[100px]"></TableHead>
+							<TableHead className="w-[50px]"></TableHead>
+							<TableHead className="w-[50px]"></TableHead>
+							<TableHead className="w-[50px]"></TableHead>
 						</TableRow>
 					</TableHeader>
 
@@ -102,6 +104,10 @@ export function PrescriptionsTable() {
 			</div>
 
 			{isLoadingPrescriptions && <PaginationSkeleton />}
+
+			{result &&
+				result.prescriptions.length === 0 &&
+				!isLoadingPrescriptions && <PrescriptionsTableEmptyState />}
 
 			{result && !isLoadingPrescriptions && (
 				<Pagination

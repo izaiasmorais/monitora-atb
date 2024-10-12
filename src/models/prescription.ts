@@ -19,6 +19,10 @@ export interface GetPrescriptionsQuery {
 	createdAt?: Date | null;
 }
 
+export interface DeletePrescriptionParams {
+	id: string;
+}
+
 export interface GetPrescriptionsResponse {
 	prescriptions: Prescription[];
 	meta: {

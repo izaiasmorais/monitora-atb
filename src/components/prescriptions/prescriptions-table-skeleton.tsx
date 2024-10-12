@@ -1,4 +1,4 @@
-import { MoreVertical, Search } from "lucide-react";
+import { MoreVertical, Search, SquarePen, Trash2 } from "lucide-react";
 import { TableCell, TableRow } from "../ui/table";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
@@ -34,9 +34,18 @@ export function PrescriptionsTableSkeleton() {
 						<span className="sr-only">Detalhes do pedido: </span>
 					</Button>
 				</TableCell>
+
 				<TableCell>
 					<Button variant="outline" size="sm" disabled>
-						<MoreVertical className="h-4 w-4" />
+						<SquarePen className="h-4 w-4" />
+						<span className="sr-only">Editar Prescrição</span>
+					</Button>
+				</TableCell>
+
+				<TableCell>
+					<Button variant="outline" size="sm" disabled>
+						<Trash2 className="h-4 w-4" />
+						<span className="sr-only">Deletar Prescrição</span>
 					</Button>
 				</TableCell>
 			</TableRow>

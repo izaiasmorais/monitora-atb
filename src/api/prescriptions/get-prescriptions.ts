@@ -18,6 +18,6 @@ export async function getPrescriptions({
 
 	return {
 		prescriptions: data,
-		meta: { pageIndex: 0, perPage: 10, totalCount: 30 },
+		meta: { pageIndex: 1, perPage: 10, totalCount: 30 },
 	} as GetPrescriptionsResponse;
 }
