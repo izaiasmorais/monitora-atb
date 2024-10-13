@@ -11,9 +11,14 @@ export async function getPrescriptions({
 	email,
 	id,
 	name,
+	createdAt,
+	medicalRecord,
+	unit,
+	medicine,
+	posology,
 }: GetPrescriptionsQuery) {
 	const { data } = await api.get<Prescription[]>("/prescriptions", {
-		params: { id, name, email },
+		params: { id, name, email, medicalRecord, unit, medicine, posology },
 	});
 
 	return {

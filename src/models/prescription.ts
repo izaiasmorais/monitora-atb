@@ -17,6 +17,21 @@ export interface GetPrescriptionsQuery {
 	name?: string | null;
 	email?: string | null;
 	createdAt?: Date | null;
+	medicalRecord?: string | null;
+	unit?: string | null;
+	medicine?: string | null;
+	posology?: string | null;
+}
+
+export interface CreatePrescriptionBody {
+	medicalRecord: string;
+	name: string;
+	medicine: string;
+	unit: string;
+	dose: number;
+	via: string;
+	posology: string;
+	posologyDays: string[];
 }
 
 export interface DeletePrescriptionParams {

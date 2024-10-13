@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 import { queryClient } from "../lib/react-query";
 import { Next13ProgressBar } from "next13-progressbar";
+import { Toaster } from "sonner";
 
 export default function Providers({ children }: { children: ReactNode }) {
 	return (
@@ -25,6 +26,8 @@ export default function Providers({ children }: { children: ReactNode }) {
 				showOnShallow
 				options={{ showSpinner: false }}
 			/>
+
+			<Toaster richColors />
 		</>
 	);
 }

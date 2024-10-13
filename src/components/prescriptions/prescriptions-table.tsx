@@ -16,9 +16,9 @@ import { DateRange } from "react-day-picker";
 import { subDays } from "date-fns";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
-import { z } from "zod";
 import { PaginationSkeleton } from "../global/pagination-skeleton";
 import { PrescriptionsTableEmptyState } from "./prescriptions-table-empty-state";
+import { z } from "zod";
 
 export function PrescriptionsTable() {
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -26,39 +26,35 @@ export function PrescriptionsTable() {
 		to: new Date(),
 	});
 
-	const router = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
+	// const router = useRouter();
+	// const pathname = usePathname();
+	// const searchParams = useSearchParams();
 
-	const id = searchParams.get("id");
-	const name = searchParams.get("name");
-	const status = searchParams.get("status");
+	// const id = searchParams.get("id");
+	// const name = searchParams.get("name");
+	// const status = searchParams.get("status");
 
-	const pageIndex = z.coerce
-		.number()
-		.transform((page) => page)
-		.parse(searchParams.get("page") ?? 1);
+	// const pageIndex = z.coerce
+	// 	.number()
+	// 	.transform((page) => page)
+	// 	.parse(searchParams.get("page") ?? 1);
 
 	const { data: result, isLoading: isLoadingPrescriptions } = useQuery({
-		queryKey: ["prescriptions", pageIndex, id, name, status],
-		queryFn: () =>
-			getPrescriptions({
-				pageIndex,
-				id,
-				name,
-			}),
+		queryKey: ["prescriptions"],
+		queryFn: () => getPrescriptions({}),
+		staleTime: 1000 * 60 * 60 * 12,
 	});
 
-	function handlePaginate(pageIndex: number) {
-		const state = new URLSearchParams(Array.from(searchParams.entries()));
+	// function handlePaginate(pageIndex: number) {
+	// 	const state = new URLSearchParams(Array.from(searchParams.entries()));
 
-		state.set("page", (pageIndex + 1).toString());
+	// 	state.set("page", (pageIndex + 1).toString());
 
-		const search = state.toString();
-		const query = search ? `?${search}` : "";
+	// 	const search = state.toString();
+	// 	const query = search ? `?${search}` : "";
 
-		router.push(`${pathname}${query}`);
-	}
+	// 	router.push(`${pathname}${query}`);
+	// }
 
 	return (
 		<div className="space-y-4">
@@ -105,16 +101,19 @@ export function PrescriptionsTable() {
 
 			{isLoadingPrescriptions && <PaginationSkeleton />}
 
-			{result &&
+			{((result &&
 				result.prescriptions.length === 0 &&
-				!isLoadingPrescriptions && <PrescriptionsTableEmptyState />}
+				!isLoadingPrescriptions) ||
+				(!result && !isLoadingPrescriptions)) && (
+				<PrescriptionsTableEmptyState />
+			)}
 
 			{result && !isLoadingPrescriptions && (
 				<Pagination
 					pageIndex={result.meta.pageIndex - 1}
 					perPage={result.meta.perPage}
 					totalCount={8}
-					onPageChange={handlePaginate}
+					onPageChange={() => {}}
 				/>
 			)}
 		</div>

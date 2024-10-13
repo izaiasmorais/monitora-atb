@@ -10,9 +10,15 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import type { CreatePrescriptionFormData } from "./add-prescription-sheet";
+import type { UseFormSetValue } from "react-hook-form";
 import { ptBR } from "date-fns/locale";
 
-export function PosologyDaysPicker() {
+interface PosologyDaysPickerProps {
+	setValue: UseFormSetValue<CreatePrescriptionFormData>;
+}
+
+export function PosologyDaysPicker({ setValue }: PosologyDaysPickerProps) {
 	const [selectedDates, setSelectedDates] = React.useState<Date[]>([]);
 
 	const handleSelect = (dates: Date[] | undefined) => {
@@ -20,7 +26,7 @@ export function PosologyDaysPicker() {
 		const formattedDates = dates?.map((date) => {
 			return date.toISOString();
 		});
-		console.log(formattedDates);
+		if (formattedDates) setValue("posologyDays", formattedDates);
 	};
 
 	return (

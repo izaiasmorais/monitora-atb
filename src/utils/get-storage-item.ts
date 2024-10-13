@@ -1,4 +1,3 @@
-// utils/format-currency.ts
 export const getStorageItem = (key?: string): any | null => {
 	if (!key || typeof window === "undefined") {
 		return null;

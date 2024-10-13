@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -5,13 +6,12 @@ import {
 	Sheet,
 	SheetClose,
 	SheetContent,
-	SheetDescription,
 	SheetFooter,
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { Plus } from "lucide-react";
+import { LoaderCircle, Plus } from "lucide-react";
 import {
 	Select,
 	SelectContent,
@@ -21,51 +21,72 @@ import {
 } from "../ui/select";
 import { PrescriptionDoseCheckbox } from "./prescription-dose-checkbox";
 import { PosologyDaysPicker } from "./posology-days-picker";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, Controller, type SubmitErrorHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { createPrescription } from "@/api/prescriptions/create-prescriptions";
+import { queryClient } from "@/lib/react-query";
+import { toast } from "sonner";
+import { useState } from "react";
 import { z } from "zod";
-import type { FormEvent } from "react";
 
 const createPrescriptionsFormSchema = z.object({
-	medicalReport: z.number().min(1),
+	medicalRecord: z.string().min(1),
 	name: z.string().min(1),
 	unit: z.string().min(1),
 	medicine: z.string().min(1),
 	via: z.string().min(1),
-	dose: z.string().min(1),
+	dose: z.coerce.number().min(1),
 	posology: z.string().min(1),
-	posologyDays: z.string().array().min(1),
+	posologyDays: z.array(z.string()).min(1),
 });
 
-type createPrescriptionFormData = z.infer<typeof createPrescriptionsFormSchema>;
+export type CreatePrescriptionFormData = z.infer<
+	typeof createPrescriptionsFormSchema
+>;
 
 export function AddPrescriptionSheet() {
+	const [isSheetOpen, setIsSheetOpen] = useState(false);
+
 	const {
 		register,
 		handleSubmit,
 		control,
-		watch,
+		setValue,
 		formState: { errors },
-	} = useForm<createPrescriptionFormData>({
+	} = useForm<CreatePrescriptionFormData>({
 		defaultValues: {
-			medicalReport: undefined,
+			medicalRecord: undefined,
 			name: "",
 		},
 		resolver: zodResolver(createPrescriptionsFormSchema),
 	});
 
-	const fields = watch([
-		"medicalReport",
-		"name",
-		"unit",
-		"medicine",
-		"via",
-		"dose",
-		"posology",
-	]);
+	const { mutate: createPrescriptionFn, isLoading } = useMutation({
+		mutationFn: (data: CreatePrescriptionFormData) => createPrescription(data),
+		mutationKey: ["create-prescriptions"],
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["prescriptions"],
+			});
+			toast.success("Prescrição criada com sucesso!");
+			setIsSheetOpen(false);
+		},
+	});
+
+	const onFormError: SubmitErrorHandler<CreatePrescriptionFormData> = (
+		errors
+	) => {
+		console.log(errors);
+		toast.error("Preencha todos os campos obrigatórios");
+	};
+
+	function handleCreatePrescription(data: CreatePrescriptionFormData) {
+		createPrescriptionFn(data);
+	}
 
 	return (
-		<Sheet>
+		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
 			<SheetTrigger asChild>
 				<Button className="flex items-center gap-2" size="sm">
 					<Plus className="w-5 h-5" />
@@ -76,21 +97,21 @@ export function AddPrescriptionSheet() {
 			<SheetContent data-state="open">
 				<SheetHeader>
 					<SheetTitle>Adicionar Prescrição</SheetTitle>
-					{/* <SheetDescription>
-
-					</SheetDescription> */}
 				</SheetHeader>
 
-				<form className="grid gap-8 py-8" onSubmit={() => console.log(fields)}>
+				<form
+					onSubmit={handleSubmit(handleCreatePrescription, onFormError)}
+					className="grid gap-8 py-8"
+				>
 					<div className="flex items-center gap-4">
 						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="medicalReport">Número do Prontuário*</Label>
+							<Label htmlFor="medicalRecord">Número do Prontuário*</Label>
 							<Input
-								id="medicalReport"
+								id="medicalRecord"
 								placeholder="534047436"
-								type="number"
+								type="text"
+								{...register("medicalRecord")}
 								required
-								{...register("medicalReport", { required: true })}
 							/>
 						</div>
 
@@ -100,8 +121,8 @@ export function AddPrescriptionSheet() {
 								id="name"
 								placeholder="Digite um nome"
 								type="text"
+								{...register("name")}
 								required
-								{...register("name", { required: true })}
 							/>
 						</div>
 					</div>
@@ -114,14 +135,18 @@ export function AddPrescriptionSheet() {
 								name="unit"
 								control={control}
 								render={({ field }) => (
-									<Select onValueChange={field.onChange} value={field.value}>
+									<Select
+										onValueChange={field.onChange}
+										value={field.value}
+										required
+									>
 										<SelectTrigger className="h-9">
 											<SelectValue placeholder="Selecione uma unidade" />
 										</SelectTrigger>
 										<SelectContent>
 											<SelectItem value="Posto 1">Posto 1</SelectItem>
-											<SelectItem value="Posto 2">Posto 2</SelectItem>
-											<SelectItem value="Posto 2">Posto 2</SelectItem>
+											<SelectItem value="Posto 2">Posto 3</SelectItem>
+											<SelectItem value="Posto 3">Posto 3</SelectItem>
 											<SelectItem value="UTI">UTI</SelectItem>
 											<SelectItem value="UNACON">UNACON</SelectItem>
 										</SelectContent>
@@ -137,7 +162,11 @@ export function AddPrescriptionSheet() {
 								name="medicine"
 								control={control}
 								render={({ field }) => (
-									<Select onValueChange={field.onChange} value={field.value}>
+									<Select
+										onValueChange={field.onChange}
+										value={field.value}
+										required
+									>
 										<SelectTrigger className="h-9">
 											<SelectValue placeholder="Selecione um medicamento" />
 										</SelectTrigger>
@@ -166,13 +195,17 @@ export function AddPrescriptionSheet() {
 							name="via"
 							control={control}
 							render={({ field }) => (
-								<Select onValueChange={field.onChange} value={field.value}>
+								<Select
+									onValueChange={field.onChange}
+									value={field.value}
+									required
+								>
 									<SelectTrigger className="h-9">
 										<SelectValue placeholder="Selecione a via" />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value="1">EV</SelectItem>
-										<SelectItem value="2">VO</SelectItem>
+										<SelectItem value="EV">EV</SelectItem>
+										<SelectItem value="VO">VO</SelectItem>
 									</SelectContent>
 								</Select>
 							)}
@@ -186,11 +219,13 @@ export function AddPrescriptionSheet() {
 								className="w-full"
 								type="number"
 								id="dose"
-								placeholder="500mg"
+								placeholder="500"
+								{...register("dose")}
 								required
-								{...register("dose", { required: true })}
 							/>
-							<Button className="w-full">Definir dose manualmente</Button>
+							<Button type="button" className="w-full">
+								Definir dose manualmente
+							</Button>
 						</div>
 						<PrescriptionDoseCheckbox />
 					</div>
@@ -202,16 +237,20 @@ export function AddPrescriptionSheet() {
 								name="posology"
 								control={control}
 								render={({ field }) => (
-									<Select onValueChange={field.onChange} value={field.value}>
+									<Select
+										onValueChange={field.onChange}
+										value={field.value}
+										required
+									>
 										<SelectTrigger className="h-9">
 											<SelectValue placeholder="Selecione a posologia" />
 										</SelectTrigger>
 
 										<SelectContent>
-											<SelectItem value="1">6/6h</SelectItem>
-											<SelectItem value="2">8/8h</SelectItem>
-											<SelectItem value="3">12/12h</SelectItem>
-											<SelectItem value="uti">24/24h</SelectItem>
+											<SelectItem value="6/6h">6/6h</SelectItem>
+											<SelectItem value="8/8h">8/8h</SelectItem>
+											<SelectItem value="12/12">12/12h</SelectItem>
+											<SelectItem value="24/24h">24/24h</SelectItem>
 										</SelectContent>
 									</Select>
 								)}
@@ -219,21 +258,19 @@ export function AddPrescriptionSheet() {
 						</div>
 
 						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="dose">Dias de tratamento*</Label>
-							<PosologyDaysPicker />
+							<Label htmlFor="posologyDays">Dias de tratamento*</Label>
+							<PosologyDaysPicker setValue={setValue} />
 						</div>
 					</div>
 
-					<div className="flex-1 flex justify-end">
-						<Button type="submit">Confirmar</Button>
-					</div>
-				</form>
+					<SheetFooter className="flex-1 flex justify-end">
+						<Button type="submit" className="w-[125px]">
+							{isLoading && <LoaderCircle className="animate-spin" />}
 
-				{/* <SheetFooter className="flex-1 flex items-end">
-					<SheetClose asChild>
-						<Button type="submit">Confirmar</Button>
-					</SheetClose>
-				</SheetFooter> */}
+							{!isLoading && "Confirmar"}
+						</Button>
+					</SheetFooter>
+				</form>
 			</SheetContent>
 		</Sheet>
 	);

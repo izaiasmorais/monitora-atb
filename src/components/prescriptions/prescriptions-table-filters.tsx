@@ -11,12 +11,11 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { Controller, useForm } from "react-hook-form";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateRange } from "react-day-picker";
-import { z } from "zod";
 import { AddPrescriptionSheet } from "./add-prescription-sheet";
 import { MedicinesCombobox } from "./medicines-combobox";
+import { z } from "zod";
 
 const patientFilterSchema = z.object({
 	medicalRecord: z.string().optional(),
@@ -113,7 +112,7 @@ export function PrescriptionsTableFilters({
 		state.delete("unit");
 		state.delete("medicine");
 		state.delete("posology");
-		state.set("page", "1");
+		state.delete("page");
 
 		reset({
 			medicalRecord: "",
