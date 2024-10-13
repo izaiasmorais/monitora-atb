@@ -1,28 +1,38 @@
 import { api } from "@/lib/axios";
 import type {
-	Prescription,
-	GetPrescriptionsQuery,
+	GetPrescriptionsQueryParams,
 	GetPrescriptionsResponse,
 } from "@/models/prescription";
 
 export async function getPrescriptions({
 	pageIndex,
-	perPage = 10,
-	email,
+	perPage,
 	id,
 	name,
-	createdAt,
 	medicalRecord,
 	unit,
 	medicine,
 	posology,
-}: GetPrescriptionsQuery) {
-	const { data } = await api.get<Prescription[]>("/prescriptions", {
-		params: { id, name, email, medicalRecord, unit, medicine, posology },
+	dose,
+	posologyDays,
+}: GetPrescriptionsQueryParams) {
+	const { data } = await api.get<GetPrescriptionsResponse>("/prescriptions", {
+		params: {
+			pageIndex,
+			perPage,
+			id,
+			name,
+			medicalRecord,
+			unit,
+			medicine,
+			posology,
+			dose,
+			posologyDays,
+		},
 	});
 
 	return {
-		prescriptions: data,
-		meta: { pageIndex: 1, perPage: 10, totalCount: 30 },
-	} as GetPrescriptionsResponse;
+		prescriptions: data.prescriptions,
+		meta: data.meta,
+	};
 }

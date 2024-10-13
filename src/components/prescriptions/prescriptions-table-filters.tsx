@@ -14,10 +14,10 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateRange } from "react-day-picker";
 import { AddPrescriptionSheet } from "./add-prescription-sheet";
-import { MedicinesCombobox } from "./medicines-combobox";
+import { MedicineCombobox } from "./medicines-combobox";
 import { z } from "zod";
 
-const patientFilterSchema = z.object({
+const prescriptionsFilterSchema = z.object({
 	medicalRecord: z.string().optional(),
 	name: z.string().optional(),
 	unit: z.string().optional(),
@@ -25,7 +25,9 @@ const patientFilterSchema = z.object({
 	posology: z.string().optional(),
 });
 
-type PatientFilterSchema = z.infer<typeof patientFilterSchema>;
+export type PrescriptionsFilterSchema = z.infer<
+	typeof prescriptionsFilterSchema
+>;
 
 interface PrescriptionsTableFiltersProps {
 	dateRange: DateRange | undefined;
@@ -46,9 +48,9 @@ export function PrescriptionsTableFilters({
 	const medicine = searchParams.get("medicine");
 	const posology = searchParams.get("posology");
 
-	const { register, handleSubmit, control, reset } =
-		useForm<PatientFilterSchema>({
-			resolver: zodResolver(patientFilterSchema),
+	const { register, handleSubmit, control, reset, setValue } =
+		useForm<PrescriptionsFilterSchema>({
+			resolver: zodResolver(prescriptionsFilterSchema),
 			defaultValues: {
 				medicalRecord: id ?? "",
 				name: name ?? "",
@@ -64,7 +66,7 @@ export function PrescriptionsTableFilters({
 		name,
 		posology,
 		unit,
-	}: PatientFilterSchema) {
+	}: PrescriptionsFilterSchema) {
 		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
 		if (medicalRecord) {
@@ -97,7 +99,8 @@ export function PrescriptionsTableFilters({
 			state.delete("unit");
 		}
 
-		state.set("page", "1");
+		state.set("page", "0");
+
 		const search = state.toString();
 		const query = search ? `?${search}` : "";
 
@@ -158,19 +161,19 @@ export function PrescriptionsTableFilters({
 								<SelectValue placeholder="Unidade" />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="all">Todas</SelectItem>
-								<SelectItem value="1">Posto 1</SelectItem>
-								<SelectItem value="2">Posto 2</SelectItem>
-								<SelectItem value="3">Posto 3</SelectItem>
-								<SelectItem value="uti">UTI</SelectItem>
-								<SelectItem value="unacon">UNACON</SelectItem>
+								<SelectItem value="">Todas</SelectItem>
+								<SelectItem value="Posto 1">Posto 1</SelectItem>
+								<SelectItem value="Posto 2">Posto 2</SelectItem>
+								<SelectItem value="Posto 3">Posto 3</SelectItem>
+								<SelectItem value="UTI">UTI</SelectItem>
+								<SelectItem value="UNACON">UNACON</SelectItem>
 							</SelectContent>
 						</Select>
 					);
 				}}
 			/>
 
-			<MedicinesCombobox />
+			<MedicineCombobox setFilterValue={setValue} />
 
 			<Controller
 				control={control}
@@ -187,11 +190,11 @@ export function PrescriptionsTableFilters({
 								<SelectValue placeholder="Posologia" />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="all">Todos</SelectItem>
-								<SelectItem value="1">6/6h</SelectItem>
-								<SelectItem value="2">8/8h</SelectItem>
-								<SelectItem value="3">12/12h</SelectItem>
-								<SelectItem value="uti">24/24h</SelectItem>
+								<SelectItem value="">Todos</SelectItem>
+								<SelectItem value="6/6h">6/6h</SelectItem>
+								<SelectItem value="8/8h">8/8h</SelectItem>
+								<SelectItem value="12/12h">12/12h</SelectItem>
+								<SelectItem value="24/24h">24/24h</SelectItem>
 							</SelectContent>
 						</Select>
 					);

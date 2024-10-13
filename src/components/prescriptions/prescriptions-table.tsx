@@ -26,35 +26,62 @@ export function PrescriptionsTable() {
 		to: new Date(),
 	});
 
-	// const router = useRouter();
-	// const pathname = usePathname();
-	// const searchParams = useSearchParams();
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
 
-	// const id = searchParams.get("id");
-	// const name = searchParams.get("name");
-	// const status = searchParams.get("status");
+	const id = searchParams.get("id");
+	const medicalRecord = searchParams.get("medicalRecord");
+	const name = searchParams.get("name");
+	const unit = searchParams.get("unit");
+	const medicine = searchParams.get("medicine");
+	const posology = searchParams.get("posology");
 
-	// const pageIndex = z.coerce
-	// 	.number()
-	// 	.transform((page) => page)
-	// 	.parse(searchParams.get("page") ?? 1);
+	const pageIndex = z.coerce
+		.number()
+		.transform((page) => page)
+		.parse(searchParams.get("page") ?? 0);
+
+	const perPage = z.coerce
+		.number()
+		.transform((perPage) => perPage)
+		.parse(searchParams.get("perPage") ?? 5);
 
 	const { data: result, isLoading: isLoadingPrescriptions } = useQuery({
-		queryKey: ["prescriptions"],
-		queryFn: () => getPrescriptions({}),
+		queryKey: [
+			"prescriptions",
+			pageIndex,
+			id,
+			name,
+			unit,
+			medicalRecord,
+			medicine,
+			posology,
+		],
+		queryFn: () =>
+			getPrescriptions({
+				pageIndex,
+				perPage,
+				id,
+				name,
+				unit,
+				medicalRecord,
+				medicine,
+				posology,
+			}),
 		staleTime: 1000 * 60 * 60 * 12,
 	});
 
-	// function handlePaginate(pageIndex: number) {
-	// 	const state = new URLSearchParams(Array.from(searchParams.entries()));
+	function handlePaginate(pageIndex: number) {
+		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
-	// 	state.set("page", (pageIndex + 1).toString());
+		state.set("page", pageIndex.toString());
 
-	// 	const search = state.toString();
-	// 	const query = search ? `?${search}` : "";
+		const search = state.toString();
+		const query = search ? `?${search}` : "";
 
-	// 	router.push(`${pathname}${query}`);
-	// }
+		router.push(`${pathname}${query}`);
+	}
 
 	return (
 		<div className="space-y-4">
@@ -110,10 +137,10 @@ export function PrescriptionsTable() {
 
 			{result && !isLoadingPrescriptions && (
 				<Pagination
-					pageIndex={result.meta.pageIndex - 1}
+					pageIndex={result.meta.pageIndex}
 					perPage={result.meta.perPage}
-					totalCount={8}
-					onPageChange={() => {}}
+					totalCount={result.meta.totalCount}
+					onPageChange={handlePaginate}
 				/>
 			)}
 		</div>

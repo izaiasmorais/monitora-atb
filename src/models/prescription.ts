@@ -10,17 +10,26 @@ export interface Prescription {
 	posologyDays: string[];
 }
 
-export interface GetPrescriptionsQuery {
+export interface GetPrescriptionsQueryParams {
 	pageIndex?: number;
 	perPage?: number;
 	id?: string | null;
-	name?: string | null;
-	email?: string | null;
-	createdAt?: Date | null;
 	medicalRecord?: string | null;
-	unit?: string | null;
+	name?: string | null;
 	medicine?: string | null;
+	unit?: string | null;
+	dose?: number | null;
 	posology?: string | null;
+	posologyDays?: string[] | null;
+}
+
+export interface GetPrescriptionsResponse {
+	prescriptions: Prescription[];
+	meta: {
+		pageIndex: number;
+		perPage: number;
+		totalCount: number;
+	};
 }
 
 export interface CreatePrescriptionBody {
@@ -33,16 +42,4 @@ export interface CreatePrescriptionBody {
 	posology: string;
 	posologyDays: string[];
 }
-
-export interface DeletePrescriptionParams {
-	id: string;
-}
-
-export interface GetPrescriptionsResponse {
-	prescriptions: Prescription[];
-	meta: {
-		pageIndex: number;
-		perPage: number;
-		totalCount: number;
-	};
-}
+("");

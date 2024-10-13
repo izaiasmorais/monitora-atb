@@ -8,7 +8,7 @@ export function PrescriptionsTableSkeleton() {
 		return (
 			<TableRow key={index}>
 				<TableCell>
-					<Skeleton className="h-4 w-[100px]" />
+					<Skeleton className="h-4 w-[50px]" />
 				</TableCell>
 				<TableCell>
 					<Skeleton className="h-4 w-[250px]" />

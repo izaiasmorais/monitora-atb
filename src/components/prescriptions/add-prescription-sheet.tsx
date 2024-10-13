@@ -23,7 +23,7 @@ import { PrescriptionDoseCheckbox } from "./prescription-dose-checkbox";
 import { PosologyDaysPicker } from "./posology-days-picker";
 import { useForm, Controller, type SubmitErrorHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { createPrescription } from "@/api/prescriptions/create-prescriptions";
 import { queryClient } from "@/lib/react-query";
 import { toast } from "sonner";
