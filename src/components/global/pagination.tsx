@@ -31,6 +31,7 @@ export function Pagination({
 				<div className="text-sm font-medium">
 					Página {pageIndex + 1} de {pages}
 				</div>
+				
 				<div className="flex items-center gap-2">
 					<Button
 						onClick={() => onPageChange(0)}

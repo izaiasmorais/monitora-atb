@@ -99,7 +99,7 @@ export function PrescriptionsTableFilters({
 			state.delete("unit");
 		}
 
-		state.set("page", "0");
+		state.set("page", "1");
 
 		const search = state.toString();
 		const query = search ? `?${search}` : "";

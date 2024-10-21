@@ -60,7 +60,7 @@ export function PrescriptionsTable() {
 		],
 		queryFn: () =>
 			getPrescriptions({
-				pageIndex,
+				pageIndex: pageIndex != 0 ? pageIndex - 1 : 0,
 				perPage,
 				id,
 				name,
@@ -73,9 +73,11 @@ export function PrescriptionsTable() {
 	});
 
 	function handlePaginate(pageIndex: number) {
+		console.log(pageIndex);
+
 		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
-		state.set("page", pageIndex.toString());
+		state.set("page", (pageIndex + 1).toString());
 
 		const search = state.toString();
 		const query = search ? `?${search}` : "";
