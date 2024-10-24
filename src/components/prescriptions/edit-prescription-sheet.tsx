@@ -10,7 +10,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { LoaderCircle, Plus } from "lucide-react";
+import { LoaderCircle, SquarePen } from "lucide-react";
 import {
 	Select,
 	SelectContent,
@@ -23,11 +23,12 @@ import { PosologyDaysPicker } from "./posology-days-picker";
 import { useForm, Controller, type SubmitErrorHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { createPrescription } from "@/api/prescriptions/create-prescriptions";
 import { queryClient } from "@/lib/react-query";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
+import { editPrescription } from "@/api/prescriptions/edit-prescription";
+import type { Prescription } from "@/models/prescription";
 
 const createPrescriptionsFormSchema = z.object({
 	medicalRecord: z.string().min(1),
@@ -40,67 +41,73 @@ const createPrescriptionsFormSchema = z.object({
 	posologyDays: z.array(z.string()).min(1),
 });
 
-export type CreatePrescriptionFormData = z.infer<
+export type EditPrescriptionFormData = z.infer<
 	typeof createPrescriptionsFormSchema
 >;
 
-export function AddPrescriptionSheet() {
+interface EditPrescriptionSheetProps {
+	prescription: Prescription;
+}
+
+export function EditPrescriptionSheet({
+	prescription,
+}: EditPrescriptionSheetProps) {
 	const [isSheetOpen, setIsSheetOpen] = useState(false);
 
 	const { register, handleSubmit, control, setValue } =
-		useForm<CreatePrescriptionFormData>({
+		useForm<EditPrescriptionFormData>({
 			defaultValues: {
-				medicalRecord: undefined,
-				name: undefined,
-				dose: undefined,
-				unit: undefined,
-				medicine: undefined,
-				via: undefined,
-				posology: undefined,
-				posologyDays: [],
+				medicalRecord: prescription.medicalRecord,
+				name: prescription.name,
+				dose: prescription.dose,
+				unit: prescription.unit,
+				medicine: prescription.medicine,
+				via: prescription.via,
+				posology: prescription.posology,
+				posologyDays: prescription.posologyDays,
 			},
 			resolver: zodResolver(createPrescriptionsFormSchema),
 		});
 
-	const { mutate: createPrescriptionFn, isLoading } = useMutation({
-		mutationFn: (data: CreatePrescriptionFormData) => createPrescription(data),
-		mutationKey: ["create-prescription"],
+	const { mutate: updatePrescriptionFn, isLoading } = useMutation({
+		mutationFn: (data: EditPrescriptionFormData) =>
+			editPrescription(prescription.id, data),
+		mutationKey: ["edit-prescription"],
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ["prescriptions"],
 			});
-			toast.success("Prescrição criada com sucesso!");
+			toast.success("Prescrição atualizada com sucesso!");
 			setIsSheetOpen(false);
 		},
 	});
 
-	const onFormError: SubmitErrorHandler<CreatePrescriptionFormData> = (
+	const onFormError: SubmitErrorHandler<EditPrescriptionFormData> = (
 		errors
 	) => {
 		console.log(errors);
 		toast.error("Preencha todos os campos obrigatórios");
 	};
 
-	function handleCreatePrescription(data: CreatePrescriptionFormData) {
-		createPrescriptionFn(data);
+	function handleUpdatePrescription(data: EditPrescriptionFormData) {
+		updatePrescriptionFn(data);
 	}
 
 	return (
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
 			<SheetTrigger asChild>
-				<Button className="flex items-center gap-2" size="sm">
-					<Plus className="w-5 h-5" />
-					Adicionar prescrição
+				<Button variant="outline" size="sm">
+					<SquarePen className="h-4 w-4" />
 				</Button>
 			</SheetTrigger>
 
 			<SheetContent data-state="open">
 				<SheetHeader>
-					<SheetTitle>Adicionar Prescrição</SheetTitle>
+					<SheetTitle>Editar Prescrição</SheetTitle>
 				</SheetHeader>
 
 				<form
-					onSubmit={handleSubmit(handleCreatePrescription, onFormError)}
+					onSubmit={handleSubmit(handleUpdatePrescription, onFormError)}
 					className="grid gap-8 py-8"
 				>
 					<div className="flex items-center gap-4">
@@ -259,7 +266,10 @@ export function AddPrescriptionSheet() {
 
 						<div className="flex flex-col gap-3 w-full">
 							<Label htmlFor="posologyDays">Dias de tratamento*</Label>
-							<PosologyDaysPicker setValue={setValue} posologyDays={undefined} />
+							<PosologyDaysPicker
+								setValue={setValue}
+								posologyDays={prescription.posologyDays}
+							/>
 						</div>
 					</div>
 

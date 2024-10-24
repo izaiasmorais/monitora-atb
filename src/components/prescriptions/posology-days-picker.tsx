@@ -15,19 +15,38 @@ import type { UseFormSetValue } from "react-hook-form";
 import { ptBR } from "date-fns/locale";
 
 interface PosologyDaysPickerProps {
+	posologyDays: (string | undefined)[] | undefined;
 	setValue: UseFormSetValue<CreatePrescriptionFormData>;
 }
 
-export function PosologyDaysPicker({ setValue }: PosologyDaysPickerProps) {
-	const [selectedDates, setSelectedDates] = React.useState<Date[]>([]);
+export function PosologyDaysPicker({
+	setValue,
+	posologyDays,
+}: PosologyDaysPickerProps) {
+	const [selectedDates, setSelectedDates] = React.useState<Date[]>(() => {
+		const formattedDates = defaultFormattedDates();
+		return formattedDates ? formattedDates : [];
+	});
 
 	const handleSelect = (dates: Date[] | undefined) => {
 		setSelectedDates(dates || []);
-		const formattedDates = dates?.map((date) => {
-			return date.toISOString();
-		});
+		const formattedDates = dates?.map((date) => date.toISOString());
 		if (formattedDates) setValue("posologyDays", formattedDates);
 	};
+
+	function defaultFormattedDates() {
+		if (posologyDays) {
+			const formattedDates = posologyDays
+				.map((date) => {
+					if (date !== undefined) {
+						return new Date(date);
+					}
+				})
+				.filter(Boolean) as Date[];
+			return formattedDates;
+		}
+		return [];
+	}
 
 	return (
 		<Popover>
@@ -53,9 +72,9 @@ export function PosologyDaysPicker({ setValue }: PosologyDaysPickerProps) {
 			<PopoverContent className="w-auto p-0">
 				<Calendar
 					mode="multiple"
+					initialFocus
 					selected={selectedDates}
 					onSelect={handleSelect}
-					initialFocus
 					locale={ptBR}
 				/>
 			</PopoverContent>

@@ -15,7 +15,7 @@ export function DeletePrescriptionDialog({
 	const queryClient = useQueryClient();
 	const { mutate: deletePresciptionFn, isLoading } = useMutation({
 		mutationFn: (prescriptionId: string) => deletePrescription(prescriptionId),
-		mutationKey: ["delete-prescriptions"],
+		mutationKey: ["delete-prescription"],
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ["prescriptions"],
@@ -43,7 +43,7 @@ export function DeletePrescriptionDialog({
 				</span>
 
 				<Button
-					onClick={() => handleDeletePrescription()}
+					onClick={handleDeletePrescription}
 					variant="destructive"
 					className="w-full mt-4"
 				>

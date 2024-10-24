@@ -1,18 +1,19 @@
-import { MoreVertical, Search, SquarePen, Trash2 } from "lucide-react";
+import { Search, SquarePen, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
 import { PrescriptionDetailsModal } from "./prescription-details-dialog";
 import { DeletePrescriptionDialog } from "./delete-prescriptions-dialog";
 import type { Prescription } from "@/models/prescription";
+import { EditPrescriptionSheet } from "./edit-prescription-sheet";
 
-export interface PrescriptionsTableItemsProps {
+export interface PrescriptionsTableItemProps {
 	prescription: Prescription;
 }
 
-export function PrescriptionsTableItems({
+export function PrescriptionsTableItem({
 	prescription,
-}: PrescriptionsTableItemsProps) {
+}: PrescriptionsTableItemProps) {
 	return (
 		<TableRow>
 			<TableCell className="font-mono text-xs font-medium">
@@ -42,20 +43,13 @@ export function PrescriptionsTableItems({
 							<Search className="h-4 w-4" />
 						</Button>
 					</DialogTrigger>
+
 					<PrescriptionDetailsModal prescription={prescription} />
 				</Dialog>
 			</TableCell>
 
 			<TableCell>
-				<Dialog>
-					<DialogTrigger asChild>
-						<Button variant="outline" size="sm">
-							<SquarePen className="h-4 w-4" />
-						</Button>
-					</DialogTrigger>
-
-					<PrescriptionDetailsModal prescription={prescription} />
-				</Dialog>
+				<EditPrescriptionSheet prescription={prescription} />
 			</TableCell>
 
 			<TableCell>

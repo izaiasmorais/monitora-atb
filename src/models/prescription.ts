@@ -42,4 +42,14 @@ export interface CreatePrescriptionBody {
 	posology: string;
 	posologyDays: string[];
 }
-("");
+
+export interface EditPrescriptionBody {
+	medicalRecord: string;
+	name: string;
+	medicine: string;
+	unit: string;
+	dose: number;
+	via: string;
+	posology: string;
+	posologyDays: string[];
+}

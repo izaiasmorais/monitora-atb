@@ -6,18 +6,18 @@ import {
 	TableHeader,
 	TableRow,
 } from "../ui/table";
-import { PrescriptionsTableItems } from "./prescriptions-table-items";
-import { Pagination } from "../global/pagination";
-import { useQuery } from "@tanstack/react-query";
-import { getPrescriptions } from "@/api/prescriptions/get-prescriptions";
-import { PrescriptionsTableFilters } from "@/components/prescriptions/prescriptions-table-filters";
-import { useState } from "react";
-import { DateRange } from "react-day-picker";
-import { subDays } from "date-fns";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
-import { PaginationSkeleton } from "../global/pagination-skeleton";
 import { PrescriptionsTableEmptyState } from "./prescriptions-table-empty-state";
+import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
+import { PrescriptionsTableFilters } from "@/components/prescriptions/prescriptions-table-filters";
+import { PrescriptionsTableItem } from "./prescriptions-table-item";
+import { PaginationSkeleton } from "../global/pagination-skeleton";
+import { getPrescriptions } from "@/api/prescriptions/get-prescriptions";
+import { Pagination } from "../global/pagination";
+import { DateRange } from "react-day-picker";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { subDays } from "date-fns";
 import { z } from "zod";
 
 export function PrescriptionsTable() {
@@ -73,8 +73,6 @@ export function PrescriptionsTable() {
 	});
 
 	function handlePaginate(pageIndex: number) {
-		console.log(pageIndex);
-
 		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
 		state.set("page", (pageIndex + 1).toString());
@@ -116,7 +114,7 @@ export function PrescriptionsTable() {
 							result &&
 							result.prescriptions.map((prescription) => {
 								return (
-									<PrescriptionsTableItems
+									<PrescriptionsTableItem
 										key={prescription.id}
 										prescription={prescription}
 									/>
