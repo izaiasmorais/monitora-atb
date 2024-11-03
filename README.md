@@ -4,11 +4,18 @@
 Um dashboard que gerencia prescrições de um médico/profissional de forma completa, com sistema de filtro, paginação e métricas.
 
 ## Tecnologias
-- Linguagem: [JavaScript]([https://nodejs.org](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
+- Linguagem: [TypeScript](https://www.typescriptlang.org/)
+- Biblioteca: [ReactJS]()
+- Framework: [Next.js](https://nextjs.org/)
+- Componentes: [Shadcn-ui](https://ui.shadcn.com/)
+- Conexão com API: [Axios](https://axios-http.com/docs/intro)
+- Gerenciamento de estados: [React Query](https://tanstack.com/query/latest/docs/framework/react/overview)
+- Gerenciamento de formulários: [React Hook Form](https://www.react-hook-form.com/)
+- Validação: [Zod](https://zod.dev/)
 
 ## Funcionalidades
 
-- [ ] Cadastro do usuário com nome, email e senha.
+- [x] Cadastro do usuário com nome, email e senha.
 - [ ] Autenticação com email e senha.
 - [ ] Recuperação de senha.
 - [x] Segurança de rotas via token de autenticação JWT.
