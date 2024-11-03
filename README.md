@@ -1,7 +1,12 @@
 # Dashboard de Gerenciamento de Prescrições
 
 ## Introdução
-Um dashboard que gerencia prescrições de um médico/profissional de forma completa, com sistema de filtro, paginação e métricas.
+Um dashboard que gerencia prescrições de um médico/profissional de forma completa, com sistema de filtro e paginação.
+
+<div>
+<br/>
+<img src="https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=2563EB&style=for-the-badge"/> <img src="https://img.shields.io/static/v1?label=STATUS&message=DEVELOPING&color=2563EB&style=for-the-badge"/> <img src="https://img.shields.io/static/v1?label=NODE&message=V20.11.1&color=2563EB&style=for-the-badge"/>
+</div>
 
 ## Tecnologias
 - Linguagem: [TypeScript](https://www.typescriptlang.org/)
