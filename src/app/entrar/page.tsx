@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RememberPasswordCheckbox } from "@/components/global/remeber-password";
 import Link from "next/link";
 
 export default function SignIn() {
@@ -50,8 +49,6 @@ export default function SignIn() {
 							placeholder="Digite uma senha"
 						/>
 					</div>
-
-					<RememberPasswordCheckbox />
 
 					<div className="flex flex-col gap-1">
 						<Button>Entrar</Button>

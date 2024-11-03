@@ -1,17 +1,9 @@
-"use client";
-import { BarChartContainer } from "@/components/charts/bar-chart";
-import { PieChartContainer } from "@/components/charts/pie-chart";
-import { Summary } from "@/components/dashboard/summary";
+import { PrescriptionsTable } from "@/components/prescriptions/prescriptions-table";
 
-export default function Dashboard() {
+export default function Prescriptions() {
 	return (
 		<main className="flex flex-col gap-4">
-			<Summary />
-
-			<section className="grid gap-4 md:gap-6 md:grid-cols-2 h-[400px]">
-				<BarChartContainer />
-				<PieChartContainer />
-			</section>
+			<PrescriptionsTable />
 		</main>
 	);
 }

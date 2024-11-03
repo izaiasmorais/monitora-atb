@@ -1,21 +1,19 @@
+import { api } from "@/lib/axios";
+import { AxiosError } from "axios";
 import type { User } from "@/models/user";
-import axios, { AxiosError } from "axios";
 
-export async function signUp({ name, email, password }: User) {
+export async function signUp({ name, email, password }: Omit<User, "id">) {
 	try {
-		const response = await axios.post("/auth/sign-up", {
-			params: {
-				name,
-				email,
-				password,
-			} as Omit<User, "id">,
+		const response = await api.post("/auth/sign-up", {
+			name,
+			email,
+			password,
 		});
 
 		return response;
 	} catch (error) {
 		if (error instanceof AxiosError) {
-			throw new Error(error.message);
+			throw new Error(error.response?.data.error);
 		}
-		console.log(error);
 	}
 }

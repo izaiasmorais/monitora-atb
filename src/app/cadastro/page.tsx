@@ -1,11 +1,86 @@
+"use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RememberPasswordCheckbox } from "@/components/global/remeber-password";
+import { PasswordInput } from "@/components/ui/password-input";
+import { Controller, useForm, type SubmitErrorHandler } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { signUp } from "@/api/auth/sign-up";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
+import { z } from "zod";
+
+const signUpFormSchema = z.object({
+	name: z.string().min(1, "O nome é obrigatório."),
+	email: z.string().email("Digite um email válido."),
+	password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres."),
+});
+
+export type SignUpFormData = z.infer<typeof signUpFormSchema>;
 
 export default function SignUp() {
+	const router = useRouter();
+
+
+	const { handleSubmit, register, control, watch } = useForm<SignUpFormData>({
+		defaultValues: {
+			name: "",
+			email: "",
+			password: "",
+		},
+		resolver: zodResolver(signUpFormSchema),
+	});
+
+	const { mutate: signUpFn, isLoading } = useMutation({
+		mutationFn: signUp,
+		mutationKey: ["signUp"],
+		onError: (error) => {
+			if (error instanceof Error) {
+				if (error.message === "Email already registered") {
+					toast.error("Este email já está em uso!");
+				}
+
+				if (error.message !== "Email already registered") {
+					toast.error("Ocorreu um erro ao criar a conta!");
+				}
+			}
+		},
+
+		onSuccess: () => {
+			toast.success("Conta criada com sucesso!", {
+				action: {
+					label: "Entrar",
+					onClick: () => router.push(`/entrar?email=${watch("email")}`),
+				},
+			});
+		},
+	});
+
+	const onFormError: SubmitErrorHandler<SignUpFormData> = (errors) => {
+		if (errors.name) {
+			toast.error(errors.name.message);
+			return;
+		}
+
+		if (errors.email) {
+			toast.error(errors.email.message);
+			return;
+		}
+
+		if (errors.password) {
+			toast.error(errors.password.message);
+			return;
+		}
+	};
+
+	function handleSignUp(data: SignUpFormData) {
+		signUpFn(data);
+	}
+
 	return (
 		<div className="grid w-full min-h-screen grid-cols-1 md:grid-cols-3 px-4 md:px-0">
 			<div className="min-h-screen bg-muted/50 flex-col hidden md:flex px-2 md:px-0">
@@ -34,31 +109,58 @@ export default function SignUp() {
 				</div>
 			</div>
 
-			<div className="flex items-center justify-center col-span-2">
-				<div className="flex flex-col w-[400px] gap-5">
+			<div className="flex items-center  justify-center col-span-2">
+				<form
+					className="flex flex-col w-[400px] gap-5"
+					onSubmit={handleSubmit(handleSignUp, onFormError)}
+				>
 					<h1 className="text-xl font-medium">Cadastre-se</h1>
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="name">Nome</Label>
-						<Input id="name" type="text" placeholder="Digite um nome" />
-					</div>
-					<div className="flex flex-col gap-2">
-						<Label htmlFor="email">E-mail</Label>
-						<Input id="email" type="email" placeholder="Digite um email" />
-					</div>
-
-					<div className="flex flex-col gap-2">
-						<Label htmlFor="password">Senha</Label>
+						<Label htmlFor="name">Nome*</Label>
 						<Input
-							id="password"
-							type="password"
-							placeholder="Digite uma senha"
+							id="name"
+							type="text"
+							placeholder="Digite um nome"
+							{...register("name")}
+						/>
+					</div>
+					<div className="flex flex-col gap-2">
+						<Label htmlFor="email">E-mail*</Label>
+						<Input
+							id="email"
+							type="email"
+							placeholder="Digite um email"
+							{...register("email")}
 						/>
 					</div>
 
-					<RememberPasswordCheckbox />
+					<div className="flex flex-col gap-2">
+						<Label htmlFor="password">Senha*</Label>
+
+						<Controller
+							control={control}
+							name="password"
+							render={({ field: { name, onChange, value, disabled } }) => {
+								return (
+									<PasswordInput
+										id="password"
+										placeholder="Digite uma senha"
+										value={value}
+										name={name}
+										onChange={onChange}
+										disabled={disabled}
+									/>
+								);
+							}}
+						/>
+					</div>
 
 					<div className="flex flex-col gap-1">
-						<Button>Confirmar</Button>
+						<Button type="submit">
+							{isLoading && <LoaderCircle className="animate-spin" />}
+
+							{!isLoading && "Confirmar"}
+						</Button>
 
 						<Link href="/entrar">
 							<Button
@@ -69,7 +171,7 @@ export default function SignUp() {
 							</Button>
 						</Link>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	);
