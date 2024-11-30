@@ -9,15 +9,15 @@ export function SidebarContent() {
 					GERAL
 				</span>
 
-				{/* <SidebarItem
+				<SidebarItem
 					title="Dashboard"
 					href="/"
 					icon={<Home size={20} strokeWidth={1.5} />}
-				/> */}
+				/>
 
 				<SidebarItem
 					title="Prescrições"
-					href="/"
+					href="/prescricoes"
 					icon={<Users size={20} strokeWidth={1.5} />}
 				/>
 			</div>
