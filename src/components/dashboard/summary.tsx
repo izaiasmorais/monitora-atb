@@ -46,7 +46,7 @@ export function Summary() {
 
 			<SummaryCard
 				title="Medicamentos"
-				icon={<Pill size={10} />}
+				icon={<Pill size={20} />}
 				value={27}
 				description={
 					<p>
