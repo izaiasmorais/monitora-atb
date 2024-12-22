@@ -1,17 +1,13 @@
-export const getStorageItem = (key?: string): any | null => {
-	if (!key || typeof window === "undefined") {
-		return null;
+export const getStorageItem = (key: string): string | null => {
+	if (typeof window === "undefined") {
+		return null; // Retorna null no lado do servidor
 	}
 
-	const item = window.localStorage.getItem(key);
+	const item = localStorage.getItem(key);
 
 	if (!item) {
 		return null;
 	}
 
-	try {
-		return JSON.parse(item);
-	} catch (error) {
-		return item;
-	}
+	return item;
 };

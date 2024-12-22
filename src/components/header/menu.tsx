@@ -1,5 +1,4 @@
 "use client";
-
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -9,16 +8,21 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-	FolderGit,
-	LogOut,
-	Settings,
-} from "lucide-react";
+import { FolderGit, LogOut, Settings } from "lucide-react";
 import { Avatar } from "./avatar";
 import { Button } from "../ui/button";
-import Link from "next/link";
+import Cookies from "universal-cookie";
+import { useRouter } from "next/navigation";
 
 export function Menu() {
+	const router = useRouter();
+
+	function handleLogout() {
+		const cookies = new Cookies();
+		cookies.remove("prescriptions_token", { path: "/" });
+		router.push("/entrar");
+	}
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -47,11 +51,15 @@ export function Menu() {
 					</a>
 				</DropdownMenuItem>
 
-				<DropdownMenuItem className="cursor-pointer" asChild>
-					<Link href="/entrar">
+				<DropdownMenuItem
+					className="cursor-pointer"
+					asChild
+					onClick={handleLogout}
+				>
+					<div className="flex items-center">
 						<LogOut className="mr-2 h-4 w-4" />
 						<span>Sair</span>
-					</Link>
+					</div>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

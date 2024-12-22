@@ -69,7 +69,9 @@ export function PrescriptionsTable() {
 				medicine,
 				posology,
 			}),
-		staleTime: 1000 * 60 * 60 * 12,
+		staleTime: 1000 * 60 * 5,
+		refetchOnMount: false,
+		refetchOnWindowFocus: false,
 	});
 
 	function handlePaginate(pageIndex: number) {

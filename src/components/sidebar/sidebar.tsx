@@ -1,7 +1,7 @@
 "use client";
 import { SidebarContent } from "./sidebar-content";
 import { Button } from "../ui/button";
-import { Menu, Syringe } from "lucide-react";
+import { Menu as MenuIcon, Syringe } from "lucide-react";
 import {
 	Collapsible,
 	CollapsibleContent,
@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/collapsible";
 import Image from "next/image";
 import { useState } from "react";
+import { ThemeSwitcher } from "../header/theme-switcher";
+import { Menu } from "../header/menu";
 
 export function Sidebar() {
 	const [isOpen, setIsOpen] = useState<"open" | "closed">("closed");
@@ -36,15 +38,22 @@ export function Sidebar() {
 					Prescrições
 				</h1>
 
-				<CollapsibleTrigger
-					asChild
-					className="xl:hidden"
-					onClick={() => handleToggleCollapsible()}
-				>
-					<Button variant="ghost">
-						<Menu className="w-6 h-6 text-zinc-500" />
-					</Button>
-				</CollapsibleTrigger>
+				<div className="flex items-center gap-3">
+					<div className="flex gap-3 xl:hidden">
+						<ThemeSwitcher />
+						<Menu />
+					</div>
+
+					<CollapsibleTrigger
+						asChild
+						className="xl:hidden"
+						onClick={() => handleToggleCollapsible()}
+					>
+						<Button variant="ghost">
+							<MenuIcon className="w-6 h-6 text-zinc-500" />
+						</Button>
+					</CollapsibleTrigger>
+				</div>
 			</div>
 
 			<CollapsibleContent

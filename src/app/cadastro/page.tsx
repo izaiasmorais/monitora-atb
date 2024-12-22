@@ -25,7 +25,6 @@ export type SignUpFormData = z.infer<typeof signUpFormSchema>;
 export default function SignUp() {
 	const router = useRouter();
 
-
 	const { handleSubmit, register, control, watch } = useForm<SignUpFormData>({
 		defaultValues: {
 			name: "",

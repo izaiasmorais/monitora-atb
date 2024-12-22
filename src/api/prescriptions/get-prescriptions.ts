@@ -3,6 +3,7 @@ import type {
 	GetPrescriptionsQueryParams,
 	GetPrescriptionsResponse,
 } from "@/models/prescription";
+import Cookies from "universal-cookie";
 
 export async function getPrescriptions({
 	pageIndex,
@@ -16,7 +17,12 @@ export async function getPrescriptions({
 	dose,
 	posologyDays,
 }: GetPrescriptionsQueryParams) {
+	const cookies = new Cookies();
+
 	const { data } = await api.get<GetPrescriptionsResponse>("/prescriptions", {
+		headers: {
+			Authorization: `Bearer ${cookies.get("prescriptions_token")}`,
+		},
 		params: {
 			pageIndex,
 			perPage,

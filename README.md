@@ -21,7 +21,7 @@ Um dashboard que gerencia prescrições de um médico/profissional de forma comp
 ## Funcionalidades
 
 - [x] Cadastro do usuário com nome, email e senha.
-- [ ] Autenticação com email e senha.
+- [x] Autenticação com email e senha.
 - [ ] Recuperação de senha.
 - [x] Segurança de rotas via token de autenticação JWT.
 - [x] Listar prescrições de forma paginada.
