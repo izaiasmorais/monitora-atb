@@ -1,5 +1,5 @@
 import { api } from "@/lib/axios";
-import type {
+import {
 	GetPrescriptionsQueryParams,
 	GetPrescriptionsResponse,
 } from "@/models/prescription";
@@ -23,6 +23,7 @@ export async function getPrescriptions({
 		headers: {
 			Authorization: `Bearer ${cookies.get("prescriptions_token")}`,
 		},
+
 		params: {
 			pageIndex,
 			perPage,

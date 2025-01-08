@@ -1,6 +1,14 @@
 import { api } from "@/lib/axios";
-import type { EditPrescriptionBody } from "@/models/prescription";
+import { EditPrescriptionBody } from "@/models/prescription";
+import Cookies from "universal-cookie";
 
 export async function editPrescription(id: string, data: EditPrescriptionBody) {
-	await api.put(`/prescriptions/${id}`, data);
+	const cookies = new Cookies();
+
+	await api.put(`/prescriptions/${id}`, {
+		headers: {
+			Authorization: `Bearer ${cookies.get("prescriptions_token")}`,
+		},
+		data,
+	});
 }
