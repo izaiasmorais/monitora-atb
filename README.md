@@ -1,6 +1,9 @@
 # Dashboard de Gerenciamento de Prescrições
 
+![image](https://github.com/user-attachments/assets/30663e26-ab91-4448-8af3-cd0a2e771f09)
+
 ## Introdução
+
 Um dashboard que gerencia prescrições de um médico/profissional de forma completa, com sistema de filtro e paginação.
 
 <div>
@@ -9,14 +12,15 @@ Um dashboard que gerencia prescrições de um médico/profissional de forma comp
 </div>
 
 ## Tecnologias
+
 - Linguagem: [TypeScript](https://www.typescriptlang.org/)
-- Biblioteca: [ReactJS]()
+- Biblioteca: [ReactJS](https://react.dev/)
 - Framework: [Next.js](https://nextjs.org/)
 - Componentes: [Shadcn-ui](https://ui.shadcn.com/)
-- Conexão com API: [Axios](https://axios-http.com/docs/intro)
-- Gerenciamento de estados: [React Query](https://tanstack.com/query/latest/docs/framework/react/overview)
+- Conexão com api: [Axios](https://axios-http.com/docs/intro)
+- Gerenciamento de estados http: [React Query](https://tanstack.com/query/latest/docs/framework/react/overview)
 - Gerenciamento de formulários: [React Hook Form](https://www.react-hook-form.com/)
-- Validação: [Zod](https://zod.dev/)
+- Validação de dados: [Zod](https://zod.dev/)
 
 ## Funcionalidades
 
@@ -25,11 +29,12 @@ Um dashboard que gerencia prescrições de um médico/profissional de forma comp
 - [x] Segurança de rotas via token de autenticação JWT.
 - [x] Listar prescrições de forma paginada.
 - [x] Filtro completo de prescrições.
-- [x] Criar prescrições.
-- [x] Editar prescrições.
-- [x] Deletar prescrições.
+- [ ] Criar prescrições.
+- [ ] Editar prescrições.
+- [ ] Deletar prescrições.
 
 ## Instalação
+
 Clone o repositório:
 
 ```bash
@@ -50,6 +55,7 @@ NEXT_PUBLIC_DEV_API_URL=
 ```
 
 ## Executando o Projeto
+
 Inicie o servidor:
 
 ```bash
