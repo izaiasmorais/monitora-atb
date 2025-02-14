@@ -39,6 +39,7 @@
 		"cookie": "^1.0.2",
 		"date-fns": "^2.30.0",
 		"dotenv": "^16.4.5",
+		"js-cookie": "^3.0.5",
 		"lucide-react": "^0.441.0",
 		"next": "13.4.11",
 		"next-themes": "^0.2.1",
@@ -53,7 +54,6 @@
 		"tailwind-merge": "^1.14.0",
 		"tailwindcss": "3.3.3",
 		"tailwindcss-animate": "^1.0.6",
-		"universal-cookie": "^7.2.2",
 		"zod": "^3.23.8",
 		"zustand": "^4.3.9"
 	},
@@ -65,6 +65,7 @@
 		"@kubb/plugin-react-query": "^3.5.10",
 		"@kubb/plugin-ts": "^3.5.10",
 		"@kubb/plugin-zod": "^3.5.10",
+		"@types/js-cookie": "^3.0.6",
 		"@types/lodash": "^4.17.10",
 		"@types/node": "20.4.2",
 		"@types/react": "18.2.15",

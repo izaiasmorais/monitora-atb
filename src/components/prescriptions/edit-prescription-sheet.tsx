@@ -28,7 +28,7 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { z } from "zod";
 import { editPrescription } from "@/api/prescriptions/edit-prescription";
-import type { Prescription } from "@/models/prescription";
+import type { Prescription } from "@/@types/prescription";
 
 const createPrescriptionsFormSchema = z.object({
 	medicalRecord: z.string().min(1),

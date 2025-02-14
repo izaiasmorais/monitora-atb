@@ -1,12 +1,20 @@
+import type { HTTPResponse } from "@/@types/http";
 import { api } from "@/lib/axios";
-import Cookies from "universal-cookie";
 
-export async function deletePrescription(id: string) {
-	const cookies = new Cookies();
+interface DeletePrescriptionResponseBody extends HTTPResponse {
+	data: null;
+}
 
-	await api.delete(`/prescriptions/${id}`, {
-		headers: {
-			Authorization: `Bearer ${cookies.get("prescriptions_token")}`,
-		},
-	});
+export async function deletePrescription(
+	id: string
+): Promise<DeletePrescriptionResponseBody> {
+	try {
+		const response = await api.delete<DeletePrescriptionResponseBody>(
+			`/prescriptions/${id}`
+		);
+
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
 }

@@ -1,19 +1,25 @@
+import { HTTPResponse } from "@/@types/http";
 import { api } from "@/lib/axios";
-import { AxiosError } from "axios";
-import type { User } from "@/models/user";
+import { User } from "@/@types/user";
 
-export async function signUp({ name, email, password }: Omit<User, "id">) {
+interface SignUpResponseBody extends HTTPResponse {
+	data: null;
+}
+
+export async function signUp({
+	name,
+	email,
+	password,
+}: Omit<User, "id">): Promise<SignUpResponseBody> {
 	try {
-		const response = await api.post("/auth/sign-up", {
+		const response = await api.post<SignUpResponseBody>("/auth/sign-up", {
 			name,
 			email,
 			password,
 		});
 
-		return response;
+		return response.data;
 	} catch (error) {
-		if (error instanceof AxiosError) {
-			throw new Error(error.response?.data.error);
-		}
+		throw error;
 	}
 }

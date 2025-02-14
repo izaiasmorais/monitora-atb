@@ -1,22 +1,10 @@
 import { api } from "@/lib/axios";
-import { CreatePrescriptionBody } from "@/models/prescription";
-import { AxiosError } from "axios";
-import Cookies from "universal-cookie";
+import { CreatePrescriptionBody } from "@/@types/prescription";
 
 export async function createPrescription(data: CreatePrescriptionBody) {
-	const cookies = new Cookies();
-
 	try {
-		await api.post("/prescriptions", {
-			headers: {
-				Authorization: `Bearer ${cookies.get("prescriptions_token")}`,
-			},
-			data,
-		});
+		await api.post("/prescriptions", data);
 	} catch (error) {
-		if (error instanceof AxiosError) {
-			throw new Error(error.message);
-		}
-		console.log(error);
+		throw error;
 	}
 }

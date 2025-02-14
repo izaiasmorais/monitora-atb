@@ -4,7 +4,7 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import { TableCell, TableRow } from "../ui/table";
 import { PrescriptionDetailsModal } from "./prescription-details-dialog";
 import { DeletePrescriptionDialog } from "./delete-prescriptions-dialog";
-import type { Prescription } from "@/models/prescription";
+import type { Prescription } from "@/@types/prescription";
 import { EditPrescriptionSheet } from "./edit-prescription-sheet";
 
 export interface PrescriptionsTableItemProps {

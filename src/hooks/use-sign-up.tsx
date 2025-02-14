@@ -1,7 +1,9 @@
-import { usePostAuthSignUp } from "@/http";
+import { useFormMutation } from "./use-form-mutation";
+import { useMutation } from "@tanstack/react-query";
+import { signUp } from "@/api/auth/sign-up";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useFormMutation } from "./use-form-mutation";
 import { z } from "zod";
 
 const signUpFormSchema = z.object({
@@ -13,6 +15,27 @@ const signUpFormSchema = z.object({
 export function useSignUp() {
 	const router = useRouter();
 
+	const { mutate: signUpFn, isLoading: isLoadingSignUp } = useMutation({
+		mutationFn: signUp,
+		onError: (error) => {
+			if (error instanceof AxiosError) {
+				if (error.response) {
+					if (error.response.data.error === "User already registered") {
+						toast.error("Este email já está em uso.");
+					}
+				}
+			}
+		},
+		onSuccess: () => {
+			toast.success("Conta criada com sucesso!", {
+				action: {
+					label: "Ir para a página de login",
+					onClick: () => router.push(`/entrar?email=${watch("email")}`),
+				},
+			});
+		},
+	});
+
 	const { handleSubmitForm, register, watch } = useFormMutation({
 		schema: signUpFormSchema,
 		defaultValues: {
@@ -21,32 +44,9 @@ export function useSignUp() {
 			password: "",
 		},
 		onSubmit: (data) => {
-			signUpFn({ data });
-		},
-	});
-
-	const { mutate: signUpFn, isLoading: isLoadingSignUp } = usePostAuthSignUp({
-		mutation: {
-			onError: (error) => {
-				if (error instanceof Error) {
-					if (error.message === "Email already registered") {
-						toast.error("Este email já está em uso!");
-					}
-
-					if (error.message !== "Email already registered") {
-						toast.error("Ocorreu um erro ao criar a conta!");
-					}
-				}
-			},
-
-			onSuccess: () => {
-				toast.success("Conta criada com sucesso!", {
-					action: {
-						label: "Entrar",
-						onClick: () => router.push(`/entrar?email=${watch("email")}`),
-					},
-				});
-			},
+			signUpFn({
+				...data,
+			});
 		},
 	});
 

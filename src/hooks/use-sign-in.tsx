@@ -1,10 +1,9 @@
-
-import { usePostAuthSignIn } from "@/http";
 import { useFormMutation } from "./use-form-mutation";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { signIn } from "@/api/auth/sign-in";
 import { z } from "zod";
-
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 
 const signInFormSchema = z.object({
 	email: z.string().email("Digite um email válido."),
@@ -12,17 +11,15 @@ const signInFormSchema = z.object({
 });
 
 export function useSignIn() {
-	const cookies = new Cookies();
 	const router = useRouter();
 
-	const { mutate: signInFn, isLoading: isLoadingSignIn } = usePostAuthSignIn({
-		mutation: {
-			onSuccess: (response) => {
-				cookies.set("prescriptions_token", response.data.token, {
-					maxAge: 60,
-				});
-				router.push("/");
-			},
+	const { mutate: signInFn, isLoading: isLoadingSignIn } = useMutation({
+		mutationFn: signIn,
+		onSuccess: (response) => {
+			Cookies.set("prescriptions_token", response.data.token, {
+				expires: 60 * 60,
+			});
+			router.push("/");
 		},
 	});
 
@@ -33,7 +30,9 @@ export function useSignIn() {
 			password: "",
 		},
 		onSubmit: (data) => {
-			signInFn({ data });
+			signInFn({
+				...data,
+			});
 		},
 	});
 

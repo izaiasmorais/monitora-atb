@@ -6,19 +6,16 @@ import {
 	TableHeader,
 	TableRow,
 } from "../ui/table";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PrescriptionsTableEmptyState } from "./prescriptions-table-empty-state";
 import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
 import { PrescriptionsTableFilters } from "@/components/prescriptions/prescriptions-table-filters";
 import { PrescriptionsTableItem } from "./prescriptions-table-item";
 import { PaginationSkeleton } from "../global/pagination-skeleton";
-import { getPrescriptions } from "@/api/prescriptions/get-prescriptions";
 import { Pagination } from "../global/pagination";
 import { DateRange } from "react-day-picker";
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { subDays } from "date-fns";
-import { z } from "zod";
+import { useGetPrescriptions } from "@/hooks/use-get-prescriptions";
 
 export function PrescriptionsTable() {
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -26,64 +23,8 @@ export function PrescriptionsTable() {
 		to: new Date(),
 	});
 
-	const router = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-
-	const id = searchParams.get("id");
-	const medicalRecord = searchParams.get("medicalRecord");
-	const name = searchParams.get("name");
-	const unit = searchParams.get("unit");
-	const medicine = searchParams.get("medicine");
-	const posology = searchParams.get("posology");
-
-	const pageIndex = z.coerce
-		.number()
-		.transform((page) => page)
-		.parse(searchParams.get("page") ?? 0);
-
-	const perPage = z.coerce
-		.number()
-		.transform((perPage) => perPage)
-		.parse(searchParams.get("perPage") ?? 5);
-
-	const { data: result, isLoading: isLoadingPrescriptions } = useQuery({
-		queryKey: [
-			"prescriptions",
-			pageIndex,
-			id,
-			name,
-			unit,
-			medicalRecord,
-			medicine,
-			posology,
-		],
-		queryFn: () =>
-			getPrescriptions({
-				pageIndex: pageIndex != 0 ? pageIndex - 1 : 0,
-				perPage,
-				id,
-				name,
-				unit,
-				medicalRecord,
-				medicine,
-				posology,
-			}),
-		staleTime: 1000 * 60 * 5,
-		refetchOnMount: false,
-		refetchOnWindowFocus: false,
-	});
-
-	function handlePaginate(pageIndex: number) {
-		const state = new URLSearchParams(Array.from(searchParams.entries()));
-
-		state.set("page", (pageIndex + 1).toString());
-
-		const search = state.toString();
-		const query = search ? `?${search}` : "";
-
-		router.push(`${pathname}${query}`);
-	}
+	const { data, handlePaginate, isLoadingPrescriptions } =
+		useGetPrescriptions();
 
 	return (
 		<div className="space-y-4">
@@ -113,8 +54,8 @@ export function PrescriptionsTable() {
 
 					<TableBody>
 						{!isLoadingPrescriptions &&
-							result &&
-							result.prescriptions.map((prescription) => {
+							data &&
+							data.prescriptions.map((prescription) => {
 								return (
 									<PrescriptionsTableItem
 										key={prescription.id}
@@ -130,18 +71,14 @@ export function PrescriptionsTable() {
 
 			{isLoadingPrescriptions && <PaginationSkeleton />}
 
-			{((result &&
-				result.prescriptions.length === 0 &&
-				!isLoadingPrescriptions) ||
-				(!result && !isLoadingPrescriptions)) && (
-				<PrescriptionsTableEmptyState />
-			)}
+			{((data && data.prescriptions.length === 0 && !isLoadingPrescriptions) ||
+				(!data && !isLoadingPrescriptions)) && <PrescriptionsTableEmptyState />}
 
-			{result && !isLoadingPrescriptions && (
+			{data && !isLoadingPrescriptions && (
 				<Pagination
-					pageIndex={result.meta.pageIndex}
-					perPage={result.meta.perPage}
-					totalCount={result.meta.totalCount}
+					pageIndex={data.meta.pageIndex}
+					perPage={data.meta.perPage}
+					totalCount={data.meta.totalCount}
 					onPageChange={handlePaginate}
 				/>
 			)}

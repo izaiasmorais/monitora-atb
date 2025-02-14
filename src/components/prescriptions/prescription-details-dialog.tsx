@@ -1,4 +1,4 @@
-import type { Prescription } from "@/models/prescription";
+import type { Prescription } from "@/@types/prescription";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 interface PrescriptionDetailsModalProps {

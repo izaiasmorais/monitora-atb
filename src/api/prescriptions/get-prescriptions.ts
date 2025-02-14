@@ -1,45 +1,27 @@
+import { HTTPResponse } from "@/@types/http";
 import { api } from "@/lib/axios";
 import {
 	GetPrescriptionsQueryParams,
 	GetPrescriptionsResponse,
-} from "@/models/prescription";
-import Cookies from "universal-cookie";
+} from "@/@types/prescription";
 
-export async function getPrescriptions({
-	pageIndex,
-	perPage,
-	id,
-	name,
-	medicalRecord,
-	unit,
-	medicine,
-	posology,
-	dose,
-	posologyDays,
-}: GetPrescriptionsQueryParams) {
-	const cookies = new Cookies();
+interface GetPrescriptionsResponseBody extends HTTPResponse {
+	data: GetPrescriptionsResponse;
+}
 
-	const { data } = await api.get<GetPrescriptionsResponse>("/prescriptions", {
-		headers: {
-			Authorization: `Bearer ${cookies.get("prescriptions_token")}`,
-		},
+export async function getPrescriptions(
+	params: GetPrescriptionsQueryParams
+): Promise<GetPrescriptionsResponseBody> {
+	try {
+		const response = await api.get<GetPrescriptionsResponseBody>(
+			"/prescriptions",
+			{
+				params: { ...params },
+			}
+		);
 
-		params: {
-			pageIndex,
-			perPage,
-			id,
-			name,
-			medicalRecord,
-			unit,
-			medicine,
-			posology,
-			dose,
-			posologyDays,
-		},
-	});
-
-	return {
-		prescriptions: data.prescriptions,
-		meta: data.meta,
-	};
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
 }
