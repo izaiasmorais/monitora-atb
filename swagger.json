@@ -1,0 +1,1062 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "prescriptions api",
+		"description": "An API to manage prescriptions and users in a medical system.",
+		"version": "1.0.0"
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		},
+		"schemas": {}
+	},
+	"paths": {
+		"/auth/sign-up": {
+			"post": {
+				"summary": "Register a new user",
+				"tags": ["auth"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string",
+										"minLength": 1
+									},
+									"email": {
+										"type": "string",
+										"format": "email"
+									},
+									"password": {
+										"type": "string",
+										"minLength": 6
+									}
+								},
+								"required": ["name", "email", "password"],
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"204": {
+						"description": "No Content",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "No Content"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Bad Request"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Conflict"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/sign-in": {
+			"post": {
+				"summary": "Authenticate with password",
+				"tags": ["auth"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": {
+										"type": "string",
+										"format": "email"
+									},
+									"password": {
+										"type": "string",
+										"minLength": 6
+									}
+								},
+								"required": ["email", "password"],
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"type": "object",
+											"properties": {
+												"token": {
+													"type": "string"
+												}
+											},
+											"required": ["token"],
+											"additionalProperties": false
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Created"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Bad Request"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/profile": {
+			"get": {
+				"summary": "Get authenticated user profile",
+				"tags": ["auth"],
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "string"
+												},
+												"name": {
+													"type": "string"
+												},
+												"email": {
+													"type": "string",
+													"format": "email"
+												}
+											},
+											"required": ["id", "name", "email"],
+											"additionalProperties": false
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Success"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Unauthorized"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Not Found"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/delete-account": {
+			"delete": {
+				"summary": "Delete your own account",
+				"tags": ["auth"],
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No Content",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "No Content"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Unauthorized"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Not Found"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/prescriptions": {
+			"get": {
+				"summary": "Get paginated prescriptions",
+				"tags": ["prescriptions"],
+				"parameters": [
+					{
+						"schema": {
+							"type": "integer",
+							"minimum": 0
+						},
+						"in": "query",
+						"name": "pageIndex",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "integer",
+							"exclusiveMinimum": true,
+							"minimum": 0
+						},
+						"in": "query",
+						"name": "perPage",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "string",
+							"nullable": true
+						},
+						"in": "query",
+						"name": "id",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "string",
+							"nullable": true
+						},
+						"in": "query",
+						"name": "medicalRecord",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "string",
+							"nullable": true
+						},
+						"in": "query",
+						"name": "name",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "string",
+							"nullable": true
+						},
+						"in": "query",
+						"name": "medicine",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "string",
+							"nullable": true
+						},
+						"in": "query",
+						"name": "unit",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "number",
+							"nullable": true
+						},
+						"in": "query",
+						"name": "dose",
+						"required": false
+					},
+					{
+						"schema": {
+							"type": "string",
+							"nullable": true
+						},
+						"in": "query",
+						"name": "posology",
+						"required": false
+					}
+				],
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"type": "object",
+											"properties": {
+												"prescriptions": {
+													"type": "array",
+													"items": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "string"
+															},
+															"medicalRecord": {
+																"type": "string"
+															},
+															"name": {
+																"type": "string"
+															},
+															"medicine": {
+																"type": "string"
+															},
+															"unit": {
+																"type": "string"
+															},
+															"dose": {
+																"type": "number"
+															},
+															"via": {
+																"type": "string"
+															},
+															"posology": {
+																"type": "string"
+															},
+															"posologyDays": {
+																"type": "array",
+																"items": {
+																	"type": "string"
+																}
+															}
+														},
+														"required": [
+															"id",
+															"medicalRecord",
+															"name",
+															"medicine",
+															"unit",
+															"dose",
+															"via",
+															"posology",
+															"posologyDays"
+														],
+														"additionalProperties": false
+													}
+												},
+												"meta": {
+													"type": "object",
+													"properties": {
+														"pageIndex": {
+															"type": "number"
+														},
+														"perPage": {
+															"type": "number"
+														},
+														"totalCount": {
+															"type": "number"
+														}
+													},
+													"required": ["pageIndex", "perPage", "totalCount"],
+													"additionalProperties": false
+												}
+											},
+											"required": ["prescriptions", "meta"],
+											"additionalProperties": false
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "OK"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Unauthorized"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"summary": "Create a new prescription",
+				"tags": ["prescriptions"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"medicalRecord": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"medicine": {
+										"type": "string"
+									},
+									"unit": {
+										"type": "string"
+									},
+									"dose": {
+										"type": "number"
+									},
+									"via": {
+										"type": "string"
+									},
+									"posology": {
+										"type": "string"
+									},
+									"posologyDays": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									}
+								},
+								"required": [
+									"id",
+									"medicalRecord",
+									"name",
+									"medicine",
+									"unit",
+									"dose",
+									"via",
+									"posology",
+									"posologyDays"
+								],
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": true
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No Content",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "No Content"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Bad Request"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Unauthorized"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/prescriptions/{id}": {
+			"delete": {
+				"summary": "Delete a prescription",
+				"tags": ["prescriptions"],
+				"parameters": [
+					{
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"in": "path",
+						"name": "id",
+						"required": true
+					}
+				],
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No Content",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "No Content"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Unauthorized"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Prescription not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Prescription not found"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"summary": "Edit an existing prescription",
+				"tags": ["prescriptions"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"medicalRecord": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"medicine": {
+										"type": "string"
+									},
+									"unit": {
+										"type": "string"
+									},
+									"dose": {
+										"type": "number"
+									},
+									"via": {
+										"type": "string"
+									},
+									"posology": {
+										"type": "string"
+									},
+									"posologyDays": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									}
+								},
+								"required": [
+									"medicalRecord",
+									"name",
+									"medicine",
+									"unit",
+									"dose",
+									"via",
+									"posology",
+									"posologyDays"
+								],
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": true
+				},
+				"parameters": [
+					{
+						"schema": {
+							"type": "string"
+						},
+						"in": "path",
+						"name": "id",
+						"required": true
+					}
+				],
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "No Content",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [true]
+										},
+										"error": {
+											"enum": ["null"],
+											"nullable": true
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "No Content"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Bad Request"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Unauthorized"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"enum": [false]
+										},
+										"error": {
+											"type": "string"
+										},
+										"data": {
+											"enum": ["null"],
+											"nullable": true
+										}
+									},
+									"required": ["success", "error", "data"],
+									"additionalProperties": false,
+									"description": "Not Found"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
