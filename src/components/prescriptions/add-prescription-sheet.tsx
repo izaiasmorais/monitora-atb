@@ -20,70 +20,19 @@ import {
 } from "../ui/select";
 import { PrescriptionDoseCheckbox } from "./prescription-dose-checkbox";
 import { PosologyDaysPicker } from "./posology-days-picker";
-import { useForm, Controller, type SubmitErrorHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { createPrescription } from "@/api/prescriptions/create-prescriptions";
-import { queryClient } from "@/lib/react-query";
-import { toast } from "sonner";
-import { useState } from "react";
-import { z } from "zod";
-
-const createPrescriptionsFormSchema = z.object({
-	medicalRecord: z.string().min(1),
-	name: z.string().min(1),
-	unit: z.string().min(1),
-	medicine: z.string().min(1),
-	via: z.string().min(1),
-	dose: z.coerce.number().min(1),
-	posology: z.string().min(1),
-	posologyDays: z.array(z.string()).min(1),
-});
-
-export type CreatePrescriptionFormData = z.infer<
-	typeof createPrescriptionsFormSchema
->;
+import { Controller } from "react-hook-form";
+import { useCreatePrescription } from "@/hooks/use-create-prescription";
 
 export function AddPrescriptionSheet() {
-	const [isSheetOpen, setIsSheetOpen] = useState(false);
-
-	const { register, handleSubmit, control, setValue } =
-		useForm<CreatePrescriptionFormData>({
-			defaultValues: {
-				medicalRecord: undefined,
-				name: undefined,
-				dose: undefined,
-				unit: undefined,
-				medicine: undefined,
-				via: undefined,
-				posology: undefined,
-				posologyDays: [],
-			},
-			resolver: zodResolver(createPrescriptionsFormSchema),
-		});
-
-	const { mutate: createPrescriptionFn, isLoading } = useMutation({
-		mutationFn: (data: CreatePrescriptionFormData) => createPrescription(data),
-		mutationKey: ["create-prescription"],
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: ["prescriptions"],
-			});
-			toast.success("Prescrição criada com sucesso!");
-			setIsSheetOpen(false);
-		},
-	});
-
-	const onFormError: SubmitErrorHandler<CreatePrescriptionFormData> = (
-		errors
-	) => {
-		console.log(errors);
-		toast.error("Preencha todos os campos obrigatórios");
-	};
-
-	function handleCreatePrescription(data: CreatePrescriptionFormData) {
-		createPrescriptionFn(data);
-	}
+	const {
+		isSheetOpen,
+		setIsSheetOpen,
+		handleSubmitForm,
+		register,
+		control,
+		isLoadingCreatePrescription,
+		setValue,
+	} = useCreatePrescription();
 
 	return (
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -99,19 +48,15 @@ export function AddPrescriptionSheet() {
 					<SheetTitle>Adicionar Prescrição</SheetTitle>
 				</SheetHeader>
 
-				<form
-					onSubmit={handleSubmit(handleCreatePrescription, onFormError)}
-					className="grid gap-8 py-8"
-				>
+				<form onSubmit={handleSubmitForm} className="grid gap-8 py-8">
 					<div className="flex items-center gap-4">
 						<div className="flex flex-col gap-3 w-full">
 							<Label htmlFor="medicalRecord">Número do Prontuário*</Label>
 							<Input
 								id="medicalRecord"
 								placeholder="534047436"
-								type="text"
+								type="number"
 								{...register("medicalRecord")}
-								required
 							/>
 						</div>
 
@@ -122,7 +67,6 @@ export function AddPrescriptionSheet() {
 								placeholder="Digite um nome"
 								type="text"
 								{...register("name")}
-								required
 							/>
 						</div>
 					</div>
@@ -221,7 +165,6 @@ export function AddPrescriptionSheet() {
 								id="dose"
 								placeholder="500"
 								{...register("dose")}
-								required
 							/>
 							<Button type="button" className="w-full">
 								Definir dose manualmente
@@ -239,8 +182,7 @@ export function AddPrescriptionSheet() {
 								render={({ field }) => (
 									<Select
 										onValueChange={field.onChange}
-										value={field.value}
-										required
+										defaultValue={field.value}
 									>
 										<SelectTrigger className="h-9">
 											<SelectValue placeholder="Selecione a posologia" />
@@ -259,15 +201,20 @@ export function AddPrescriptionSheet() {
 
 						<div className="flex flex-col gap-3 w-full">
 							<Label htmlFor="posologyDays">Dias de tratamento*</Label>
-							<PosologyDaysPicker setValue={setValue} posologyDays={undefined} />
+							<PosologyDaysPicker
+								setValue={setValue}
+								posologyDays={undefined}
+							/>
 						</div>
 					</div>
 
 					<SheetFooter className="flex-1 flex justify-end">
 						<Button type="submit" className="w-[125px]">
-							{isLoading && <LoaderCircle className="animate-spin" />}
+							{isLoadingCreatePrescription && (
+								<LoaderCircle className="animate-spin" />
+							)}
 
-							{!isLoading && "Confirmar"}
+							{!isLoadingCreatePrescription && "Confirmar"}
 						</Button>
 					</SheetFooter>
 				</form>

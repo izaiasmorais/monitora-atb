@@ -10,9 +10,10 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import type { CreatePrescriptionFormData } from "./add-prescription-sheet";
+
 import type { UseFormSetValue } from "react-hook-form";
 import { ptBR } from "date-fns/locale";
+import type { CreatePrescriptionFormData } from "@/hooks/use-create-prescription";
 
 interface PosologyDaysPickerProps {
 	posologyDays: (string | undefined)[] | undefined;

@@ -15,28 +15,7 @@ const signUpFormSchema = z.object({
 export function useSignUp() {
 	const router = useRouter();
 
-	const { mutate: signUpFn, isLoading: isLoadingSignUp } = useMutation({
-		mutationFn: signUp,
-		onError: (error) => {
-			if (error instanceof AxiosError) {
-				if (error.response) {
-					if (error.response.data.error === "User already registered") {
-						toast.error("Este email já está em uso.");
-					}
-				}
-			}
-		},
-		onSuccess: () => {
-			toast.success("Conta criada com sucesso!", {
-				action: {
-					label: "Ir para a página de login",
-					onClick: () => router.push(`/entrar?email=${watch("email")}`),
-				},
-			});
-		},
-	});
-
-	const { handleSubmitForm, register, watch } = useFormMutation({
+	const form = useFormMutation({
 		schema: signUpFormSchema,
 		defaultValues: {
 			name: "",
@@ -50,9 +29,36 @@ export function useSignUp() {
 		},
 	});
 
+	const { mutate: signUpFn, isLoading: isLoadingSignUp } = useMutation({
+		mutationFn: signUp,
+		onError: (error) => {
+			if (error instanceof AxiosError) {
+				if (error.response) {
+					if (error.response.data.error === "User already registered") {
+						toast.error("Este email já está em uso.");
+					}
+				}
+			}
+		},
+		onSuccess: (response) => {
+			if (response.success) {
+				toast.success("Conta criada com sucesso!", {
+					action: {
+						label: "Ir para a página de login",
+						onClick: () => router.push(`/entrar?email=${form.watch("email")}`),
+					},
+				});
+				return;
+			}
+
+			if (response.error === "User already registered") {
+				toast.error("Este email já está em uso.");
+			}
+		},
+	});
+
 	return {
-		register,
-		handleSubmitForm,
+		form,
 		isLoadingSignUp,
 	};
 }

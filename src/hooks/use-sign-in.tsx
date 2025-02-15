@@ -2,6 +2,7 @@ import { useFormMutation } from "./use-form-mutation";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "@/api/auth/sign-in";
+import { toast } from "sonner";
 import { z } from "zod";
 import Cookies from "js-cookie";
 
@@ -16,14 +17,21 @@ export function useSignIn() {
 	const { mutate: signInFn, isLoading: isLoadingSignIn } = useMutation({
 		mutationFn: signIn,
 		onSuccess: (response) => {
-			Cookies.set("prescriptions_token", response.data.token, {
-				expires: 60 * 60,
-			});
-			router.push("/");
+			if (response.success) {
+				Cookies.set("prescriptions_token", response.data.token, {
+					expires: 1 / 24,
+				});
+				router.push("/");
+				return;
+			}
+
+			if (response.error === "Invalid Credentials") {
+				toast.error("Email ou senha inválidos.");
+			}
 		},
 	});
 
-	const { handleSubmitForm, register } = useFormMutation({
+	const form = useFormMutation({
 		schema: signInFormSchema,
 		defaultValues: {
 			email: "",
@@ -37,8 +45,7 @@ export function useSignIn() {
 	});
 
 	return {
-		handleSubmitForm,
-		register,
+		form,
 		isLoadingSignIn,
 	};
 }
