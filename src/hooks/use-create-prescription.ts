@@ -7,17 +7,19 @@ import { createPrescription } from "@/api/prescriptions/create-prescriptions";
 import { queryClient } from "@/lib/react-query";
 
 const createPrescriptionsFormSchema = z.object({
-	medicalRecord: z.string().min(1, "Número do prontuário é obrigatório"),
-	name: z.string().min(1, "Nome do paciente é obrigatório"),
-	unit: z.string().min(1, "Unidade é obrigatória"),
-	medicine: z.string().min(1, "Medicamento é obrigatório"),
-	via: z.string().min(1, "Via de administração é obrigatória"),
-	dose: z.coerce.number().min(1, "Dose é obrigatória"),
-	posology: z.string().min(1, "Posologia é obrigatória"),
-	posologyDays: z.array(z.string()).min(1, "Dias de tratamento é obrigatório"),
+	medicalRecord: z.string().min(1, "O Número do prontuário é obrigatório"),
+	patientName: z.string().min(1, "O Nome do paciente é obrigatório"),
+	unit: z.string().min(1, "A Unidade é obrigatória"),
+	medicine: z.string().min(1, "O Medicamento é obrigatório"),
+	via: z.string().min(1, "A Via de administração é obrigatória"),
+	dose: z.coerce.string().min(1, "A Dose é obrigatória"),
+	posology: z.string().min(1, "A Posologia é obrigatória"),
+	treatmentDays: z.array(z.string()).min(1, "Defina os dias de tratamento"),
 });
 
-export type CreatePrescriptionFormData = z.infer<typeof createPrescriptionsFormSchema>;
+export type CreatePrescriptionFormData = z.infer<
+	typeof createPrescriptionsFormSchema
+>;
 
 export function useCreatePrescription() {
 	const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -28,41 +30,42 @@ export function useCreatePrescription() {
 	} = useMutation({
 		mutationFn: createPrescription,
 		mutationKey: ["create-prescription"],
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: ["prescriptions"],
-			});
-			toast.success("Prescrição criada com sucesso!");
-			setIsSheetOpen(false);
+		onSuccess: (data) => {
+			console.log(data);
+
+			// queryClient.invalidateQueries({
+			// 	queryKey: ["prescriptions"],
+			// });
+			// toast.success("Prescrição criada com sucesso!");
+			// setIsSheetOpen(false);
 		},
 	});
 
-	const { register, handleSubmitForm, control, setValue } = useFormMutation({
+	const form = useFormMutation({
 		schema: createPrescriptionsFormSchema,
 		defaultValues: {
 			medicalRecord: "",
-			name: "",
+			patientName: "",
 			unit: "",
+			treatmentDays: [],
+			
 			medicine: "",
 			via: "",
-			dose: 0,
+			dose: "",
 			posology: "",
-			posologyDays: [],
 		},
 		onSubmit: (data) => {
-			createPrescriptionFn({
-				...data,
-			});
+			// createPrescriptionFn({
+			// 	...data,
+			// });
+			console.log(data);
 		},
 	});
 
 	return {
-		register,
-		handleSubmitForm,
-		control,
-		setValue,
+		form,
+		isLoadingCreatePrescription,
 		isSheetOpen,
 		setIsSheetOpen,
-		isLoadingCreatePrescription,
 	};
 }

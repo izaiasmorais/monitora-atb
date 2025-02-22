@@ -1,38 +1,27 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
 	Sheet,
 	SheetContent,
-	SheetFooter,
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import { Form } from "../ui/form";
 import { LoaderCircle, Plus } from "lucide-react";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "../ui/select";
-import { PrescriptionDoseCheckbox } from "./prescription-dose-checkbox";
-import { PosologyDaysPicker } from "./posology-days-picker";
-import { Controller } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import { useCreatePrescription } from "@/hooks/use-create-prescription";
+import { MedicalRecordField } from "./add-prescription-form/medical-record-input";
+import { PatientNameField } from "./add-prescription-form/patient-name-input";
+import { UnitSelect } from "./add-prescription-form/unit-select";
+import { TreatmentDaysPciker } from "./add-prescription-form/treatment-days-picker";
+import { MedicineCombobox } from "./add-prescription-form/medicine-combobox";
+import { DoseCombobox } from "./add-prescription-form/dose-combobox";
+import { PosologyCombobox } from "./add-prescription-form/posology-combobox";
+import { ViaCombobox } from "./add-prescription-form/via-combobox";
 
 export function AddPrescriptionSheet() {
-	const {
-		isSheetOpen,
-		setIsSheetOpen,
-		handleSubmitForm,
-		register,
-		control,
-		isLoadingCreatePrescription,
-		setValue,
-	} = useCreatePrescription();
+	const { form, isSheetOpen, setIsSheetOpen, isLoadingCreatePrescription } =
+		useCreatePrescription();
 
 	return (
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -48,176 +37,41 @@ export function AddPrescriptionSheet() {
 					<SheetTitle>Adicionar Prescrição</SheetTitle>
 				</SheetHeader>
 
-				<form onSubmit={handleSubmitForm} className="grid gap-8 py-8">
-					<div className="flex items-center gap-4">
-						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="medicalRecord">Número do Prontuário*</Label>
-							<Input
-								id="medicalRecord"
-								placeholder="534047436"
-								type="number"
-								{...register("medicalRecord")}
-							/>
+				<Form {...form}>
+					<form onSubmit={form.handleSubmitForm} className="space-y-6 pt-6">
+						<div className="grid grid-cols-2 gap-6">
+							<MedicalRecordField form={form} />
+							<PatientNameField form={form} />
+							<UnitSelect form={form} />
+							<TreatmentDaysPciker form={form} />
 						</div>
 
-						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="name">Nome do paciente*</Label>
-							<Input
-								id="name"
-								placeholder="Digite um nome"
-								type="text"
-								{...register("name")}
-							/>
-						</div>
-					</div>
+						<MedicineCombobox form={form} />
 
-					<div className="flex items-center gap-4">
-						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="unit">Unidade*</Label>
+						<DoseCombobox form={form} />
 
-							<Controller
-								name="unit"
-								control={control}
-								render={({ field }) => (
-									<Select
-										onValueChange={field.onChange}
-										value={field.value}
-										required
-									>
-										<SelectTrigger className="h-9">
-											<SelectValue placeholder="Selecione uma unidade" />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="Posto 1">Posto 1</SelectItem>
-											<SelectItem value="Posto 2">Posto 3</SelectItem>
-											<SelectItem value="Posto 3">Posto 3</SelectItem>
-											<SelectItem value="UTI">UTI</SelectItem>
-											<SelectItem value="UNACON">UNACON</SelectItem>
-										</SelectContent>
-									</Select>
+						<ViaCombobox form={form} />
+
+						<PosologyCombobox form={form} />
+
+						<div className="flex w-full justify-end gap-4">
+							<Button
+								variant="secondary"
+								onClick={() => [setIsSheetOpen(false), form.reset()]}
+							>
+								Cancelar
+							</Button>
+
+							<Button type="submit">
+								{isLoadingCreatePrescription && (
+									<LoaderCircle className="animate-spin" />
 								)}
-							/>
-						</div>
 
-						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="unit">Medicamento*</Label>
-
-							<Controller
-								name="medicine"
-								control={control}
-								render={({ field }) => (
-									<Select
-										onValueChange={field.onChange}
-										value={field.value}
-										required
-									>
-										<SelectTrigger className="h-9">
-											<SelectValue placeholder="Selecione um medicamento" />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="Polimixina B1">
-												Polimixina B1
-											</SelectItem>
-											<SelectItem value="Ciprofloxacino Inj">
-												Ciprofloxacino Inj
-											</SelectItem>
-											<SelectItem value="Metronidazol Inj">
-												Metronidazol Inj
-											</SelectItem>
-											<SelectItem value="Cefepime">Cefepime</SelectItem>
-											<SelectItem value="Tazobactam">Tazobactam</SelectItem>
-										</SelectContent>
-									</Select>
-								)}
-							/>
-						</div>
-					</div>
-
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="via">Via de administração*</Label>
-						<Controller
-							name="via"
-							control={control}
-							render={({ field }) => (
-								<Select
-									onValueChange={field.onChange}
-									value={field.value}
-									required
-								>
-									<SelectTrigger className="h-9">
-										<SelectValue placeholder="Selecione a via" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="EV">EV</SelectItem>
-										<SelectItem value="VO">VO</SelectItem>
-									</SelectContent>
-								</Select>
-							)}
-						/>
-					</div>
-
-					<div className="flex flex-col gap-3">
-						<Label htmlFor="dose">Dose*</Label>
-						<div className="flex items-center gap-4">
-							<Input
-								className="w-full"
-								type="number"
-								id="dose"
-								placeholder="500"
-								{...register("dose")}
-							/>
-							<Button type="button" className="w-full">
-								Definir dose manualmente
+								{!isLoadingCreatePrescription && "Confirmar"}
 							</Button>
 						</div>
-						<PrescriptionDoseCheckbox />
-					</div>
-
-					<div className="flex items-center gap-4">
-						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="unit">Posologia*</Label>
-							<Controller
-								name="posology"
-								control={control}
-								render={({ field }) => (
-									<Select
-										onValueChange={field.onChange}
-										defaultValue={field.value}
-									>
-										<SelectTrigger className="h-9">
-											<SelectValue placeholder="Selecione a posologia" />
-										</SelectTrigger>
-
-										<SelectContent>
-											<SelectItem value="6/6h">6/6h</SelectItem>
-											<SelectItem value="8/8h">8/8h</SelectItem>
-											<SelectItem value="12/12">12/12h</SelectItem>
-											<SelectItem value="24/24h">24/24h</SelectItem>
-										</SelectContent>
-									</Select>
-								)}
-							/>
-						</div>
-
-						<div className="flex flex-col gap-3 w-full">
-							<Label htmlFor="posologyDays">Dias de tratamento*</Label>
-							<PosologyDaysPicker
-								setValue={setValue}
-								posologyDays={undefined}
-							/>
-						</div>
-					</div>
-
-					<SheetFooter className="flex-1 flex justify-end">
-						<Button type="submit" className="w-[125px]">
-							{isLoadingCreatePrescription && (
-								<LoaderCircle className="animate-spin" />
-							)}
-
-							{!isLoadingCreatePrescription && "Confirmar"}
-						</Button>
-					</SheetFooter>
-				</form>
+					</form>
+				</Form>
 			</SheetContent>
 		</Sheet>
 	);

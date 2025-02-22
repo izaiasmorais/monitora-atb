@@ -14,7 +14,6 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateRange } from "react-day-picker";
 import { AddPrescriptionSheet } from "./add-prescription-sheet";
-import { MedicineCombobox } from "./medicines-combobox";
 import { z } from "zod";
 
 const prescriptionsFilterSchema = z.object({
@@ -172,8 +171,6 @@ export function PrescriptionsTableFilters({
 					);
 				}}
 			/>
-
-			<MedicineCombobox setFilterValue={setValue} />
 
 			<Controller
 				control={control}
