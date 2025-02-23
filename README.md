@@ -29,9 +29,11 @@ Um dashboard que gerencia prescrições de um médico/profissional de forma comp
 - [x] Segurança de rotas via token de autenticação JWT.
 - [x] Listar prescrições de forma paginada.
 - [x] Filtro completo de prescrições.
-- [ ] Criar prescrições.
-- [ ] Editar prescrições.
-- [ ] Deletar prescrições.
+- [x] Criar prescrições.
+- [x] Editar prescrições.
+- [x] Deletar prescrições.
+- [ ] Gráficos com informações sobre prescrições.
+- [ ] Sistema de notificações.
 
 ## Instalação
 
