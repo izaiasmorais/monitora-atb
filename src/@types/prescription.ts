@@ -1,13 +1,13 @@
 export interface Prescription {
 	id: string;
 	medicalRecord: string;
-	name: string;
+	patientName: string;
 	medicine: string;
 	unit: string;
-	dose: number;
+	dose: string;
 	via: string;
 	posology: string;
-	posologyDays: string[];
+	treatmentDays: string[];
 }
 
 export interface GetPrescriptionsQueryParams {
@@ -20,7 +20,7 @@ export interface GetPrescriptionsQueryParams {
 	unit?: string | null;
 	dose?: number | null;
 	posology?: string | null;
-	posologyDays?: string[] | null;
+	treatmentDays?: string[] | null;
 }
 
 export interface GetPrescriptionsResponse {
@@ -34,22 +34,22 @@ export interface GetPrescriptionsResponse {
 
 export interface CreatePrescriptionBody {
 	medicalRecord: string;
-	name: string;
+	patientName: string;
 	medicine: string;
 	unit: string;
-	dose: number;
+	dose: string;
 	via: string;
 	posology: string;
-	posologyDays: string[];
+	treatmentDays: string[];
 }
 
 export interface EditPrescriptionBody {
 	medicalRecord: string;
-	name: string;
+	patientName: string;
 	medicine: string;
 	unit: string;
-	dose: number;
+	dose: string;
 	via: string;
 	posology: string;
-	posologyDays: string[];
+	treatmentDays: string[];
 }

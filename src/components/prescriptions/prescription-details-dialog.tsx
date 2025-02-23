@@ -1,5 +1,6 @@
-import type { Prescription } from "@/@types/prescription";
+import { Prescription } from "@/@types/prescription";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { capitalizeWords } from "@/utils/capitalize-words";
 
 interface PrescriptionDetailsModalProps {
 	prescription: Prescription;
@@ -19,26 +20,32 @@ export function PrescriptionDetailsModal({
 					<strong>Prontuário:</strong>
 					<span>{prescription.medicalRecord}</span>
 				</div>
+
 				<div className="flex w-full justify-between items-center">
 					<strong>Paciente:</strong>
-					<span>{prescription.name}</span>
+					<span>{prescription.patientName}</span>
 				</div>
+
 				<div className="flex w-full justify-between items-center">
 					<strong>Unidade:</strong>
 					<span>{prescription.unit}</span>
 				</div>
+
 				<div className="flex w-full justify-between items-center">
 					<strong>Medicamento:</strong>
-					<span>{prescription.medicine}</span>
+					<span>{capitalizeWords(prescription.medicine)}</span>
 				</div>
+
 				<div className="flex w-full justify-between items-center">
 					<strong>Via de Administração:</strong>
 					<span>{prescription.via}</span>
 				</div>
+
 				<div className="flex w-full justify-between items-center">
 					<strong>Dose:</strong>
-					<span>{prescription.dose}mg</span>
+					<span>{prescription.dose}</span>
 				</div>
+
 				<div className="flex w-full justify-between items-center">
 					<strong>Posologia:</strong>
 					<span>{prescription.posology}</span>

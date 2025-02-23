@@ -1,9 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "../ui/button";
 import { DialogContent } from "../ui/dialog";
 import { LoaderCircle, TriangleAlert } from "lucide-react";
-import { deletePrescription } from "@/api/prescriptions/delete-prescription";
-import { toast } from "sonner";
+import { useDeletePrescription } from "@/hooks/use-delete-prescriptions";
 
 interface DeletePrescriptionDialogProps {
 	prescriptionId: string;
@@ -12,17 +10,7 @@ interface DeletePrescriptionDialogProps {
 export function DeletePrescriptionDialog({
 	prescriptionId,
 }: DeletePrescriptionDialogProps) {
-	const queryClient = useQueryClient();
-	const { mutate: deletePresciptionFn, isLoading } = useMutation({
-		mutationFn: (prescriptionId: string) => deletePrescription(prescriptionId),
-		mutationKey: ["delete-prescription"],
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: ["prescriptions"],
-			});
-			toast.success("Prescrição excluída com sucesso!");
-		},
-	});
+	const { deletePresciptionFn, isLoadingDeletePrescription } = useDeletePrescription()
 
 	function handleDeletePrescription() {
 		deletePresciptionFn(prescriptionId);
@@ -47,9 +35,9 @@ export function DeletePrescriptionDialog({
 					variant="destructive"
 					className="w-full mt-4"
 				>
-					{isLoading && <LoaderCircle className="animate-spin" />}
+					{isLoadingDeletePrescription && <LoaderCircle className="animate-spin" />}
 
-					{!isLoading && "Excluir prescrição"}
+					{!isLoadingDeletePrescription && "Excluir prescrição"}
 				</Button>
 			</div>
 		</DialogContent>

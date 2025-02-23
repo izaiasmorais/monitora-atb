@@ -1,6 +1,4 @@
-
-
-import { PrescriptionsTable } from "@/components/prescriptions/prescriptions-table";
+import { PrescriptionsTable } from "@/components/prescriptions/table/prescriptions-table";
 
 export default function Prescriptions() {
 	return (

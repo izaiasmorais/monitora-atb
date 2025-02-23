@@ -1,7 +1,7 @@
-import { MoreVertical, Search, SquarePen, Trash2 } from "lucide-react";
-import { TableCell, TableRow } from "../ui/table";
-import { Skeleton } from "../ui/skeleton";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { TableRow, TableCell } from "@/components/ui/table";
+import { Search, SquarePen, Trash2 } from "lucide-react";
 
 export function PrescriptionsTableSkeleton() {
 	return Array.from({ length: 8 }).map((_, index) => {
@@ -10,24 +10,30 @@ export function PrescriptionsTableSkeleton() {
 				<TableCell>
 					<Skeleton className="h-4 w-[50px]" />
 				</TableCell>
+
+				<TableCell>
+					<Skeleton className="h-4 w-[250px]" />
+				</TableCell>
+
+				<TableCell>
+					<Skeleton className="h-4 w-[250px]" />
+				</TableCell>
+
 				<TableCell>
 					<Skeleton className="h-4 w-[250px]" />
 				</TableCell>
 				<TableCell>
-					<Skeleton className="h-4 w-[50px]" />
+					<Skeleton className="h-4 w-[80px]" />
 				</TableCell>
-				<TableCell>
-					<Skeleton className="h-4 w-[120px]" />
-				</TableCell>
-				<TableCell>
-					<Skeleton className="h-4 w-[50px]" />
-				</TableCell>
-				<TableCell>
-					<Skeleton className="h-4 w-[50px]" />
-				</TableCell>
+
 				<TableCell>
 					<Skeleton className="h-4 w-[80px]" />
 				</TableCell>
+
+				<TableCell>
+					<Skeleton className="h-4 w-[80px]" />
+				</TableCell>
+
 				<TableCell>
 					<Button variant="outline" size="sm" disabled>
 						<Search className="h-4 w-4" />

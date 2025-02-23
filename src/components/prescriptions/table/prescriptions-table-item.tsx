@@ -1,11 +1,12 @@
-import { Search, SquarePen, Trash2 } from "lucide-react";
-import { Button } from "../ui/button";
-import { Dialog, DialogTrigger } from "../ui/dialog";
-import { TableCell, TableRow } from "../ui/table";
-import { PrescriptionDetailsModal } from "./prescription-details-dialog";
-import { DeletePrescriptionDialog } from "./delete-prescriptions-dialog";
-import type { Prescription } from "@/@types/prescription";
-import { EditPrescriptionSheet } from "./edit-prescription-sheet";
+import { Prescription } from "@/@types/prescription";
+import { DeletePrescriptionDialog } from "../delete-prescriptions-dialog";
+import { EditPrescriptionSheet } from "../edit-prescription-sheet";
+import { PrescriptionDetailsModal } from "../prescription-details-dialog";
+import { TableRow, TableCell } from "@/components/ui/table";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Search, Trash2 } from "lucide-react";
+import { capitalizeWords } from "@/utils/capitalize-words";
 
 export interface PrescriptionsTableItemProps {
 	prescription: Prescription;
@@ -20,16 +21,16 @@ export function PrescriptionsTableItem({
 				{prescription.medicalRecord}
 			</TableCell>
 
-			<TableCell className="font-medium">{prescription.name}</TableCell>
+			<TableCell className="font-medium">{prescription.patientName}</TableCell>
 
 			<TableCell>{prescription.unit}</TableCell>
 
-			<TableCell>{prescription.medicine}</TableCell>
+			<TableCell>{capitalizeWords(prescription.medicine)}</TableCell>
 
 			<TableCell>{prescription.via}</TableCell>
 
 			<TableCell className="text-muted-foreground">
-				{prescription.dose}mg
+				{prescription.dose}
 			</TableCell>
 
 			<TableCell className="text-muted-foreground">

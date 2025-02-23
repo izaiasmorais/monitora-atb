@@ -130,7 +130,7 @@ export const prescriptionFormData = [
 	},
 	{
 		name: "CLINDAMICINA",
-		doses: ["150 MG", "300 MG", "600 MG", "600 mg", "900 MG"],
+		doses: ["150 MG", "300 MG", "600 MG", "600 MG", "900 MG"],
 		vias: ["EV"],
 		posologies: ["12/12H", "24/24H", "6/6H", "8/8H"],
 	},
@@ -243,13 +243,13 @@ export const prescriptionFormData = [
 	},
 	{
 		name: "TEICOPLANINA",
-		doses: ["400 MG", "400 mg", "600 MG", "800 MG"],
+		doses: ["400 MG", "400 MG", "600 MG", "800 MG"],
 		vias: ["EV", "IM"],
 		posologies: ["12/12H", "24/24H", "3/3 DIAS", "4/4H", "48/48H"],
 	},
 	{
 		name: "TIGECICLINA",
-		doses: ["100 MG", "200 MG", "5 OMG", "50 MG"],
+		doses: ["100 MG", "200 MG", "5 MG", "50 MG"],
 		vias: ["EV"],
 		posologies: ["12/12H", "24/24H", "DOSE DE ATAQUE", "DOSE ÚNICA"],
 	},

@@ -1,11 +1,11 @@
-import { HTTPResponse } from "@/@types/http";
+import { HTTPSuccessResponse } from "@/@types/http";
 import { api } from "@/lib/axios";
 import {
 	GetPrescriptionsQueryParams,
 	GetPrescriptionsResponse,
 } from "@/@types/prescription";
 
-interface GetPrescriptionsResponseBody extends HTTPResponse {
+interface GetPrescriptionsResponseBody extends HTTPSuccessResponse {
 	data: GetPrescriptionsResponse;
 }
 
@@ -16,7 +16,7 @@ export async function getPrescriptions(
 		const response = await api.get<GetPrescriptionsResponseBody>(
 			"/prescriptions",
 			{
-				params: { ...params },
+				params,
 			}
 		);
 

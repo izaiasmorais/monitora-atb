@@ -1,21 +1,21 @@
 "use client";
 import {
 	Table,
-	TableBody,
-	TableHead,
 	TableHeader,
 	TableRow,
-} from "../ui/table";
-import { PrescriptionsTableEmptyState } from "./prescriptions-table-empty-state";
-import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
-import { PrescriptionsTableFilters } from "@/components/prescriptions/prescriptions-table-filters";
-import { PrescriptionsTableItem } from "./prescriptions-table-item";
-import { PaginationSkeleton } from "../global/pagination-skeleton";
-import { Pagination } from "../global/pagination";
+	TableHead,
+	TableBody,
+} from "@/components/ui/table";
 import { DateRange } from "react-day-picker";
 import { useState } from "react";
 import { subDays } from "date-fns";
 import { useGetPrescriptions } from "@/hooks/use-get-prescriptions";
+import { Pagination } from "@/components/global/pagination";
+import { PaginationSkeleton } from "@/components/global/pagination-skeleton";
+import { PrescriptionsTableEmptyState } from "./prescriptions-table-empty-state";
+import { PrescriptionsTableFilters } from "./prescriptions-table-filters";
+import { PrescriptionsTableItem } from "./prescriptions-table-item";
+import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
 
 export function PrescriptionsTable() {
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -39,10 +39,14 @@ export function PrescriptionsTable() {
 				<Table>
 					<TableHeader>
 						<TableRow className="bg-muted/50">
-							<TableHead className="w-[200px]">Prontuário</TableHead>
+							<TableHead className="w-[100px]">Prontuário</TableHead>
 							<TableHead className="min-w-[300px] xl:w-[300px]">Nome</TableHead>
-							<TableHead className="w-[150px]">Unidade</TableHead>
-							<TableHead className="min-w-[150px]">Medicamento</TableHead>
+							<TableHead className="min-w-[300px] xl:w-[300px]">
+								Unidade
+							</TableHead>
+							<TableHead className="min-w-[300px] xl:w-[300px]">
+								Medicamento
+							</TableHead>
 							<TableHead className="w-[150px]">Via</TableHead>
 							<TableHead className="w-[150px]">Dose</TableHead>
 							<TableHead className="w-[150px]">Posologia</TableHead>
@@ -69,10 +73,12 @@ export function PrescriptionsTable() {
 				</Table>
 			</div>
 
-			{isLoadingPrescriptions && <PaginationSkeleton />}
+			{!isLoadingPrescriptions &&
+				(!data || (data && data.prescriptions.length === 0)) && (
+					<PrescriptionsTableEmptyState />
+				)}
 
-			{((data && data.prescriptions.length === 0 && !isLoadingPrescriptions) ||
-				(!data && !isLoadingPrescriptions)) && <PrescriptionsTableEmptyState />}
+			{isLoadingPrescriptions && <PaginationSkeleton />}
 
 			{data && !isLoadingPrescriptions && (
 				<Pagination

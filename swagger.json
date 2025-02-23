@@ -556,7 +556,7 @@
 															"posology": {
 																"type": "string"
 															},
-															"posologyDays": {
+															"treatmentDays": {
 																"type": "array",
 																"items": {
 																	"type": "string"
@@ -572,7 +572,7 @@
 															"dose",
 															"via",
 															"posology",
-															"posologyDays"
+															"treatmentDays"
 														],
 														"additionalProperties": false
 													}
@@ -666,7 +666,7 @@
 									"posology": {
 										"type": "string"
 									},
-									"posologyDays": {
+									"treatmentDays": {
 										"type": "array",
 										"items": {
 											"type": "string"
@@ -682,7 +682,7 @@
 									"dose",
 									"via",
 									"posology",
-									"posologyDays"
+									"treatmentDays"
 								],
 								"additionalProperties": false
 							}
@@ -910,7 +910,7 @@
 									"posology": {
 										"type": "string"
 									},
-									"posologyDays": {
+									"treatmentDays": {
 										"type": "array",
 										"items": {
 											"type": "string"
@@ -925,7 +925,7 @@
 									"dose",
 									"via",
 									"posology",
-									"posologyDays"
+									"treatmentDays"
 								],
 								"additionalProperties": false
 							}
@@ -1059,4 +1059,3 @@
 		}
 	}
 }
-

@@ -1,19 +1,19 @@
-import { Search, X } from "lucide-react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import {
 	Select,
-	SelectContent,
-	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "../ui/select";
+	SelectContent,
+	SelectItem,
+} from "@/components/ui/select";
+import { Search, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { AddPrescriptionForm } from "../add-prescription-form";
 import { DateRange } from "react-day-picker";
-import { AddPrescriptionSheet } from "./add-prescription-sheet";
 import { z } from "zod";
 
 const prescriptionsFilterSchema = z.object({
@@ -213,7 +213,7 @@ export function PrescriptionsTableFilters({
 				Limpar
 			</Button>
 
-			<AddPrescriptionSheet />
+			<AddPrescriptionForm />
 		</form>
 	);
 }

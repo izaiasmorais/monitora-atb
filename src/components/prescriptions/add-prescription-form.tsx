@@ -12,14 +12,15 @@ import { Button } from "@/components/ui/button";
 import { useCreatePrescription } from "@/hooks/use-create-prescription";
 import { MedicalRecordField } from "./add-prescription-form/medical-record-input";
 import { PatientNameField } from "./add-prescription-form/patient-name-input";
-import { UnitSelect } from "./add-prescription-form/unit-select";
 import { TreatmentDaysPciker } from "./add-prescription-form/treatment-days-picker";
+import { UnitCombobox } from "./add-prescription-form/unit-combobox";
 import { MedicineCombobox } from "./add-prescription-form/medicine-combobox";
 import { DoseCombobox } from "./add-prescription-form/dose-combobox";
 import { PosologyCombobox } from "./add-prescription-form/posology-combobox";
 import { ViaCombobox } from "./add-prescription-form/via-combobox";
+import { PrescriptionTypeToggle } from "./add-prescription-form/prescription-type-toggle";
 
-export function AddPrescriptionSheet() {
+export function AddPrescriptionForm() {
 	const { form, isSheetOpen, setIsSheetOpen, isLoadingCreatePrescription } =
 		useCreatePrescription();
 
@@ -42,9 +43,11 @@ export function AddPrescriptionSheet() {
 						<div className="grid grid-cols-2 gap-6">
 							<MedicalRecordField form={form} />
 							<PatientNameField form={form} />
-							<UnitSelect form={form} />
+							<UnitCombobox form={form} />
 							<TreatmentDaysPciker form={form} />
 						</div>
+
+						<PrescriptionTypeToggle form={form} />
 
 						<MedicineCombobox form={form} />
 
@@ -58,11 +61,12 @@ export function AddPrescriptionSheet() {
 							<Button
 								variant="secondary"
 								onClick={() => [setIsSheetOpen(false), form.reset()]}
+								className="w-[100px]"
 							>
 								Cancelar
 							</Button>
 
-							<Button type="submit">
+							<Button type="submit" className="w-[100px]">
 								{isLoadingCreatePrescription && (
 									<LoaderCircle className="animate-spin" />
 								)}

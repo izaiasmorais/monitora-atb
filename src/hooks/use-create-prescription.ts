@@ -5,6 +5,7 @@ import { useFormMutation } from "./use-form-mutation";
 import { useMutation } from "@tanstack/react-query";
 import { createPrescription } from "@/api/prescriptions/create-prescriptions";
 import { queryClient } from "@/lib/react-query";
+import { useManualStore } from "@/store/use-manual";
 
 const createPrescriptionsFormSchema = z.object({
 	medicalRecord: z.string().min(1, "O Número do prontuário é obrigatório"),
@@ -22,24 +23,8 @@ export type CreatePrescriptionFormData = z.infer<
 >;
 
 export function useCreatePrescription() {
+	const { setIsManually } = useManualStore();
 	const [isSheetOpen, setIsSheetOpen] = useState(false);
-
-	const {
-		mutate: createPrescriptionFn,
-		isLoading: isLoadingCreatePrescription,
-	} = useMutation({
-		mutationFn: createPrescription,
-		mutationKey: ["create-prescription"],
-		onSuccess: (data) => {
-			console.log(data);
-
-			// queryClient.invalidateQueries({
-			// 	queryKey: ["prescriptions"],
-			// });
-			// toast.success("Prescrição criada com sucesso!");
-			// setIsSheetOpen(false);
-		},
-	});
 
 	const form = useFormMutation({
 		schema: createPrescriptionsFormSchema,
@@ -47,18 +32,31 @@ export function useCreatePrescription() {
 			medicalRecord: "",
 			patientName: "",
 			unit: "",
-			treatmentDays: [],
-			
 			medicine: "",
 			via: "",
 			dose: "",
 			posology: "",
+			treatmentDays: [],
 		},
 		onSubmit: (data) => {
-			// createPrescriptionFn({
-			// 	...data,
-			// });
-			console.log(data);
+			createPrescriptionFn(data);
+		},
+	});
+
+	const {
+		mutate: createPrescriptionFn,
+		isLoading: isLoadingCreatePrescription,
+	} = useMutation({
+		mutationFn: createPrescription,
+		mutationKey: ["create-prescription"],
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["prescriptions"],
+			});
+			toast.success("Prescrição criada com sucesso!");
+			setIsSheetOpen(false);
+			form.reset();
+			setIsManually(false);
 		},
 	});
 

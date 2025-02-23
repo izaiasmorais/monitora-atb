@@ -1,7 +1,7 @@
-import type { HTTPResponse } from "@/@types/http";
+import type { HTTPSuccessResponse } from "@/@types/http";
 import { api } from "@/lib/axios";
 
-interface DeletePrescriptionResponseBody extends HTTPResponse {
+interface DeletePrescriptionResponseBody extends HTTPSuccessResponse {
 	data: null;
 }
 
