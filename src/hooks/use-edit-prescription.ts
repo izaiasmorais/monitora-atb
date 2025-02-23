@@ -1,16 +1,33 @@
 import { useState } from "react";
-import { z } from "zod";
 import { toast } from "sonner";
 import { useFormMutation } from "./use-form-mutation";
 import { useMutation } from "@tanstack/react-query";
-import { createPrescription } from "@/api/prescriptions/create-prescriptions";
 import { queryClient } from "@/lib/react-query";
 import { useManualStore } from "@/store/use-manual";
+import { editPrescription } from "@/api/prescriptions/edit-prescription";
 import { prescriptionFormSchema } from "@/components/prescriptions/schemas/prescription";
 
-export function useCreatePrescription() {
+export function useEditPrescription() {
 	const { setIsManually } = useManualStore();
 	const [isSheetOpen, setIsSheetOpen] = useState(false);
+	const [prescriptionId, setPrescriptionId] = useState("");
+
+	const { mutate: editPrescriptionFn, isLoading: isLoadingEditPrescription } =
+		useMutation({
+			mutationFn: editPrescription,
+			mutationKey: ["edit-prescription"],
+			onSuccess: (data) => {
+				if (data.success) {
+					queryClient.invalidateQueries({
+						queryKey: ["prescriptions"],
+					});
+					toast.success("Prescrição editada com sucesso!");
+					setIsSheetOpen(false);
+					setIsManually(false);
+					form.reset();
+				}
+			},
+		});
 
 	const form = useFormMutation({
 		schema: prescriptionFormSchema,
@@ -25,31 +42,18 @@ export function useCreatePrescription() {
 			treatmentDays: [],
 		},
 		onSubmit: (data) => {
-			createPrescriptionFn(data);
-		},
-	});
-
-	const {
-		mutate: createPrescriptionFn,
-		isLoading: isLoadingCreatePrescription,
-	} = useMutation({
-		mutationFn: createPrescription,
-		mutationKey: ["create-prescription"],
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: ["prescriptions"],
+			editPrescriptionFn({
+				prescriptionId,
+				body: { ...data },
 			});
-			toast.success("Prescrição criada com sucesso!");
-			setIsSheetOpen(false);
-			form.reset();
-			setIsManually(false);
 		},
 	});
 
 	return {
 		form,
-		isLoadingCreatePrescription,
+		isLoadingEditPrescription,
 		isSheetOpen,
 		setIsSheetOpen,
+		setPrescriptionId,
 	};
 }

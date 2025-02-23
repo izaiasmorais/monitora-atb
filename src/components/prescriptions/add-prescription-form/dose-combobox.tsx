@@ -1,5 +1,5 @@
 "use client";
-import { CreatePrescriptionFormData } from "@/hooks/use-create-prescription";
+import { PrescriptionFormData } from "../schemas/prescription";
 import { usePrescriptions } from "@/hooks/use-prescriptions";
 import { UseFormReturn } from "react-hook-form";
 import { Combobox } from "./combobox";
@@ -8,7 +8,7 @@ import { useManualStore } from "@/store/use-manual";
 export function DoseCombobox({
 	form,
 }: {
-	form: UseFormReturn<CreatePrescriptionFormData>;
+	form: UseFormReturn<PrescriptionFormData>;
 }) {
 	const { isManually } = useManualStore();
 	const { doses, getDoses } = usePrescriptions();

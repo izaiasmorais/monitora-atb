@@ -6,9 +6,6 @@ import {
 	TableHead,
 	TableBody,
 } from "@/components/ui/table";
-import { DateRange } from "react-day-picker";
-import { useState } from "react";
-import { subDays } from "date-fns";
 import { useGetPrescriptions } from "@/hooks/use-get-prescriptions";
 import { Pagination } from "@/components/global/pagination";
 import { PaginationSkeleton } from "@/components/global/pagination-skeleton";
@@ -18,21 +15,13 @@ import { PrescriptionsTableItem } from "./prescriptions-table-item";
 import { PrescriptionsTableSkeleton } from "./prescriptions-table-skeleton";
 
 export function PrescriptionsTable() {
-	const [dateRange, setDateRange] = useState<DateRange | undefined>({
-		from: subDays(new Date(), 30),
-		to: new Date(),
-	});
-
 	const { data, handlePaginate, isLoadingPrescriptions } =
 		useGetPrescriptions();
 
 	return (
 		<div className="space-y-4">
 			<div className="flex items-center justify-between flex-wrap lg:flex-nowrap gap-2">
-				<PrescriptionsTableFilters
-					dateRange={dateRange}
-					setDateRange={setDateRange}
-				/>
+				<PrescriptionsTableFilters />
 			</div>
 
 			<div className="rounded-md border">

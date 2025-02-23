@@ -6,10 +6,9 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { Form } from "../ui/form";
-import { LoaderCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCreatePrescription } from "@/hooks/use-create-prescription";
+import { Form } from "../ui/form";
+import { LoaderCircle, SquarePen } from "lucide-react";
 import { MedicalRecordField } from "./add-prescription-form/medical-record-input";
 import { PatientNameField } from "./add-prescription-form/patient-name-input";
 import { TreatmentDaysPicker } from "./add-prescription-form/treatment-days-picker";
@@ -19,17 +18,47 @@ import { DoseCombobox } from "./add-prescription-form/dose-combobox";
 import { PosologyCombobox } from "./add-prescription-form/posology-combobox";
 import { ViaCombobox } from "./add-prescription-form/via-combobox";
 import { PrescriptionTypeToggle } from "./add-prescription-form/prescription-type-toggle";
+import { Prescription } from "@/@types/prescription";
+import { useEffect } from "react";
+import { useEditPrescription } from "@/hooks/use-edit-prescription";
+import { useManualStore } from "@/store/use-manual";
 
-export function AddPrescriptionForm() {
-	const { form, isSheetOpen, setIsSheetOpen, isLoadingCreatePrescription } =
-		useCreatePrescription();
+interface EditPrescriptionFormProps {
+	prescription: Prescription;
+}
+
+export function EditPrescriptionForm({
+	prescription,
+}: EditPrescriptionFormProps) {
+	const { setIsManually } = useManualStore();
+	const {
+		form,
+		isSheetOpen,
+		setIsSheetOpen,
+		isLoadingEditPrescription,
+		setPrescriptionId,
+	} = useEditPrescription();
+
+	useEffect(() => {
+		setPrescriptionId(prescription.id);
+		setIsManually(true);
+		form.reset({
+			medicalRecord: prescription.medicalRecord,
+			patientName: prescription.patientName,
+			unit: prescription.unit,
+			medicine: prescription.medicine,
+			dose: prescription.dose,
+			via: prescription.via,
+			posology: prescription.posology,
+			treatmentDays: prescription.treatmentDays,
+		});
+	}, []);
 
 	return (
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
 			<SheetTrigger asChild>
-				<Button className="flex items-center gap-2 ml-auto" size="sm">
-					<Plus className="w-5 h-5" />
-					Adicionar prescrição
+				<Button variant="outline" size="sm">
+					<SquarePen className="h-4 w-4" />
 				</Button>
 			</SheetTrigger>
 
@@ -67,11 +96,11 @@ export function AddPrescriptionForm() {
 							</Button>
 
 							<Button type="submit" className="w-[100px]">
-								{isLoadingCreatePrescription && (
+								{isLoadingEditPrescription && (
 									<LoaderCircle className="animate-spin" />
 								)}
 
-								{!isLoadingCreatePrescription && "Confirmar"}
+								{!isLoadingEditPrescription && "Confirmar"}
 							</Button>
 						</div>
 					</form>

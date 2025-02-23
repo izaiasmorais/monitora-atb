@@ -7,13 +7,13 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { CreatePrescriptionFormData } from "@/hooks/use-create-prescription";
+import { PrescriptionFormData } from "../schemas/prescription";
 import { UseFormReturn } from "react-hook-form";
 
 export function PatientNameField({
 	form,
 }: {
-	form: UseFormReturn<CreatePrescriptionFormData>;
+	form: UseFormReturn<PrescriptionFormData>;
 }) {
 	return (
 		<FormField

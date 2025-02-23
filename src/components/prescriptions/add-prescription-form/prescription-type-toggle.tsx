@@ -1,12 +1,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreatePrescriptionFormData } from "@/hooks/use-create-prescription";
+import { PrescriptionFormData } from "../schemas/prescription";
 import { useManualStore } from "@/store/use-manual";
 import { UseFormReturn } from "react-hook-form";
 
 export function PrescriptionTypeToggle({
 	form,
 }: {
-	form: UseFormReturn<CreatePrescriptionFormData>;
+	form: UseFormReturn<PrescriptionFormData>;
 }) {
 	const { isManually, setIsManually } = useManualStore();
 

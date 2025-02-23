@@ -7,13 +7,13 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { CreatePrescriptionFormData } from "@/hooks/use-create-prescription";
 import { UseFormReturn } from "react-hook-form";
+import type { PrescriptionFormData } from "../schemas/prescription";
 
 export function MedicalRecordField({
 	form,
 }: {
-	form: UseFormReturn<CreatePrescriptionFormData>;
+	form: UseFormReturn<PrescriptionFormData>;
 }) {
 	return (
 		<FormField

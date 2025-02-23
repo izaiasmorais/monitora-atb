@@ -17,16 +17,35 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { UseFormReturn } from "react-hook-form";
-import { CreatePrescriptionFormData } from "@/hooks/use-create-prescription";
 import { useState } from "react";
 import { ptBR } from "date-fns/locale";
+import { PrescriptionFormData } from "../schemas/prescription";
 
-export function TreatmentDaysPciker({
+export function TreatmentDaysPicker({
 	form,
 }: {
-	form: UseFormReturn<CreatePrescriptionFormData>;
+	form: UseFormReturn<PrescriptionFormData>;
 }) {
-	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+	const defaultTreatmentDays = form.watch("treatmentDays");
+
+	function defaultFormattedDates() {
+		if (defaultTreatmentDays) {
+			const formattedDates = defaultTreatmentDays
+				.map((date) => {
+					if (date !== undefined) {
+						return new Date(date);
+					}
+				})
+				.filter(Boolean) as Date[];
+			return formattedDates;
+		}
+		return [];
+	}
+
+	const [selectedDates, setSelectedDates] = useState<Date[]>(() => {
+		const formattedDates = defaultFormattedDates();
+		return formattedDates ? formattedDates : [];
+	});
 
 	const handleSelect = (dates: Date[] | undefined) => {
 		setSelectedDates(dates || []);

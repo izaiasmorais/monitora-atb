@@ -28,15 +28,7 @@ export type PrescriptionsFilterSchema = z.infer<
 	typeof prescriptionsFilterSchema
 >;
 
-interface PrescriptionsTableFiltersProps {
-	dateRange: DateRange | undefined;
-	setDateRange: Dispatch<SetStateAction<DateRange | undefined>>;
-}
-
-export function PrescriptionsTableFilters({
-	dateRange,
-	setDateRange,
-}: PrescriptionsTableFiltersProps) {
+export function PrescriptionsTableFilters() {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -47,7 +39,7 @@ export function PrescriptionsTableFilters({
 	const medicine = searchParams.get("medicine");
 	const posology = searchParams.get("posology");
 
-	const { register, handleSubmit, control, reset, setValue } =
+	const { register, handleSubmit, control, reset } =
 		useForm<PrescriptionsFilterSchema>({
 			resolver: zodResolver(prescriptionsFilterSchema),
 			defaultValues: {
@@ -138,65 +130,12 @@ export function PrescriptionsTableFilters({
 			<span className="text-sm font-semibold hidden lg:block">Filtros: </span>
 
 			<Input
-				className="h-9"
+				className="h-9 w-[300px]"
 				placeholder="Prontuário"
 				{...register("medicalRecord")}
 			/>
 
-			<Input className="h-9" placeholder="Nome" {...register("name")} />
-
-			<Controller
-				control={control}
-				name="unit"
-				render={({ field: { name, onChange, value, disabled } }) => {
-					return (
-						<Select
-							onValueChange={onChange}
-							name={name}
-							value={value ? value : undefined}
-							disabled={disabled}
-						>
-							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Unidade" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="">Todas</SelectItem>
-								<SelectItem value="Posto 1">Posto 1</SelectItem>
-								<SelectItem value="Posto 2">Posto 2</SelectItem>
-								<SelectItem value="Posto 3">Posto 3</SelectItem>
-								<SelectItem value="UTI">UTI</SelectItem>
-								<SelectItem value="UNACON">UNACON</SelectItem>
-							</SelectContent>
-						</Select>
-					);
-				}}
-			/>
-
-			<Controller
-				control={control}
-				name="posology"
-				render={({ field: { name, onChange, value, disabled } }) => {
-					return (
-						<Select
-							onValueChange={onChange}
-							name={name}
-							value={value ? value : undefined}
-							disabled={disabled}
-						>
-							<SelectTrigger className="h-9">
-								<SelectValue placeholder="Posologia" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="">Todos</SelectItem>
-								<SelectItem value="6/6h">6/6h</SelectItem>
-								<SelectItem value="8/8h">8/8h</SelectItem>
-								<SelectItem value="12/12h">12/12h</SelectItem>
-								<SelectItem value="24/24h">24/24h</SelectItem>
-							</SelectContent>
-						</Select>
-					);
-				}}
-			/>
+			<Input className="h-9 w-[400px]" placeholder="Nome" {...register("name")} />
 
 			<Button type="submit" variant="secondary" size="sm">
 				<Search className="mr-2 h-4 w-4" />
