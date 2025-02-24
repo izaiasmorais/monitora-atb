@@ -1,10 +1,11 @@
 import { api } from "@/lib/axios";
-import { EditPrescriptionBody } from "@/@types/prescription";
+import { PrescriptionBody } from "@/@types/prescription";
 import { HTTPSuccessResponse, HTTPErrorResponse } from "@/@types/http";
+import { AxiosError } from "axios";
 
 interface EditPrescriptionRequest {
 	prescriptionId: string;
-	body: EditPrescriptionBody;
+	body: PrescriptionBody;
 }
 
 interface EditPrescriptionSuccessResponse extends HTTPSuccessResponse {
@@ -28,6 +29,14 @@ export async function editPrescription({
 
 		return response.data;
 	} catch (error) {
-		throw error;
+		if (error instanceof AxiosError && error.response?.data) {
+			return error.response.data;
+		}
+
+		return {
+			success: false,
+			error: "Erro desconhecido",
+			data: null,
+		};
 	}
 }

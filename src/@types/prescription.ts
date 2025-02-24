@@ -13,14 +13,10 @@ export interface Prescription {
 export interface GetPrescriptionsQueryParams {
 	pageIndex?: number;
 	perPage?: number;
-	id?: string | null;
+
 	medicalRecord?: string | null;
-	name?: string | null;
+	patientName?: string | null;
 	medicine?: string | null;
-	unit?: string | null;
-	dose?: number | null;
-	posology?: string | null;
-	treatmentDays?: string[] | null;
 }
 
 export interface GetPrescriptionsResponse {
@@ -32,18 +28,7 @@ export interface GetPrescriptionsResponse {
 	};
 }
 
-export interface CreatePrescriptionBody {
-	medicalRecord: string;
-	patientName: string;
-	medicine: string;
-	unit: string;
-	dose: string;
-	via: string;
-	posology: string;
-	treatmentDays: string[];
-}
-
-export interface EditPrescriptionBody {
+export interface PrescriptionBody {
 	medicalRecord: string;
 	patientName: string;
 	medicine: string;

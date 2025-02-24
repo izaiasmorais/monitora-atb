@@ -11,10 +11,8 @@ export function useGetPrescriptions() {
 
 	const id = searchParams.get("id");
 	const medicalRecord = searchParams.get("medicalRecord");
-	const name = searchParams.get("name");
-	const unit = searchParams.get("unit");
+	const patientName = searchParams.get("patientName");
 	const medicine = searchParams.get("medicine");
-	const posology = searchParams.get("posology");
 
 	const pageIndex = z.coerce
 		.number()
@@ -27,28 +25,16 @@ export function useGetPrescriptions() {
 		.parse(searchParams.get("perPage") ?? 5);
 
 	const { data: result, isLoading: isLoadingPrescriptions } = useQuery({
-		queryKey: [
-			"prescriptions",
-			pageIndex,
-			id,
-			name,
-			unit,
-			medicalRecord,
-			medicine,
-			posology,
-		],
+		queryKey: ["prescriptions", pageIndex, id, patientName, medicalRecord],
 		queryFn: () =>
 			getPrescriptions({
 				pageIndex: pageIndex != 0 ? pageIndex - 1 : 0,
 				perPage,
-				id,
-				name,
-				unit,
 				medicalRecord,
+				patientName,
 				medicine,
-				posology,
 			}),
-		staleTime: 1000 * 60 * 5,
+		staleTime: 60 * 60 * 5, // 5 hours
 		refetchOnMount: false,
 		refetchOnWindowFocus: false,
 	});

@@ -1,27 +1,16 @@
-import {
-	Select,
-	SelectTrigger,
-	SelectValue,
-	SelectContent,
-	SelectItem,
-} from "@/components/ui/select";
 import { Search, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AddPrescriptionForm } from "../add-prescription-form";
-import { DateRange } from "react-day-picker";
 import { z } from "zod";
 
 const prescriptionsFilterSchema = z.object({
 	medicalRecord: z.string().optional(),
-	name: z.string().optional(),
-	unit: z.string().optional(),
+	patientName: z.string().optional(),
 	medicine: z.string().optional(),
-	posology: z.string().optional(),
 });
 
 export type PrescriptionsFilterSchema = z.infer<
@@ -33,30 +22,23 @@ export function PrescriptionsTableFilters() {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	const id = searchParams.get("id");
-	const name = searchParams.get("name");
-	const status = searchParams.get("status");
+	const medicalRecord = searchParams.get("medicalRecord");
+	const patientName = searchParams.get("patientName");
 	const medicine = searchParams.get("medicine");
-	const posology = searchParams.get("posology");
 
-	const { register, handleSubmit, control, reset } =
-		useForm<PrescriptionsFilterSchema>({
-			resolver: zodResolver(prescriptionsFilterSchema),
-			defaultValues: {
-				medicalRecord: id ?? "",
-				name: name ?? "",
-				unit: status ?? "",
-				medicine: medicine ?? "",
-				posology: posology ?? "",
-			},
-		});
+	const { register, handleSubmit, reset } = useForm<PrescriptionsFilterSchema>({
+		resolver: zodResolver(prescriptionsFilterSchema),
+		defaultValues: {
+			medicalRecord: medicalRecord ?? "",
+			patientName: patientName ?? "",
+			medicine: medicine ?? "",
+		},
+	});
 
 	function handleFilter({
 		medicalRecord,
 		medicine,
-		name,
-		posology,
-		unit,
+		patientName,
 	}: PrescriptionsFilterSchema) {
 		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
@@ -66,28 +48,16 @@ export function PrescriptionsTableFilters() {
 			state.delete("medicalRecord");
 		}
 
-		if (name) {
-			state.set("name", name);
+		if (patientName) {
+			state.set("patientName", patientName);
 		} else {
-			state.delete("name");
+			state.delete("patientName");
 		}
 
 		if (medicine) {
 			state.set("medicine", medicine);
 		} else {
 			state.delete("medicine");
-		}
-
-		if (posology) {
-			state.set("posology", posology);
-		} else {
-			state.delete("posology");
-		}
-
-		if (unit) {
-			state.set("unit", unit);
-		} else {
-			state.delete("unit");
 		}
 
 		state.set("page", "1");
@@ -102,18 +72,14 @@ export function PrescriptionsTableFilters() {
 		const state = new URLSearchParams(Array.from(searchParams.entries()));
 
 		state.delete("medicalRecord");
-		state.delete("name");
-		state.delete("unit");
+		state.delete("patientName");
 		state.delete("medicine");
-		state.delete("posology");
 		state.delete("page");
 
 		reset({
 			medicalRecord: "",
-			name: "",
-			unit: "",
+			patientName: "",
 			medicine: "",
-			posology: "",
 		});
 
 		const search = state.toString();
@@ -131,11 +97,15 @@ export function PrescriptionsTableFilters() {
 
 			<Input
 				className="h-9 w-[300px]"
-				placeholder="Prontuário"
+				placeholder="Número do Prontuário"
 				{...register("medicalRecord")}
 			/>
 
-			<Input className="h-9 w-[400px]" placeholder="Nome" {...register("name")} />
+			<Input
+				className="h-9 w-[400px]"
+				placeholder="Nome do Paciente"
+				{...register("patientName")}
+			/>
 
 			<Button type="submit" variant="secondary" size="sm">
 				<Search className="mr-2 h-4 w-4" />

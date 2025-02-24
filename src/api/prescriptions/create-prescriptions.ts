@@ -1,17 +1,7 @@
 import { HTTPErrorResponse, HTTPSuccessResponse } from "@/@types/http";
+import type { PrescriptionBody } from "@/@types/prescription";
 import { api } from "@/lib/axios";
 import { AxiosError } from "axios";
-
-interface CreatePrescriptionRequest {
-	medicalRecord: string;
-	patientName: string;
-	unit: string;
-	medicine: string;
-	via: string;
-	dose: string;
-	posology: string;
-	treatmentDays: string[];
-}
 
 interface CreatePrescriptionSuccessResponse extends HTTPSuccessResponse {
 	data: null;
@@ -26,13 +16,14 @@ type CreatePrescriptionResponse =
 	| CreatePrescriptionErrorResponse;
 
 export async function createPrescription(
-	body: CreatePrescriptionRequest
+	body: PrescriptionBody
 ): Promise<CreatePrescriptionResponse> {
 	try {
 		const response = await api.post<CreatePrescriptionSuccessResponse>(
 			"/prescriptions",
 			body
 		);
+
 		return response.data;
 	} catch (error) {
 		if (error instanceof AxiosError && error.response?.data) {
