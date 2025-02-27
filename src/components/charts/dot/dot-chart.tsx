@@ -12,7 +12,7 @@ export function DotChart() {
 	const { medicines } = usePrescriptions();
 
 	return (
-		<div className="w-full space-y-4 rounded-lg border border-muted p-6">
+		<div className="w-full space-y-4 rounded-lg border border-muted p-6 bg-white">
 			<strong>Dias de terapia (DOT)</strong>
 
 			<div className="flex ml-auto">

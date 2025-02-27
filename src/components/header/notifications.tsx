@@ -1,5 +1,5 @@
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Merge, Rocket, Settings, Split } from "lucide-react";
+import { ClockAlert, Merge, Rocket, Settings, Split } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { BellIcon } from "@radix-ui/react-icons";
 import { Separator } from "../ui/separator";
@@ -37,9 +37,9 @@ export async function Notifications() {
 				</div>
 
 				<Tabs defaultValue="new" className="mt-2">
-					<TabsList className="space-x-1">
-						<TabsTrigger value="new">New (3)</TabsTrigger>
-						<TabsTrigger value="archived">Archived</TabsTrigger>
+					<TabsList className="space-x-1 max-h-max w-full">
+						<TabsTrigger value="new">Notificações (2)</TabsTrigger>
+						<TabsTrigger value="archived">Arquivadas</TabsTrigger>
 					</TabsList>
 				</Tabs>
 
@@ -48,49 +48,38 @@ export async function Notifications() {
 				<div className="space-y-4">
 					<div className="flex items-start gap-4">
 						<div className="rounded-full border border-primary/10 bg-primary/5 p-2">
-							<Split className="h-4 w-4 text-violet-400" />
+							<ClockAlert className="h-4 w-4 text-red-500" strokeWidth={2} />
 						</div>
+
 						<div className="space-y-1">
 							<p className="text-xs leading-relaxed">
-								New event <strong>pluto.subscription-created</strong> was
-								created under <strong>pluto</strong> service by{" "}
-								<strong>Diego Fernandes</strong>.
+								O tratamento de <strong>Izaías Lima</strong> chegou ao fim.
 							</p>
+
 							<time className="text-xs text-muted-foreground">
-								15 minutes ago
+								1 hora atrás
 							</time>
 						</div>
 					</div>
 
 					<div className="flex items-start gap-4">
 						<div className="rounded-full border border-primary/10 bg-primary/5 p-2">
-							<Merge className="h-4 w-4 text-sky-400" />
+							<ClockAlert className="h-4 w-4 text-red-500" strokeWidth={2} />
 						</div>
-						<div className="space-y-1">
-							<p className="text-xs leading-relaxed">
-								New subscription on <strong>pluto.subscription-created</strong>{" "}
-								was created under <strong>skylab</strong> service by{" "}
-								<strong>Gabriel Buzzi</strong>.
-							</p>
-							<time className="text-xs text-muted-foreground">4 hours ago</time>
-						</div>
-					</div>
 
-					<div className="flex items-start gap-4">
-						<div className="rounded-full border border-primary/10 bg-primary/5 p-2">
-							<Rocket className="h-4 w-4 text-amber-400" />
-						</div>
 						<div className="space-y-1">
 							<p className="text-xs leading-relaxed">
-								New version <strong>v1.0.1</strong> released on{" "}
-								<strong>pluto.subscription-created</strong> event.
+								O tratamento de <strong>Dário</strong> chegou ao fim.
 							</p>
-							<time className="text-xs text-muted-foreground">6 hours ago</time>
+
+							<time className="text-xs text-muted-foreground">
+								1 hora atrás
+							</time>
 						</div>
 					</div>
 
 					<Button variant="outline" className="w-full">
-						Archive all
+						Arquivar todas
 					</Button>
 				</div>
 			</PopoverContent>

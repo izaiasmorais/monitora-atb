@@ -24,7 +24,7 @@ export function PrescriptionsTable() {
 				<PrescriptionsTableFilters />
 			</div>
 
-			<div className="rounded-md border">
+			<div className="rounded-md border overflow-hidden">
 				<Table>
 					<TableHeader>
 						<TableRow className="bg-muted/50">
