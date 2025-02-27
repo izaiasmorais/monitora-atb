@@ -1,17 +1,13 @@
-"use client";
-import { BarChartContainer } from "@/components/charts/bar-chart";
-import { PieChartContainer } from "@/components/charts/pie-chart";
-import { Summary } from "@/components/dashboard/summary";
+import { DddChart } from "@/components/charts/ddd-chart";
+import { DotChart } from "@/components/charts/dot/dot-chart";
+import { LotChart } from "@/components/charts/lot-chart";
 
 export default function Dashboard() {
 	return (
-		<main className="flex flex-col gap-4">
-			<Summary />
-
-			<section className="grid gap-4 md:gap-6 md:grid-cols-2 h-[400px]">
-				<BarChartContainer />
-				<PieChartContainer />
-			</section>
+		<main className="flex gap-4">
+			<DotChart />
+			<DddChart />
+			<LotChart />
 		</main>
 	);
 }

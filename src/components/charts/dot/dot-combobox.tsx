@@ -20,20 +20,20 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { PrescriptionFormData } from "../schemas/prescription";
 import { UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { GetDotData } from "@/hooks/use-get-dot";
 import { useState } from "react";
 
 interface ComboboxProps {
 	options: { label: string; value: string }[];
-	entity: "medicine" | "unit" | "posology" | "via" | "dose";
+	entity: "medicine" | "unit";
 	translatedEntity: string;
-	form: UseFormReturn<PrescriptionFormData>;
+	form: UseFormReturn<GetDotData>;
 }
 
-export function Combobox({
+export function DotCombobox({
 	options,
 	entity,
 	translatedEntity,

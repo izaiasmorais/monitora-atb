@@ -1,4 +1,5 @@
 export const units = [
+	{ label: "Hospital Inteiro", value: "all" },
 	{ label: "UTI", value: "UTI" },
 	{ label: "Posto 1", value: "Posto 1" },
 	{ label: "Posto 2", value: "Posto 2" },

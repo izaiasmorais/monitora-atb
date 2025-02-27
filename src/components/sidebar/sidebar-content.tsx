@@ -12,13 +12,13 @@ export function SidebarContent() {
 				<SidebarItem
 					title="Dashboard"
 					href="/"
-					icon={<Home size={20} strokeWidth={1.5} />}
+					icon={<Home size={20} strokeWidth={1.75} />}
 				/>
 
 				<SidebarItem
 					title="Prescrições"
 					href="/prescricoes"
-					icon={<Users size={20} strokeWidth={1.5} />}
+					icon={<Users size={20} strokeWidth={1.75} />}
 				/>
 			</div>
 		</>

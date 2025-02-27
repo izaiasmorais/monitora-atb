@@ -20,12 +20,12 @@ export function SidebarItem({
 
 	const style = pathname.endsWith(href)
 		? "bg-blue-50/50 dark:bg-blue-950/50 text-blue-500"
-		: "tex-muted";
+		: "text-foreground";
 
 	return (
 		<Link
 			href={!disabled ? href : ""}
-			className={`px-4 py-2 rounded-md font-light flex justify-between items-center
+			className={`px-4 py-2 rounded-md flex justify-between items-center
 			 ${style} ${disabled && "cursor-not-allowed"} ${
 				!disabled && "hover:bg-muted/50"
 			}`}

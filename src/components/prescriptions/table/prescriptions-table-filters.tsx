@@ -107,7 +107,7 @@ export function PrescriptionsTableFilters() {
 				{...register("patientName")}
 			/>
 
-			<Button type="submit" variant="secondary" size="sm">
+			<Button type="submit" variant="secondary">
 				<Search className="mr-2 h-4 w-4" />
 				Filtrar
 			</Button>
@@ -115,7 +115,6 @@ export function PrescriptionsTableFilters() {
 			<Button
 				type="button"
 				variant="outline"
-				size="sm"
 				onClick={() => handleClearFilters()}
 			>
 				<X className="mr-2 h-4 w-4" />

@@ -27,7 +27,7 @@ export function AddPrescriptionForm() {
 	return (
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
 			<SheetTrigger asChild>
-				<Button className="flex items-center gap-2 ml-auto" size="sm">
+				<Button className="flex items-center gap-2 ml-auto">
 					<Plus className="w-5 h-5" />
 					Adicionar prescrição
 				</Button>
