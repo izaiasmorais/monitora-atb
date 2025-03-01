@@ -10,7 +10,8 @@ interface DeletePrescriptionDialogProps {
 export function DeletePrescriptionDialog({
 	prescriptionId,
 }: DeletePrescriptionDialogProps) {
-	const { deletePresciptionFn, isLoadingDeletePrescription } = useDeletePrescription()
+	const { deletePresciptionFn, isLoadingDeletePrescription } =
+		useDeletePrescription();
 
 	function handleDeletePrescription() {
 		deletePresciptionFn(prescriptionId);
@@ -32,12 +33,14 @@ export function DeletePrescriptionDialog({
 
 				<Button
 					onClick={handleDeletePrescription}
+					disabled={isLoadingDeletePrescription}
 					variant="destructive"
 					className="w-full mt-4"
 				>
-					{isLoadingDeletePrescription && <LoaderCircle className="animate-spin" />}
-
-					{!isLoadingDeletePrescription && "Excluir prescrição"}
+					{isLoadingDeletePrescription && (
+						<LoaderCircle className="animate-spin" />
+					)}
+					Excluir prescrição
 				</Button>
 			</div>
 		</DialogContent>

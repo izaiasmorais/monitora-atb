@@ -22,12 +22,6 @@ export function SidebarContent() {
 				/>
 
 				<SidebarItem
-					title="Medicamentos"
-					href="/medicamentos"
-					icon={<Pill size={20} strokeWidth={1.75} />}
-				/>
-
-				<SidebarItem
 					title="Configurações"
 					href="/configuracoes"
 					icon={<Settings2 size={20} strokeWidth={1.75} />}

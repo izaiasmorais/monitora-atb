@@ -1,6 +1,6 @@
 export function DddChart() {
 	return (
-		<div className="w-full rounded-lg border border-slate-100 p-6 bg-white">
+		<div className="w-full rounded-lg border p-6 ">
 			<div>
 				<strong>Dose Diária Definida (DDD) por 100 pacientes</strong>
 

@@ -19,8 +19,8 @@ export function SidebarItem({
 	const pathname = usePathname();
 
 	const style = pathname.endsWith(href)
-		? "bg-blue-50 dark:bg-blue-950/50 text-blue-500"
-		: "text-foreground";
+		? "text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-blue-950/50 font-medium"
+		: "text-foreground/80";
 
 	return (
 		<Link
@@ -30,7 +30,7 @@ export function SidebarItem({
 				!disabled && "hover:bg-muted/50"
 			}`}
 		>
-			<div className="flex gap-2 items-center font-medium">
+			<div className="flex gap-2 items-center">
 				{icon}
 				{title}
 			</div>

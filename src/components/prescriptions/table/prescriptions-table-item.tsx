@@ -16,7 +16,7 @@ export function PrescriptionsTableItem({
 	prescription,
 }: PrescriptionsTableItemProps) {
 	return (
-		<TableRow className="bg-white">
+		<TableRow>
 			<TableCell className="font-mono text-xs font-medium">
 				{prescription.medicalRecord}
 			</TableCell>

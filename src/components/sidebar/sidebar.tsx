@@ -27,16 +27,21 @@ export function Sidebar() {
 			data-[state=open]:h-screen xl:data-[state=open]:h-screen xl:h-auto"
 		>
 			<div className="flex items-center justify-between ">
-				<h1 className="text-xl xl:text-2xl font-medium flex items-center gap-2">
+				<div className="flex items-center gap-3">
 					<Image
 						src={"/image.png"}
 						alt="Símbolo da Saúde Azul"
 						width={512}
 						height={512}
 						className="w-8 h-8"
+						quality={100}
+						priority
 					/>
-					Prescrições
-				</h1>
+
+					<h1 className="text-xl font-semibold flex items-center gap-2">
+						Prescrições
+					</h1>
+				</div>
 
 				<div className="flex items-center gap-3">
 					<div className="flex gap-3 xl:hidden">

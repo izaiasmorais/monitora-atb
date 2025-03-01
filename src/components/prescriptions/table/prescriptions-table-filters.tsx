@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react";
+import { LoaderCircle, Search, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +26,7 @@ export function PrescriptionsTableFilters() {
 	const patientName = searchParams.get("patientName");
 	const medicine = searchParams.get("medicine");
 
-	const { register, handleSubmit, reset } = useForm<PrescriptionsFilterSchema>({
+	const { register, handleSubmit, reset, formState } = useForm<PrescriptionsFilterSchema>({
 		resolver: zodResolver(prescriptionsFilterSchema),
 		defaultValues: {
 			medicalRecord: medicalRecord ?? "",
@@ -107,8 +107,15 @@ export function PrescriptionsTableFilters() {
 				{...register("patientName")}
 			/>
 
-			<Button type="submit" variant="secondary">
-				<Search className="mr-2 h-4 w-4" />
+			<Button
+				type="submit"
+				variant="secondary"
+				disabled={formState.isSubmitting}
+			>
+				{!formState.isSubmitting && <Search className="mr-2 h-4 w-4" />}
+
+				{formState.isSubmitting && <LoaderCircle className="animate-spin" />}
+
 				Filtrar
 			</Button>
 

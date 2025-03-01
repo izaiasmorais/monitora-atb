@@ -27,7 +27,7 @@ export function PrescriptionsTable() {
 			<div className="rounded-md border overflow-hidden">
 				<Table>
 					<TableHeader>
-						<TableRow className="bg-muted/50">
+						<TableRow className="bg-muted/50 hover:bg-muted/50">
 							<TableHead className="w-[100px]">Prontuário</TableHead>
 							<TableHead className="min-w-[300px] xl:w-[300px]">Nome</TableHead>
 							<TableHead className="min-w-[300px] xl:w-[300px]">

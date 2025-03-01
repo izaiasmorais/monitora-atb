@@ -25,20 +25,20 @@ export async function Notifications() {
 				</Button>
 			</PopoverTrigger>
 
-			<PopoverContent align="end" alignOffset={-16} className="w-80 p-4">
+			<PopoverContent align="end" alignOffset={-16} className="w-96 p-4">
 				<div className="flex items-center justify-between">
-					<span className="text-sm font-medium">Notifications</span>
+					<span className="text-sm font-medium">Notificações</span>
 					<Link
 						className="text-muted-foreground hover:text-primary"
-						href="/settings"
+						href="/configuracoes"
 					>
 						<Settings size={16} />
 					</Link>
 				</div>
 
 				<Tabs defaultValue="new" className="mt-2">
-					<TabsList className="space-x-1 max-h-max w-full">
-						<TabsTrigger value="new">Notificações (2)</TabsTrigger>
+					<TabsList className="space-x-1 max-h-max w-full p-1 bg-muted/50">
+						<TabsTrigger value="new">Novas (2)</TabsTrigger>
 						<TabsTrigger value="archived">Arquivadas</TabsTrigger>
 					</TabsList>
 				</Tabs>
