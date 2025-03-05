@@ -1,15 +1,14 @@
 "use client";
 import { useGetdot } from "@/hooks/use-get-dot";
-import { Form } from "../../ui/form";
-import { DotCombobox } from "./dot-combobox";
-import { usePrescriptions } from "@/hooks/use-prescriptions";
 import { units } from "@/mocks/units";
-import { DotDatePicker } from "./dot-date-picker";
 import { Button } from "@/components/ui/button";
+import { LoaderCircle } from "lucide-react";
+import { DatePicker } from "@/components/ui/date-picket";
+import { Combobox } from "@/components/ui/combobox";
+import { Form } from "../ui/form";
 
 export function DotChart() {
 	const { form, isLoadingGetDot } = useGetdot();
-	const { medicines } = usePrescriptions();
 
 	return (
 		<div className="w-full space-y-4 rounded-lg border border-muted p-6 ">
@@ -18,23 +17,29 @@ export function DotChart() {
 			<div className="flex ml-auto">
 				<Form {...form}>
 					<form onSubmit={form.handleSubmitForm} className="w-full space-y-4">
-						<DotCombobox
-							entity="medicine"
-							translatedEntity="Medicamento"
-							options={medicines}
+						<Combobox
 							form={form}
-						/>
-
-						<DotCombobox
-							entity="unit"
-							translatedEntity="Unidade"
 							options={units}
-							form={form}
+							entity="unit"
+							emptyMessage="Nenhuma unidade encontrada."
+							translatedEntity="Unidade"
+							placeholder="Selecione uma unidade"
 						/>
 
-						<DotDatePicker form={form} />
+						<DatePicker
+							form={form}
+							label="Intervalo de Tempo"
+							placeholder="Selecione um intervalo"
+							entity="timeInterval"
+						/>
 
-						<Button type="submit" className="w-full">
+						<Button
+							variant="secondary"
+							type="submit"
+							className="w-full"
+							disabled={isLoadingGetDot}
+						>
+							{isLoadingGetDot && <LoaderCircle className="animate-spin" />}
 							Calcular DOT
 						</Button>
 
@@ -52,9 +57,9 @@ export function DotChart() {
 							<strong className="text-3xl font-medium">50 DOT</strong>
 						</div>
 
-						<span className="block text-sm text-muted-foreground">
-							O cálculo acima indica que o antibiótico Amoxicilina foi prescrito
-							em 5 dias, durante um intervalo de 10 dias, assim gerando 50 DOT.
+						<span className="block text-xs text-muted-foreground">
+							O cálculo acima indica que todos os antibióticos prescritos
+							durante o período somaram 50 dias de terapia.
 						</span>
 					</form>
 				</Form>

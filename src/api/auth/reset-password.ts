@@ -7,28 +7,17 @@ interface ResetPasswordRequest {
 	new_password: string;
 }
 
-interface ResetPasswordSuccessResponse extends HTTPSuccessResponse {
-	data: {
-		message: string;
-	};
-}
-
-interface ResetPasswordErrorResponse extends HTTPErrorResponse {
-	data: null;
-}
-
-type ResetPasswordResponse =
-	| ResetPasswordSuccessResponse
-	| ResetPasswordErrorResponse;
+type ResetPasswordResponse = HTTPSuccessResponse | HTTPErrorResponse;
 
 export async function resetPassword(
 	credentials: ResetPasswordRequest
 ): Promise<ResetPasswordResponse> {
 	try {
-		const response = await api.put<ResetPasswordSuccessResponse>(
+		const response = await api.put<HTTPSuccessResponse>(
 			"/auth/reset-password",
 			credentials
 		);
+
 		return response.data;
 	} catch (error) {
 		if (error instanceof AxiosError && error.response?.data) {

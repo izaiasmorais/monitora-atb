@@ -1,11 +1,10 @@
 "use client";
-import { addDays, format } from "date-fns";
+import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { GetDotData } from "@/hooks/use-get-dot";
 import {
 	FormControl,
 	FormField,
@@ -18,21 +17,28 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import React from "react";
-import type { DateRange } from "react-day-picker";
+import { FieldValues, Path } from "react-hook-form";
 
-interface DotDatePickerProps {
-	form: UseFormReturn<GetDotData>;
+interface DatePickerProps<TFieldValues extends FieldValues> {
+	form: UseFormReturn<TFieldValues>;
+	entity: Path<TFieldValues>;
+	label?: string;
+	placeholder?: string;
 }
 
-export function DotDatePicker({ form }: DotDatePickerProps) {
+export function DatePicker<TFieldValues extends FieldValues>({
+	form,
+	entity,
+	label = "Data",
+	placeholder = "Selecione uma data",
+}: DatePickerProps<TFieldValues>) {
 	return (
 		<FormField
 			control={form.control}
-			name="timeInterval"
+			name={entity}
 			render={({ field }) => (
 				<FormItem className="flex flex-col">
-					<FormLabel>Intervalo de Tempo</FormLabel>
+					<FormLabel>{label}</FormLabel>
 					<Popover>
 						<PopoverTrigger asChild>
 							<FormControl>
@@ -53,7 +59,7 @@ export function DotDatePicker({ form }: DotDatePickerProps) {
 											format(field.value.from, "dd/MM/yyyy")
 										)
 									) : (
-										<span>Seleciona um intervalo</span>
+										<span>{placeholder}</span>
 									)}
 									<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
 								</Button>

@@ -26,14 +26,15 @@ export function PrescriptionsTableFilters() {
 	const patientName = searchParams.get("patientName");
 	const medicine = searchParams.get("medicine");
 
-	const { register, handleSubmit, reset, formState } = useForm<PrescriptionsFilterSchema>({
-		resolver: zodResolver(prescriptionsFilterSchema),
-		defaultValues: {
-			medicalRecord: medicalRecord ?? "",
-			patientName: patientName ?? "",
-			medicine: medicine ?? "",
-		},
-	});
+	const { register, handleSubmit, reset, formState } =
+		useForm<PrescriptionsFilterSchema>({
+			resolver: zodResolver(prescriptionsFilterSchema),
+			defaultValues: {
+				medicalRecord: medicalRecord ?? "",
+				patientName: patientName ?? "",
+				medicine: medicine ?? "",
+			},
+		});
 
 	function handleFilter({
 		medicalRecord,
@@ -96,13 +97,7 @@ export function PrescriptionsTableFilters() {
 			<span className="text-sm font-semibold hidden lg:block">Filtros: </span>
 
 			<Input
-				className="h-9 w-[300px]"
-				placeholder="Número do Prontuário"
-				{...register("medicalRecord")}
-			/>
-
-			<Input
-				className="h-9 w-[400px]"
+				className="h-9 w-full lg:max-w-[400px]"
 				placeholder="Nome do Paciente"
 				{...register("patientName")}
 			/>
@@ -111,11 +106,10 @@ export function PrescriptionsTableFilters() {
 				type="submit"
 				variant="secondary"
 				disabled={formState.isSubmitting}
+				className="w-full lg:max-w-[200px]"
 			>
 				{!formState.isSubmitting && <Search className="mr-2 h-4 w-4" />}
-
 				{formState.isSubmitting && <LoaderCircle className="animate-spin" />}
-
 				Filtrar
 			</Button>
 
@@ -123,6 +117,7 @@ export function PrescriptionsTableFilters() {
 				type="button"
 				variant="outline"
 				onClick={() => handleClearFilters()}
+				className="w-full lg:max-w-[200px]"
 			>
 				<X className="mr-2 h-4 w-4" />
 				Limpar

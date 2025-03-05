@@ -3,23 +3,13 @@ import type { PrescriptionBody } from "@/@types/prescription";
 import { api } from "@/lib/axios";
 import { AxiosError } from "axios";
 
-interface CreatePrescriptionSuccessResponse extends HTTPSuccessResponse {
-	data: null;
-}
-
-interface CreatePrescriptionErrorResponse extends HTTPErrorResponse {
-	data: null;
-}
-
-type CreatePrescriptionResponse =
-	| CreatePrescriptionSuccessResponse
-	| CreatePrescriptionErrorResponse;
+type CreatePrescriptionResponse = HTTPSuccessResponse | HTTPErrorResponse;
 
 export async function createPrescription(
 	body: PrescriptionBody
 ): Promise<CreatePrescriptionResponse> {
 	try {
-		const response = await api.post<CreatePrescriptionSuccessResponse>(
+		const response = await api.post<HTTPSuccessResponse>(
 			"/prescriptions",
 			body
 		);

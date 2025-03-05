@@ -28,20 +28,16 @@ export function PrescriptionsTable() {
 				<Table>
 					<TableHeader>
 						<TableRow className="bg-muted/50 hover:bg-muted/50">
-							<TableHead className="w-[100px]">Prontuário</TableHead>
-							<TableHead className="min-w-[300px] xl:w-[300px]">Nome</TableHead>
-							<TableHead className="min-w-[300px] xl:w-[300px]">
-								Unidade
-							</TableHead>
-							<TableHead className="min-w-[300px] xl:w-[300px]">
-								Medicamento
-							</TableHead>
-							<TableHead className="w-[150px]">Via</TableHead>
-							<TableHead className="w-[150px]">Dose</TableHead>
-							<TableHead className="w-[150px]">Posologia</TableHead>
-							<TableHead className="w-[50px]"></TableHead>
-							<TableHead className="w-[50px]"></TableHead>
-							<TableHead className="w-[50px]"></TableHead>
+							<TableHead>Prontuário</TableHead>
+							<TableHead>Nome</TableHead>
+							<TableHead>Unidade</TableHead>
+							<TableHead>Medicamento</TableHead>
+							<TableHead>Via</TableHead>
+							<TableHead>Dose</TableHead>
+							<TableHead>Posologia</TableHead>
+							<TableHead></TableHead>
+							<TableHead></TableHead>
+							<TableHead></TableHead>
 						</TableRow>
 					</TableHeader>
 

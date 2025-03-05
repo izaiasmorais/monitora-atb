@@ -4,28 +4,21 @@ import { HTTPSuccessResponse, HTTPErrorResponse } from "@/@types/http";
 import { AxiosError } from "axios";
 
 interface EditPrescriptionRequest {
-	prescriptionId: string;
+	id: string;
 	body: PrescriptionBody;
 }
 
-interface EditPrescriptionSuccessResponse extends HTTPSuccessResponse {
-	data: null;
-}
-
-interface EditPrescriptionErrorResponse extends HTTPErrorResponse {
-	data: null;
-}
-
-type EditPrescriptionResponse =
-	| EditPrescriptionSuccessResponse
-	| EditPrescriptionErrorResponse;
+type EditPrescriptionResponse = HTTPSuccessResponse | HTTPErrorResponse;
 
 export async function editPrescription({
-	prescriptionId,
+	id,
 	body,
 }: EditPrescriptionRequest): Promise<EditPrescriptionResponse> {
 	try {
-		const response = await api.put(`/prescriptions/${prescriptionId}`, body);
+		const response = await api.put<HTTPSuccessResponse>(
+			`/prescriptions/${id}`,
+			body
+		);
 
 		return response.data;
 	} catch (error) {

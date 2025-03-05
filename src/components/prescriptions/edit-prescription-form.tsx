@@ -42,6 +42,8 @@ export function EditPrescriptionForm({
 	useEffect(() => {
 		setPrescriptionId(prescription.id);
 		setIsManually(true);
+		console.log('render');
+		
 		form.reset({
 			medicalRecord: prescription.medicalRecord,
 			patientName: prescription.patientName,

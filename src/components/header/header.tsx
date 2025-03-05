@@ -5,13 +5,13 @@ import { Notifications } from "./notifications";
 
 export function Header() {
 	return (
-		<header className="flex w-full justify-between p-4 border-b border-muted">
-			<SearchInput
-				placeholder="Pesquisar..."
-				className="hidden md:flex bg-muted/50"
-			/>
+		<header className="flex w-full justify-between p-4 border-b">
+				<SearchInput
+					placeholder="Pesquisar..."
+					className="hidden md:flex bg-muted/50"
+				/>
 
-			<div className="flex gap-3">
+			<div className="flex gap-3 ml-auto">
 				<Notifications />
 				<ThemeSwitcher />
 				<Menu />

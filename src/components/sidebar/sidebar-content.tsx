@@ -1,4 +1,4 @@
-import { Home, LayoutDashboard, Pill, Settings2, Users } from "lucide-react";
+import { LayoutDashboard, Settings, Users } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 
 export function SidebarContent() {
@@ -24,7 +24,7 @@ export function SidebarContent() {
 				<SidebarItem
 					title="Configurações"
 					href="/configuracoes"
-					icon={<Settings2 size={20} strokeWidth={1.75} />}
+					icon={<Settings size={20} strokeWidth={1.75} />}
 				/>
 			</div>
 		</>

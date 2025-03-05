@@ -7,26 +7,25 @@ interface SignInRequest {
 	password: string;
 }
 
-interface SignInSuccessResponse extends HTTPSuccessResponse {
+type SignInResponseData = {
 	data: {
 		token: string;
 	};
-}
+};
 
-interface SignInErrorResponse extends HTTPErrorResponse {
-	data: null;
-}
-
-type SignInResponse = SignInSuccessResponse | SignInErrorResponse;
+type SignInResponse =
+	| HTTPSuccessResponse<SignInResponseData>
+	| HTTPErrorResponse;
 
 export async function signIn(
 	credentials: SignInRequest
 ): Promise<SignInResponse> {
 	try {
-		const response = await api.post<SignInSuccessResponse>(
+		const response = await api.post<HTTPSuccessResponse<SignInResponseData>>(
 			"/auth/sign-in",
 			credentials
 		);
+
 		return response.data;
 	} catch (error) {
 		if (error instanceof AxiosError && error.response?.data) {

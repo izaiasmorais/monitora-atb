@@ -6,28 +6,19 @@ import {
 	GetPrescriptionsResponse,
 } from "@/@types/prescription";
 
-interface GetPrescriptionSuccessResponse extends HTTPSuccessResponse {
-	data: GetPrescriptionsResponse;
-}
-
-interface GetPrescriptionErrorResponse extends HTTPErrorResponse {
-	data: null;
-}
-
 type GetPrescriptionResponse =
-	| GetPrescriptionSuccessResponse
-	| GetPrescriptionErrorResponse;
+	| HTTPSuccessResponse<GetPrescriptionsResponse>
+	| HTTPErrorResponse;
 
 export async function getPrescriptions(
 	params: GetPrescriptionsQueryParams
 ): Promise<GetPrescriptionResponse> {
 	try {
-		const response = await api.get<GetPrescriptionSuccessResponse>(
-			"/prescriptions",
-			{
-				params,
-			}
-		);
+		const response = await api.get<
+			HTTPSuccessResponse<GetPrescriptionsResponse>
+		>("/prescriptions", {
+			params,
+		});
 
 		return response.data;
 	} catch (error) {

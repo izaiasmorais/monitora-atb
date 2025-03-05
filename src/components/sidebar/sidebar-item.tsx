@@ -19,8 +19,8 @@ export function SidebarItem({
 	const pathname = usePathname();
 
 	const style = pathname.endsWith(href)
-		? "text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-blue-950/50 font-medium"
-		: "text-foreground/80";
+		? "text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-blue-950/50"
+		: "text-foreground/90";
 
 	return (
 		<Link

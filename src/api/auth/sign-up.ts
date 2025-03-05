@@ -8,26 +8,17 @@ interface SignUpRequest {
 	password: string;
 }
 
-interface SignUpSuccessResponse extends HTTPSuccessResponse {
-	data: {
-		token: string;
-	};
-}
-
-interface SignUpErrorResponse extends HTTPErrorResponse {
-	data: null;
-}
-
-type SignUpResponse = SignUpSuccessResponse | SignUpErrorResponse;
+type SignUpResponse = HTTPSuccessResponse | HTTPErrorResponse;
 
 export async function signUp(
 	credentials: SignUpRequest
 ): Promise<SignUpResponse> {
 	try {
-		const response = await api.post<SignUpSuccessResponse>(
+		const response = await api.post<HTTPSuccessResponse>(
 			"/auth/sign-up",
 			credentials
 		);
+		
 		return response.data;
 	} catch (error) {
 		if (error instanceof AxiosError && error.response?.data) {

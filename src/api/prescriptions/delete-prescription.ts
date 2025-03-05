@@ -1,20 +1,27 @@
-import type { HTTPSuccessResponse } from "@/@types/http";
+import { HTTPErrorResponse, HTTPSuccessResponse } from "@/@types/http";
 import { api } from "@/lib/axios";
+import { AxiosError } from "axios";
 
-interface DeletePrescriptionResponseBody extends HTTPSuccessResponse {
-	data: null;
-}
+type DeletePrescriptionResponse = HTTPSuccessResponse | HTTPErrorResponse;
 
 export async function deletePrescription(
 	id: string
-): Promise<DeletePrescriptionResponseBody> {
+): Promise<DeletePrescriptionResponse> {
 	try {
-		const response = await api.delete<DeletePrescriptionResponseBody>(
+		const response = await api.post<HTTPSuccessResponse>(
 			`/prescriptions/${id}`
 		);
 
 		return response.data;
 	} catch (error) {
-		throw error;
+		if (error instanceof AxiosError && error.response?.data) {
+			return error.response.data;
+		}
+
+		return {
+			success: false,
+			error: "Erro desconhecido",
+			data: null,
+		};
 	}
 }

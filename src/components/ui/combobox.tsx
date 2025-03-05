@@ -20,30 +20,33 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
+import { Control, FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { GetDotData } from "@/hooks/use-get-dot";
 import { useState } from "react";
 
-interface ComboboxProps {
+interface ComboboxProps<TFieldValues extends FieldValues> {
 	options: { label: string; value: string }[];
-	entity: "medicine" | "unit";
+	form: UseFormReturn<TFieldValues>;
+	entity: Path<TFieldValues>;
 	translatedEntity: string;
-	form: UseFormReturn<GetDotData>;
+	emptyMessage?: string;
+	placeholder?: string;
 }
 
-export function DotCombobox({
+export function Combobox<TFieldValues extends FieldValues>({
 	options,
+	form,
 	entity,
 	translatedEntity,
-	form,
-}: ComboboxProps) {
+	emptyMessage = "Nenhum item encontrado.",
+	placeholder,
+}: ComboboxProps<TFieldValues>) {
 	const [open, setOpen] = useState(false);
 
 	return (
 		<FormField
-			control={form.control}
+			control={form.control as Control<TFieldValues, any>}
 			name={entity}
 			render={({ field }) => (
 				<FormItem className="flex flex-col">
@@ -64,8 +67,8 @@ export function DotCombobox({
 									{field.value
 										? options.find((option) => option.value === field.value)
 												?.label
-										: "Selecionar " + translatedEntity}
-									<ChevronsUpDown className="opacity-50" />
+										: `Selecionar ${translatedEntity}`}
+									<ChevronsUpDown className="opacity-50" size={16} />
 								</Button>
 							</FormControl>
 						</PopoverTrigger>
@@ -73,19 +76,15 @@ export function DotCombobox({
 						<PopoverContent className="w-[400px] p-0">
 							<Command>
 								<CommandInput
-									placeholder={`Pesquisar ${translatedEntity.toLocaleLowerCase()}...`}
+									placeholder={
+										placeholder ||
+										`Pesquisar ${translatedEntity.toLocaleLowerCase()}...`
+									}
 									className="h-9"
 								/>
 								<CommandList>
-									<CommandEmpty>
-										{entity === "medicine" && "Nenhum medicamento encontrado."}
+									<CommandEmpty>{emptyMessage}</CommandEmpty>
 
-										{entity === "unit" && "Nenhuma unidade encontrada."}
-
-										{entity !== "medicine" &&
-											entity !== "unit" &&
-											`Selecione um medicamento para exibir as ${translatedEntity.toLocaleLowerCase()}s disponiveis.`}
-									</CommandEmpty>
 									<CommandGroup>
 										{options.map((option) => (
 											<CommandItem

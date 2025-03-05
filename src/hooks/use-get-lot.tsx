@@ -1,11 +1,10 @@
 import { useFormMutation } from "./use-form-mutation";
 import { useMutation } from "@tanstack/react-query";
-import { createPrescription } from "@/api/prescriptions/create-prescriptions";
 import { format } from "date-fns";
+import { getLot } from "@/api/chart/get-lot";
 import { z } from "zod";
-import { getDot } from "@/api/chart/get-dot";
 
-export const getDotSchema = z.object({
+export const getLotSchema = z.object({
 	unit: z.string().min(1, "Selecione uma unidade"),
 	timeInterval: z.object({
 		from: z.date(),
@@ -13,9 +12,9 @@ export const getDotSchema = z.object({
 	}),
 });
 
-export function useGetdot() {
+export function useGetLot() {
 	const form = useFormMutation({
-		schema: getDotSchema,
+		schema: getLotSchema,
 		defaultValues: {
 			unit: "",
 			timeInterval: {
@@ -32,15 +31,15 @@ export function useGetdot() {
 		},
 	});
 
-	const { mutate: getDotFn, isLoading: isLoadingGetDot } = useMutation({
-		mutationFn: getDot,
-		mutationKey: ["get-dot"],
+	const { mutate: getLotFn, isLoading: isLoadingGetLot } = useMutation({
+		mutationFn: getLot,
+		mutationKey: ["get-lot"],
 		onSuccess: () => {},
 	});
 
 	return {
 		form,
-		isLoadingGetDot,
-		getDotFn,
+		isLoadingGetLot,
+		getLotFn,
 	};
 }

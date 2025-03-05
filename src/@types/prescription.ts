@@ -10,6 +10,17 @@ export interface Prescription {
 	treatmentDays: string[];
 }
 
+export interface PrescriptionBody {
+	medicalRecord: string;
+	patientName: string;
+	medicine: string;
+	unit: string;
+	dose: string;
+	via: string;
+	posology: string;
+	treatmentDays: string[];
+}
+
 export interface GetPrescriptionsQueryParams {
 	pageIndex?: number;
 	perPage?: number;
@@ -26,15 +37,4 @@ export interface GetPrescriptionsResponse {
 		perPage: number;
 		totalCount: number;
 	};
-}
-
-export interface PrescriptionBody {
-	medicalRecord: string;
-	patientName: string;
-	medicine: string;
-	unit: string;
-	dose: string;
-	via: string;
-	posology: string;
-	treatmentDays: string[];
 }
