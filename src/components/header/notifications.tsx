@@ -1,12 +1,11 @@
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { ClockAlert, Merge, Rocket, Settings, Split } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import { BellIcon } from "@radix-ui/react-icons";
+"use client";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
-import Link from "next/link";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { ClockAlert, Settings, BellIcon } from "lucide-react";
 
-export async function Notifications() {
+export function Notifications() {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
@@ -28,12 +27,9 @@ export async function Notifications() {
 			<PopoverContent align="end" alignOffset={-16} className="w-96 p-4">
 				<div className="flex items-center justify-between">
 					<span className="text-sm font-medium">Notificações</span>
-					<Link
-						className="text-muted-foreground hover:text-primary"
-						href="/configuracoes"
-					>
+					<div className="text-muted-foreground hover:text-primary">
 						<Settings size={16} />
-					</Link>
+					</div>
 				</div>
 
 				<Tabs defaultValue="new" className="mt-2">

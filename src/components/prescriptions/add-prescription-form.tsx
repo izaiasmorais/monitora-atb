@@ -19,15 +19,20 @@ import { DoseCombobox } from "./add-prescription-form/dose-combobox";
 import { PosologyCombobox } from "./add-prescription-form/posology-combobox";
 import { ViaCombobox } from "./add-prescription-form/via-combobox";
 import { PrescriptionTypeToggle } from "./add-prescription-form/prescription-type-toggle";
+import { useManualStore } from "@/store/use-manual";
 
 export function AddPrescriptionForm() {
 	const { form, isSheetOpen, setIsSheetOpen, isLoadingCreatePrescription } =
 		useCreatePrescription();
+	const { setIsManually } = useManualStore();
 
 	return (
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
 			<SheetTrigger asChild>
-				<Button className="flex items-center gap-2 ml-auto w-full lg:max-w-[200px]">
+				<Button
+					className="flex items-center gap-2 ml-auto w-full lg:max-w-[200px]"
+					onClick={() => setIsManually(false)}
+				>
 					<Plus className="w-5 h-5" />
 					Adicionar prescrição
 				</Button>
@@ -60,7 +65,11 @@ export function AddPrescriptionForm() {
 						<div className="flex w-full justify-end gap-4">
 							<Button
 								variant="secondary"
-								onClick={() => [setIsSheetOpen(false), form.reset()]}
+								onClick={() => [
+									setIsSheetOpen(false),
+									setIsManually(false),
+									form.reset(),
+								]}
 								className="w-[100px]"
 							>
 								Cancelar

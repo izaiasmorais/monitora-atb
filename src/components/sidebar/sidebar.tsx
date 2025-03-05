@@ -1,16 +1,17 @@
 "use client";
 import { SidebarContent } from "./sidebar-content";
 import { Button } from "../ui/button";
-import { Menu as MenuIcon, Syringe } from "lucide-react";
+import { Menu as MenuIcon } from "lucide-react";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import Image from "next/image";
 import { useState } from "react";
+import { Notifications } from "../header/notifications";
 import { ThemeSwitcher } from "../header/theme-switcher";
 import { Menu } from "../header/menu";
+import Image from "next/image";
 
 export function Sidebar() {
 	const [isOpen, setIsOpen] = useState<"open" | "closed">("closed");
@@ -22,11 +23,11 @@ export function Sidebar() {
 	return (
 		<Collapsible
 			data-state={isOpen}
-			className="border-b bg-white data-[state=open]:bottom-0 xl:data-[state=closed]:bottom-0 left-0 top-0
+			className="border-b bg-white xl:bg-muted/20 data-[state=open]:bottom-0 xl:data-[state=closed]:bottom-0 left-0 top-0
 			right-0 flex flex-col p-4 fixed z-20 xl:right-auto xl:w-64 xl:border-r gap-6 border-muted
 			data-[state=open]:h-screen xl:data-[state=open]:h-screen xl:h-auto"
 		>
-			<div className="flex items-center justify-between ">
+			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-3">
 					<Image
 						src={"/image.png"}
@@ -45,6 +46,7 @@ export function Sidebar() {
 
 				<div className="flex items-center gap-3">
 					<div className="flex gap-3 xl:hidden">
+						<Notifications />
 						<ThemeSwitcher />
 						<Menu />
 					</div>

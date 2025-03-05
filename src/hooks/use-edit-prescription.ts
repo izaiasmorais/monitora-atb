@@ -43,7 +43,7 @@ export function useEditPrescription() {
 		},
 		onSubmit: (data) => {
 			editPrescriptionFn({
-				prescriptionId,
+				id: prescriptionId,
 				body: { ...data },
 			});
 		},

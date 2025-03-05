@@ -14,6 +14,19 @@ const signInFormSchema = z.object({
 export function useSignIn() {
 	const router = useRouter();
 
+	const form = useFormMutation({
+		schema: signInFormSchema,
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+		onSubmit: (data) => {
+			signInFn({
+				...data,
+			});
+		},
+	});
+
 	const { mutate: signInFn, isLoading: isLoadingSignIn } = useMutation({
 		mutationFn: signIn,
 		onSuccess: (response) => {
@@ -28,19 +41,6 @@ export function useSignIn() {
 			if (response.error === "Invalid Credentials") {
 				toast.error("Email ou senha inválidos.");
 			}
-		},
-	});
-
-	const form = useFormMutation({
-		schema: signInFormSchema,
-		defaultValues: {
-			email: "",
-			password: "",
-		},
-		onSubmit: (data) => {
-			signInFn({
-				...data,
-			});
 		},
 	});
 

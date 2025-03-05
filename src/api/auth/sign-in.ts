@@ -8,9 +8,7 @@ interface SignInRequest {
 }
 
 type SignInResponseData = {
-	data: {
-		token: string;
-	};
+	token: string;
 };
 
 type SignInResponse =

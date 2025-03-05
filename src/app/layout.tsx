@@ -1,15 +1,7 @@
-import { Inter } from "next/font/google";
-import type { Metadata } from "next";
+import { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
 import Providers from "./providers";
-
 import "./globals.css";
-
-const inter = Inter({
-	subsets: ["latin"],
-	display: "swap",
-	weight: ["400", "500", "600", "700", "800", "900"],
-	style: ["normal"],
-});
 
 export const metadata: Metadata = {
 	title: "Prescrições",
@@ -22,16 +14,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={inter.className} suppressHydrationWarning={true}>
+		<html
+			lang="pt-br"
+			className={GeistSans.className}
+			suppressHydrationWarning={true}
+		>
 			<head>
 				<link rel="icon" href="/image.png" sizes="any" />
-				<link
-					rel="preload"
-					as="font"
-					href="/fonts/custom-font.woff2"
-					type="font/woff2"
-					crossOrigin="anonymous"
-				/>
 			</head>
 
 			<body>

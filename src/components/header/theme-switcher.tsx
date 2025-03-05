@@ -13,7 +13,7 @@ export function ThemeSwitcher() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="border w-10 h-10 flex items-center justify-center rounded-md">
+			<DropdownMenuTrigger className="border w-10 h-10 flex items-center justify-center rounded-md shadow-sm">
 				<Sun size={20} />
 			</DropdownMenuTrigger>
 
