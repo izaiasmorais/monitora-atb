@@ -35,7 +35,7 @@ export default function Settings() {
 					<form
 						id="reset-password-form"
 						onSubmit={form.handleSubmitForm}
-						className="space-y-4 w-[400px]"
+						className="space-y-4 w-full max-w-[400px]"
 					>
 						<FormField
 							control={form.control}

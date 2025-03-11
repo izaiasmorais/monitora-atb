@@ -57,10 +57,11 @@ export function SignInForm() {
 					)}
 				/>
 
-				<Button type="submit" className="w-full">
-					{isLoadingSignIn && <LoaderCircle className="animate-spin" />}
-
-					{!isLoadingSignIn && "Entrar"}
+				<Button type="submit" className="w-full" disabled={isLoadingSignIn}>
+					{isLoadingSignIn && (
+						<LoaderCircle className="animate-spin" size={16} />
+					)}
+					Entrar
 				</Button>
 			</form>
 		</Form>

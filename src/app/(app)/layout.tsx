@@ -9,7 +9,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 			<main className="xl:col-start-2 max-w-[100vw] flex flex-col h-screen">
 				<Header />
 
-				<div className="p-4 flex-grow overflow-auto">{children}</div>
+				<div className="px-4 py-8 md:p-4 flex-grow overflow-auto">{children}</div>
 			</main>
 		</div>
 	);

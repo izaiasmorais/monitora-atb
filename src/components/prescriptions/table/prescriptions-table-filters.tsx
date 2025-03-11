@@ -100,6 +100,7 @@ export function PrescriptionsTableFilters() {
 				className="h-9 w-full lg:max-w-[400px]"
 				placeholder="Nome do Paciente"
 				{...register("patientName")}
+				required
 			/>
 
 			<Button

@@ -29,6 +29,16 @@ export function Sidebar() {
 		>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-3">
+					<CollapsibleTrigger
+						asChild
+						className="xl:hidden"
+						onClick={() => handleToggleCollapsible()}
+					>
+						<Button variant="ghost">
+							<MenuIcon className="w-5 h-5 text-zinc-500" />
+						</Button>
+					</CollapsibleTrigger>
+
 					<Image
 						src={"/image.png"}
 						alt="Símbolo da Saúde Azul"
@@ -39,7 +49,7 @@ export function Sidebar() {
 						priority
 					/>
 
-					<h1 className="text-xl font-semibold flex items-center gap-2">
+					<h1 className="hidden xs:block text-xl font-semibold flex items-center gap-2">
 						Prescrições
 					</h1>
 				</div>
@@ -50,16 +60,6 @@ export function Sidebar() {
 						<ThemeSwitcher />
 						<Menu />
 					</div>
-
-					<CollapsibleTrigger
-						asChild
-						className="xl:hidden"
-						onClick={() => handleToggleCollapsible()}
-					>
-						<Button variant="ghost">
-							<MenuIcon className="w-6 h-6 text-zinc-500" />
-						</Button>
-					</CollapsibleTrigger>
 				</div>
 			</div>
 

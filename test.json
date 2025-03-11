@@ -1,0 +1,5 @@
+{
+	"success": false,
+	"errors": ["error1", "error2", "..."],
+	"data": null
+}

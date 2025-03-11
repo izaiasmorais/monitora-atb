@@ -1,9 +1,8 @@
 import { useFormMutation } from "./use-form-mutation";
 import { useMutation } from "@tanstack/react-query";
-import { createPrescription } from "@/api/prescriptions/create-prescriptions";
 import { format } from "date-fns";
-import { z } from "zod";
 import { getDot } from "@/api/chart/get-dot";
+import { z } from "zod";
 
 export const getDotSchema = z.object({
 	unit: z.string().min(1, "Selecione uma unidade"),
