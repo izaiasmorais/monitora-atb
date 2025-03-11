@@ -1,6 +1,6 @@
 # Dashboard de Gerenciamento de Prescrições
 
-![image](https://github.com/user-attachments/assets/30663e26-ab91-4448-8af3-cd0a2e771f09)
+![image](https://github.com/user-attachments/assets/522eef1d-2fde-470a-96b4-50fdf3d3cba0)
 
 ## Introdução
 
