@@ -22,7 +22,7 @@ export function Pagination({
 	const pages = Math.ceil(totalCount / perPage);
 
 	return (
-		<div className="flex items-center justify-between">
+		<div className="flex gap-2 flex-wrap items-center justify-between">
 			<span className="text-sm text-muted-foreground">
 				Total de {totalCount} item(s)
 			</span>
@@ -31,7 +31,7 @@ export function Pagination({
 				<div className="text-sm font-medium">
 					Página {pageIndex + 1} de {pages}
 				</div>
-				
+
 				<div className="flex items-center gap-2">
 					<Button
 						onClick={() => onPageChange(0)}

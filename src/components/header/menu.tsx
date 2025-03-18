@@ -38,7 +38,7 @@ export function Menu() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<div className="flex items-center gap-4 cursor-pointer">
+				<div className="hidden sm:flex items-center gap-4 cursor-pointer">
 					{isLoadingGetProfile && (
 						<div className="w-10 h-10 rounded-full bg-muted animate-pulse" />
 					)}

@@ -23,7 +23,7 @@ export function Sidebar() {
 	return (
 		<Collapsible
 			data-state={isOpen}
-			className="border-b bg-white xl:bg-muted/20 data-[state=open]:bottom-0 xl:data-[state=closed]:bottom-0 left-0 top-0
+			className="border-b bg-background xl:bg-muted/20 data-[state=open]:bottom-0 xl:data-[state=closed]:bottom-0 left-0 top-0
 			right-0 flex flex-col p-4 fixed z-20 xl:right-auto xl:w-64 xl:border-r gap-6 border-muted
 			data-[state=open]:h-screen xl:data-[state=open]:h-screen xl:h-auto"
 		>
@@ -44,12 +44,12 @@ export function Sidebar() {
 						alt="Símbolo da Saúde Azul"
 						width={512}
 						height={512}
-						className="w-8 h-8"
+						className="w-8 h-8 hidden sm:block"
 						quality={100}
 						priority
 					/>
 
-					<h1 className="hidden xs:block text-xl font-semibold flex items-center gap-2">
+					<h1 className=" hidden sm:flex text-xl font-semibold items-center gap-2">
 						Prescrições
 					</h1>
 				</div>

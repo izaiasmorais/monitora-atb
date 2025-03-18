@@ -5,9 +5,9 @@ import { LotChart } from "@/components/charts/lot-chart";
 export default function Dashboard() {
 	return (
 		<main className="grid md:grid-cols-2 xl:flex gap-4">
-			<DddChart />
 			<DotChart />
 			<LotChart />
+			<DddChart />
 		</main>
 	);
 }
