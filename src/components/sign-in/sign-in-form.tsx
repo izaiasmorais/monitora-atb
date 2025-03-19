@@ -24,7 +24,10 @@ export function SignInForm() {
 				</span>
 			</div>
 
-			<form onSubmit={form.handleSubmitForm} className="space-y-4 w-[400px]">
+			<form
+				onSubmit={form.handleSubmitForm}
+				className="space-y-4 w-full max-w-[400px]"
+			>
 				<FormField
 					control={form.control}
 					name="email"

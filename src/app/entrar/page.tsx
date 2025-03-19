@@ -46,14 +46,16 @@ export default function SignIn() {
 					</h1>
 				</div>
 
-				<div>
+				<div className="w-full items-center justify-center flex flex-col">
 					<SignInForm />
 
-					<Link href="/cadastro">
-						<Button variant="link" className="justify-start p-0 text-blue-500">
-							Não possui uma conta? Cadastre-se
-						</Button>
-					</Link>
+					<Button
+						variant="link"
+						className="p-0 text-blue-500 mt-2 w-full justify-center"
+						asChild
+					>
+						<Link href="/cadastro">Não possui uma conta? Cadastre-se</Link>
+					</Button>
 				</div>
 			</div>
 		</div>

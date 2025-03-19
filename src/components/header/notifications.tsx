@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { ClockAlert, Settings, BellIcon } from "lucide-react";
+import Link from "next/link";
 
 export function Notifications() {
 	return (
@@ -24,12 +25,12 @@ export function Notifications() {
 				</Button>
 			</PopoverTrigger>
 
-			<PopoverContent align="end" alignOffset={-16} className="w-96 p-4">
+			<PopoverContent align="end" alignOffset={-16} className="w-full max-w-96 p-4">
 				<div className="flex items-center justify-between">
 					<span className="text-sm font-medium">Notificações</span>
-					<div className="text-muted-foreground hover:text-primary">
+					<Link href={"/configuracoes"} className="text-muted-foreground hover:text-primary">
 						<Settings size={16} />
-					</div>
+					</Link>
 				</div>
 
 				<Tabs defaultValue="new" className="mt-2">

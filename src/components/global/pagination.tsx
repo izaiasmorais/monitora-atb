@@ -27,7 +27,7 @@ export function Pagination({
 				Total de {totalCount} item(s)
 			</span>
 
-			<div className="flex items-center gap-6 lg:gap-8">
+			<div className="flex justify-between sm:justify-end w-full items-center gap-6 lg:gap-8">
 				<div className="text-sm font-medium">
 					Página {pageIndex + 1} de {pages}
 				</div>

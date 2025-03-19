@@ -34,8 +34,8 @@ export function Sidebar() {
 						className="xl:hidden"
 						onClick={() => handleToggleCollapsible()}
 					>
-						<Button variant="ghost">
-							<MenuIcon className="w-5 h-5 text-zinc-500" />
+						<Button variant="ghost" className="py-0 px-1 hover:bg-transparent">
+							<MenuIcon className="w-6 h-6 text-zinc-500" />
 						</Button>
 					</CollapsibleTrigger>
 

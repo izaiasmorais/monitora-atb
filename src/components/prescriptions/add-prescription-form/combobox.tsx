@@ -70,7 +70,7 @@ export function Combobox({
 							</FormControl>
 						</PopoverTrigger>
 
-						<PopoverContent className="w-[400px] p-0">
+						<PopoverContent className="w-full max-w-[400px] p-0">
 							<Command>
 								<CommandInput
 									placeholder={`Pesquisar ${translatedEntity.toLocaleLowerCase()}...`}

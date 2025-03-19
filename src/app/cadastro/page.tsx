@@ -46,14 +46,16 @@ export default function SignUp() {
 					</h1>
 				</div>
 
-				<div>
+				<div className="w-full items-center justify-center flex flex-col">
 					<SignUpForm />
 
-					<Link href="/entrar">
-						<Button variant="link" className="justify-start p-0 text-blue-500">
-							Já possui uma conta? Entre
-						</Button>
-					</Link>
+					<Button
+						variant="link"
+						className="justify-center w-full p-0 text-blue-500"
+						asChild
+					>
+						<Link href="/entrar">Já possui uma conta? Entre</Link>
+					</Button>
 				</div>
 			</div>
 		</div>

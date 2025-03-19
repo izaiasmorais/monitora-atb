@@ -45,7 +45,7 @@ export function AddPrescriptionForm() {
 
 				<Form {...form}>
 					<form onSubmit={form.handleSubmitForm} className="space-y-6 pt-6">
-						<div className="grid grid-cols-2 gap-6">
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
 							<MedicalRecordField form={form} />
 							<PatientNameField form={form} />
 							<UnitCombobox form={form} />
