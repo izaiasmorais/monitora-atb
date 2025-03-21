@@ -37,14 +37,14 @@ export function DddChart() {
 							variant="secondary"
 							type="submit"
 							className="w-full"
-							disabled={isLoadingGetDdd}
+							disabled
 						>
 							{isLoadingGetDdd && <LoaderCircle className="animate-spin" />}{" "}
 							Calcular DDD
 						</Button>
 
-						<div className="text-center items-center flex justify-center gap-4 border rounded-lg p-4">
-							<div className="flex items-center gap-4">
+						<div className="text-center items-center flex justify-center gap-4 border rounded-lg p-4 h-[80px]">
+							{/* <div className="flex items-center gap-4">
 								<div className="flex flex-col">
 									<span>10 g</span>
 									<hr />
@@ -53,12 +53,15 @@ export function DddChart() {
 
 								<span>x 100 =</span>
 							</div>
-							<strong className="text-3xl font-medium">200 DDD</strong>{" "}
+							<strong className="text-3xl font-medium">200 DDD</strong> */}
+							<span className="text-xs">
+								Preencha os campos acima para calcular um determinado DDD
+							</span>
 						</div>
 
 						<span className="block text-xs text-muted-foreground">
 							O cálculo acima indica que o uso do antimicrobiano prescrito
-							durante o período resultou em 200 DDD por 100 pacientes.
+							durante o período resultou em x DDD por 100 pacientes.
 						</span>
 					</form>
 				</Form>

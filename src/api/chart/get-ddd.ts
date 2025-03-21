@@ -2,11 +2,13 @@ import { HTTPSuccessResponse, HTTPErrorResponse } from "@/@types/http";
 import { AxiosError } from "axios";
 import { api } from "@/lib/axios";
 
-type GetDddResponse = HTTPSuccessResponse | HTTPErrorResponse;
+type GetDddResponseData = HTTPSuccessResponse<{ ddd: number }>;
+
+type GetDddResponse = GetDddResponseData | HTTPErrorResponse;
 
 export async function getDdd(): Promise<GetDddResponse> {
 	try {
-		const response = await api.get<HTTPSuccessResponse>("/charts/ddd");
+		const response = await api.get<GetDddResponseData>("/charts/ddd");
 
 		return response.data;
 	} catch (error) {

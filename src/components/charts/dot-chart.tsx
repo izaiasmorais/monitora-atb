@@ -1,14 +1,15 @@
 "use client";
-import { useGetdot } from "@/hooks/use-get-dot";
+import { useGetDot } from "@/hooks/use-get-dot";
 import { units } from "@/mocks/units";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picket";
 import { Combobox } from "@/components/ui/combobox";
 import { Form } from "../ui/form";
+import { Skeleton } from "../ui/skeleton";
 
 export function DotChart() {
-	const { form, isLoadingGetDot } = useGetdot();
+	const { dot, form, isLoadingGetDot } = useGetDot();
 
 	return (
 		<div className="w-full space-y-4 rounded-lg border border-muted p-6 ">
@@ -39,12 +40,14 @@ export function DotChart() {
 							className="w-full"
 							disabled={isLoadingGetDot}
 						>
-							{isLoadingGetDot && <LoaderCircle className="animate-spin" />}
+							{isLoadingGetDot && (
+								<LoaderCircle className="animate-spin" size={18} />
+							)}
 							Calcular DOT
 						</Button>
 
-						<div className="text-center items-center flex justify-center gap-4 border rounded-lg p-4">
-							<div className="flex items-center gap-4">
+						<div className="text-center items-center flex justify-center gap-4 border rounded-lg p-4 h-[80px]">
+							{/* <div className="flex items-center gap-4">
 								<div className="flex flex-col">
 									<span>5 dias</span>
 									<hr />
@@ -52,14 +55,23 @@ export function DotChart() {
 								</div>
 
 								<span>x 100 =</span>
-							</div>
+							</div> */}
+							{isLoadingGetDot && <Skeleton className="w-full h-full" />}
 
-							<strong className="text-3xl font-medium">50 DOT</strong>
+							{!isLoadingGetDot && dot === null && (
+								<span className="text-xs">
+									Preencha os campos acima para calcular um determinado DOT
+								</span>
+							)}
+
+							{!isLoadingGetDot && dot !== null && (
+								<strong className="text-3xl font-medium">{dot} DOT</strong>
+							)}
 						</div>
 
 						<span className="block text-xs text-muted-foreground">
 							O cálculo acima indica que todos os antibióticos prescritos
-							durante o período somaram 50 dias de terapia.
+							durante o período somaram x dias de terapia.
 						</span>
 					</form>
 				</Form>

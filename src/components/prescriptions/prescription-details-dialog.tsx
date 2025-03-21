@@ -1,6 +1,7 @@
 import { Prescription } from "@/@types/prescription";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { capitalizeWords } from "@/utils/capitalize-words";
+import { formatDate } from "@/utils/format-date";
 
 interface PrescriptionDetailsModalProps {
 	prescription: Prescription;
@@ -49,6 +50,15 @@ export function PrescriptionDetailsModal({
 				<div className="flex w-full justify-between items-center">
 					<strong>Posologia:</strong>
 					<span>{prescription.posology}</span>
+				</div>
+
+				<div className="flex w-full justify-between items-center">
+					<strong>Dias de Tratamento:</strong>
+					<div className="flex flex-col">
+						{prescription.treatmentDays.map((day) => (
+							<span key={day}>{formatDate(day)}</span>
+						))}
+					</div>
 				</div>
 			</div>
 		</DialogContent>

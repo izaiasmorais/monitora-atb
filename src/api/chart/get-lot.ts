@@ -2,11 +2,29 @@ import { HTTPSuccessResponse, HTTPErrorResponse } from "@/@types/http";
 import { AxiosError } from "axios";
 import { api } from "@/lib/axios";
 
-type GetLotResponse = HTTPSuccessResponse | HTTPErrorResponse;
+type GetLotResponseData = HTTPSuccessResponse<{ lot: number }>;
 
-export async function getLot(): Promise<GetLotResponse> {
+type GetLotResponse = GetLotResponseData | HTTPErrorResponse;
+
+type GetLotRequest = {
+	unit: string;
+	startDate: string;
+	endDate: string;
+};
+
+export async function getLot({
+	unit,
+	startDate,
+	endDate,
+}: GetLotRequest): Promise<GetLotResponse> {
 	try {
-		const response = await api.get<HTTPSuccessResponse>("/charts/lot");
+		const response = await api.get<GetLotResponseData>("/charts/lot", {
+			params: {
+				unit,
+				startDate,
+				endDate,
+			},
+		});
 
 		return response.data;
 	} catch (error) {

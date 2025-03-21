@@ -59,27 +59,16 @@
 		"zustand": "^4.3.9"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.21.0",
-		"@kubb/cli": "^3.5.10",
-		"@kubb/core": "^3.5.10",
-		"@kubb/plugin-client": "^3.5.10",
-		"@kubb/plugin-oas": "^3.5.10",
-		"@kubb/plugin-react-query": "^3.5.10",
-		"@kubb/plugin-ts": "^3.5.10",
-		"@kubb/plugin-zod": "^3.5.10",
+		"@eslint/eslintrc": "^3",
 		"@types/js-cookie": "^3.0.6",
 		"@types/lodash": "^4.17.10",
 		"@types/node": "20.4.2",
 		"@types/react": "18.2.15",
 		"@types/react-dom": "18.2.7",
 		"autoprefixer": "10.4.14",
-		"eslint": "8.57.1",
-		"eslint-config-next": "13.4.11",
-		"eslint-plugin-next": "^0.0.0",
-		"eslint-plugin-react-hooks": "^5.2.0",
-		"eslint-plugin-react-refresh": "^0.4.19",
+		"eslint": "^9.22.0",
+		"eslint-config-next": "15.2.3",
 		"postcss": "8.4.27",
-		"typescript": "5.1.6",
-		"typescript-eslint": "^8.26.0"
+		"typescript": "5.1.6"
 	}
 }

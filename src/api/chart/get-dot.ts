@@ -2,11 +2,29 @@ import { HTTPSuccessResponse, HTTPErrorResponse } from "@/@types/http";
 import { AxiosError } from "axios";
 import { api } from "@/lib/axios";
 
-type GetDotResponse = HTTPSuccessResponse | HTTPErrorResponse;
+type GetDotResponseData = HTTPSuccessResponse<{ dot: number }>;
 
-export async function getDot(): Promise<GetDotResponse> {
+type GetDotResponse = GetDotResponseData | HTTPErrorResponse;
+
+type GetDotRequest = {
+	unit: string;
+	startDate: string;
+	endDate: string;
+};
+
+export async function getDot({
+	unit,
+	startDate,
+	endDate,
+}: GetDotRequest): Promise<GetDotResponse> {
 	try {
-		const response = await api.get<HTTPSuccessResponse>("/charts/dot");
+		const response = await api.get<GetDotResponseData>("/charts/dot", {
+			params: {
+				unit,
+				startDate,
+				endDate,
+			},
+		});
 
 		return response.data;
 	} catch (error) {

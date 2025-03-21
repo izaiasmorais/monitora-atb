@@ -6,9 +6,10 @@ import { LoaderCircle } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picket";
 import { Combobox } from "@/components/ui/combobox";
 import { Form } from "../ui/form";
+import { Skeleton } from "../ui/skeleton";
 
 export function LotChart() {
-	const { form, isLoadingGetLot } = useGetLot();
+	const { lot, form, isLoadingGetLot } = useGetLot();
 
 	return (
 		<div className="w-full space-y-4 rounded-lg border border-muted p-6 ">
@@ -39,12 +40,14 @@ export function LotChart() {
 							className="w-full"
 							disabled={isLoadingGetLot}
 						>
-							{isLoadingGetLot && <LoaderCircle className="animate-spin" />}
+							{isLoadingGetLot && (
+								<LoaderCircle className="animate-spin" size={18} />
+							)}
 							Calcular LOT
 						</Button>
 
-						<div className="text-center items-center flex justify-center gap-4 border rounded-lg p-4">
-							<div className="flex items-center gap-4">
+						<div className="text-center items-center flex justify-center gap-4 border rounded-lg p-4 h-[80px]">
+							{/* <div className="flex items-center gap-4">
 								<div className="flex flex-col">
 									<span>5 dias</span>
 									<hr />
@@ -52,13 +55,22 @@ export function LotChart() {
 								</div>
 
 								<span>x 100 =</span>
-							</div>
+							</div> */}
+							{isLoadingGetLot && <Skeleton className="w-full h-full" />}
 
-							<strong className="text-3xl font-medium">50 LOT</strong>
+							{!isLoadingGetLot && lot === null && (
+								<span className="text-xs">
+									Preencha os campos acima para calcular um determinado LOT
+								</span>
+							)}
+
+							{!isLoadingGetLot && lot !== null && (
+								<strong className="text-3xl font-medium">{lot} LOT</strong>
+							)}
 						</div>
 
 						<span className="block text-xs text-muted-foreground">
-							O cálculo acima indica que a duração da terapia foi de 50 dias.
+							O cálculo acima indica que a duração da terapia foi de x dias.
 						</span>
 					</form>
 				</Form>
