@@ -32,7 +32,7 @@ Um dashboard que gerencia prescrições de um médico/profissional de forma comp
 - [x] Criar prescrições.
 - [x] Editar prescrições.
 - [x] Deletar prescrições.
-- [ ] Gráficos com informações sobre prescrições.
+- [x] Gráficos com informações sobre prescrições.
 - [ ] Sistema de notificações.
 
 ## Instalação
