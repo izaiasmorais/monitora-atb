@@ -1,5 +1,5 @@
-import { Button } from "../ui/button";
-import { DialogContent } from "../ui/dialog";
+import { Button } from "../../ui/button";
+import { DialogContent } from "../../ui/dialog";
 import { LoaderCircle, TriangleAlert } from "lucide-react";
 import { useDeletePrescription } from "@/hooks/use-delete-prescriptions";
 

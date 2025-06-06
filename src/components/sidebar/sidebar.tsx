@@ -50,7 +50,7 @@ export function Sidebar() {
 					/>
 
 					<h1 className=" hidden sm:flex text-xl font-semibold items-center gap-2">
-						Prescrições
+						MonitoraATB
 					</h1>
 				</div>
 

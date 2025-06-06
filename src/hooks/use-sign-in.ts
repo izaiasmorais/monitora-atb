@@ -31,15 +31,15 @@ export function useSignIn() {
 		mutationFn: signIn,
 		onSuccess: (response) => {
 			if (response.success) {
-				Cookies.set("prescriptions_token", response.data.token, {
+				Cookies.set("prescriptions_token", response.data.accessToken, {
 					expires: 1 / 24,
 				});
 				router.push("/");
 				return;
 			}
 
-			if (response.error === "Invalid Credentials") {
-				toast.error("Email ou senha inválidos.");
+			for (const error of response.errors) {
+				toast.error(error);
 			}
 		},
 	});

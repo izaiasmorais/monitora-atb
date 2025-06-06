@@ -33,27 +33,12 @@ export function DddChart() {
 							entity="timeInterval"
 						/>
 
-						<Button
-							variant="secondary"
-							type="submit"
-							className="w-full"
-							disabled
-						>
+						<Button variant="secondary" type="submit" className="w-full">
 							{isLoadingGetDdd && <LoaderCircle className="animate-spin" />}{" "}
 							Calcular DDD
 						</Button>
 
 						<div className="text-center items-center flex justify-center gap-4 border rounded-lg p-4 h-[80px]">
-							{/* <div className="flex items-center gap-4">
-								<div className="flex flex-col">
-									<span>10 g</span>
-									<hr />
-									<span>5 pacientes</span>{" "}
-								</div>
-
-								<span>x 100 =</span>
-							</div>
-							<strong className="text-3xl font-medium">200 DDD</strong> */}
 							<span className="text-xs">
 								Preencha os campos acima para calcular um determinado DDD
 							</span>

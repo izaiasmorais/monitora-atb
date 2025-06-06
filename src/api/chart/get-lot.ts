@@ -33,7 +33,7 @@ export async function getLot({
 
 		return {
 			success: false,
-			error: "Erro desconhecido",
+			errors: ["Erro desconhecido"],
 			data: null,
 		};
 	}

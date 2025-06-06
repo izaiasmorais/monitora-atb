@@ -6,22 +6,22 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { Form } from "../ui/form";
+import { Form } from "../../ui/form";
 import { LoaderCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCreatePrescription } from "@/hooks/use-create-prescription";
-import { MedicalRecordField } from "./add-prescription-form/medical-record-input";
-import { PatientNameField } from "./add-prescription-form/patient-name-input";
-import { TreatmentDaysPicker } from "./add-prescription-form/treatment-days-picker";
-import { UnitCombobox } from "./add-prescription-form/unit-combobox";
-import { MedicineCombobox } from "./add-prescription-form/medicine-combobox";
-import { DoseCombobox } from "./add-prescription-form/dose-combobox";
-import { PosologyCombobox } from "./add-prescription-form/posology-combobox";
-import { ViaCombobox } from "./add-prescription-form/via-combobox";
-import { PrescriptionTypeToggle } from "./add-prescription-form/prescription-type-toggle";
+import { MedicalRecordField } from "../form/medical-record-input";
+import { PatientNameField } from "../form/patient-name-input";
+import { TreatmentDaysPicker } from "../form/treatment-days-picker";
+import { UnitCombobox } from "../form/unit-combobox";
+import { MedicineCombobox } from "../form/medicine-combobox";
+import { DoseCombobox } from "../form/dose-combobox";
+import { PosologyCombobox } from "../form/posology-combobox";
+import { ViaCombobox } from "../form/via-combobox";
+import { PrescriptionTypeToggle } from "../form/prescription-type-toggle";
 import { useManualStore } from "@/store/use-manual";
 
-export function AddPrescriptionForm() {
+export function AddPrescriptionSheet() {
 	const { form, isSheetOpen, setIsSheetOpen, isLoadingCreatePrescription } =
 		useCreatePrescription();
 	const { setIsManually } = useManualStore();

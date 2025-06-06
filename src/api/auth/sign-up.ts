@@ -18,7 +18,7 @@ export async function signUp(
 			"/auth/sign-up",
 			credentials
 		);
-		
+
 		return response.data;
 	} catch (error) {
 		if (error instanceof AxiosError && error.response?.data) {
@@ -27,7 +27,7 @@ export async function signUp(
 
 		return {
 			success: false,
-			error: "Erro desconhecido",
+			errors: ["Erro desconhecido"],
 			data: null,
 		};
 	}

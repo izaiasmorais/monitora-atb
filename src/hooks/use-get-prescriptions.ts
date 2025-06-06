@@ -14,27 +14,27 @@ export function useGetPrescriptions() {
 	const patientName = searchParams.get("patientName");
 	const medicine = searchParams.get("medicine");
 
-	const pageIndex = z.coerce
+	const page = z.coerce
 		.number()
 		.transform((page) => page)
 		.parse(searchParams.get("page") ?? 0);
 
-	const perPage = z.coerce
+	const itemsPerPage = z.coerce
 		.number()
-		.transform((perPage) => perPage)
-		.parse(searchParams.get("perPage") ?? 5);
+		.transform((itemsPerPage) => itemsPerPage)
+		.parse(searchParams.get("itemsPerPage") ?? 5);
 
 	const { data: result, isLoading: isLoadingPrescriptions } = useQuery({
-		queryKey: ["prescriptions", pageIndex, id, patientName, medicalRecord],
+		queryKey: ["prescriptions", page, id, patientName, medicalRecord],
 		queryFn: () =>
 			getPrescriptions({
-				pageIndex: pageIndex != 0 ? pageIndex - 1 : 0,
-				perPage,
+				page: page != 0 ? page - 1 : 0,
+				itemsPerPage,
 				medicalRecord,
 				patientName,
 				medicine,
 			}),
-		staleTime: 60 * 60 * 5, // 5 hours
+		staleTime: 60 * 60, // 1 hour
 		refetchOnMount: false,
 		refetchOnWindowFocus: false,
 	});

@@ -67,9 +67,9 @@ export function PrescriptionsTable() {
 
 			{data && !isLoadingPrescriptions && (
 				<Pagination
-					pageIndex={data.meta.pageIndex}
-					perPage={data.meta.perPage}
-					totalCount={data.meta.totalCount}
+					page={data.meta.page}
+					totalItems={data.meta.totalItems}
+					totalPages={data.meta.totalPages}
 					onPageChange={handlePaginate}
 				/>
 			)}

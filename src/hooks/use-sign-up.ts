@@ -51,8 +51,8 @@ export function useSignUp() {
 				return;
 			}
 
-			if (response.error === "User already registered") {
-				toast.error("Este email já está em uso.");
+			for (const error of response.errors) {
+				toast.error(error);
 			}
 		},
 	});

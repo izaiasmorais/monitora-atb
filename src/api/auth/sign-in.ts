@@ -8,7 +8,7 @@ interface SignInRequest {
 }
 
 type SignInResponseData = {
-	token: string;
+	accessToken: string;
 };
 
 type SignInResponse =
@@ -32,7 +32,7 @@ export async function signIn(
 
 		return {
 			success: false,
-			error: "Erro desconhecido",
+			errors: ["Erro desconhecido"],
 			data: null,
 		};
 	}

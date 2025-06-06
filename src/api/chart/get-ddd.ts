@@ -17,7 +17,7 @@ export async function getDdd(): Promise<GetDddResponse> {
 
 		return {
 			success: false,
-			error: "Erro desconhecido",
+			errors: ["Erro desconhecido"],
 			data: null,
 		};
 	}

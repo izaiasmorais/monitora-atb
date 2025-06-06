@@ -7,29 +7,29 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Form } from "../ui/form";
+import { Form } from "../../ui/form";
 import { LoaderCircle, SquarePen } from "lucide-react";
-import { MedicalRecordField } from "./add-prescription-form/medical-record-input";
-import { PatientNameField } from "./add-prescription-form/patient-name-input";
-import { TreatmentDaysPicker } from "./add-prescription-form/treatment-days-picker";
-import { UnitCombobox } from "./add-prescription-form/unit-combobox";
-import { MedicineCombobox } from "./add-prescription-form/medicine-combobox";
-import { DoseCombobox } from "./add-prescription-form/dose-combobox";
-import { PosologyCombobox } from "./add-prescription-form/posology-combobox";
-import { ViaCombobox } from "./add-prescription-form/via-combobox";
-import { PrescriptionTypeToggle } from "./add-prescription-form/prescription-type-toggle";
+import { MedicalRecordField } from "../form/medical-record-input";
+import { PatientNameField } from "../form/patient-name-input";
+import { TreatmentDaysPicker } from "../form/treatment-days-picker";
+import { UnitCombobox } from "../form/unit-combobox";
+import { MedicineCombobox } from "../form/medicine-combobox";
+import { DoseCombobox } from "../form/dose-combobox";
+import { PosologyCombobox } from "../form/posology-combobox";
+import { ViaCombobox } from "../form/via-combobox";
+import { PrescriptionTypeToggle } from "../form/prescription-type-toggle";
 import { Prescription } from "@/@types/prescription";
 import { useEffect } from "react";
 import { useEditPrescription } from "@/hooks/use-edit-prescription";
 import { useManualStore } from "@/store/use-manual";
 
-interface EditPrescriptionFormProps {
+interface EditPrescriptionSheetProps {
 	prescription: Prescription;
 }
 
-export function EditPrescriptionForm({
+export function EditPrescriptionSheet({
 	prescription,
-}: EditPrescriptionFormProps) {
+}: EditPrescriptionSheetProps) {
 	const { setIsManually } = useManualStore();
 	const {
 		form,
@@ -42,8 +42,8 @@ export function EditPrescriptionForm({
 	useEffect(() => {
 		setPrescriptionId(prescription.id);
 		setIsManually(true);
-		console.log('render');
-		
+		console.log("render");
+
 		form.reset({
 			medicalRecord: prescription.medicalRecord,
 			patientName: prescription.patientName,
@@ -54,7 +54,18 @@ export function EditPrescriptionForm({
 			posology: prescription.posology,
 			treatmentDays: prescription.treatmentDays,
 		});
-	}, []);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [
+		prescription.id,
+		prescription.medicalRecord,
+		prescription.patientName,
+		prescription.unit,
+		prescription.medicine,
+		prescription.dose,
+		prescription.via,
+		prescription.posology,
+		prescription.treatmentDays,
+	]);
 
 	return (
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>

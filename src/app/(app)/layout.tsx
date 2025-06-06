@@ -1,5 +1,6 @@
 import { Header } from "@/components/header/header";
 import { Sidebar } from "@/components/sidebar/sidebar";
+import { RouteMetadata } from "@/components/global/route-metadata";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
 	return (
@@ -9,7 +10,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 			<main className="xl:col-start-2 max-w-[100vw] flex flex-col h-screen">
 				<Header />
 
-				<div className="px-4 py-8 md:p-4 flex-grow overflow-auto">{children}</div>
+				<div className="px-4 py-8 md:p-4 flex-grow overflow-auto">
+					<RouteMetadata />
+
+					{children}
+				</div>
 			</main>
 		</div>
 	);

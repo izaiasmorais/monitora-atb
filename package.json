@@ -6,7 +6,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "npm run server",
-		"lint": "next lint",
+		"lint": "pnpm dlx next lint",
 		"generate": "kubb generate"
 	},
 	"dependencies": {
@@ -60,6 +60,7 @@
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3",
+		"@next/eslint-plugin-next": "^15.3.3",
 		"@types/js-cookie": "^3.0.6",
 		"@types/lodash": "^4.17.10",
 		"@types/node": "20.4.2",
@@ -68,6 +69,8 @@
 		"autoprefixer": "10.4.14",
 		"eslint": "^9.22.0",
 		"eslint-config-next": "15.2.3",
+		"eslint-plugin-react-hooks": "^5.2.0",
+		"eslint-plugin-unused-imports": "^4.1.4",
 		"postcss": "8.4.27",
 		"typescript": "5.1.6"
 	}

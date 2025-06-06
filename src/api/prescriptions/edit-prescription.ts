@@ -28,7 +28,7 @@ export async function editPrescription({
 
 		return {
 			success: false,
-			error: "Erro desconhecido",
+			errors: ["Erro desconhecido"],
 			data: null,
 		};
 	}

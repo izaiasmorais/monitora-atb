@@ -24,7 +24,7 @@ export async function getProfile(): Promise<GetProfileResponse> {
 
 		return {
 			success: false,
-			error: "Erro desconhecido",
+			errors: ["Erro desconhecido"],
 			data: null,
 		};
 	}

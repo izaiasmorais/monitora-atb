@@ -1,12 +1,12 @@
 import { Prescription } from "@/@types/prescription";
-import { DeletePrescriptionDialog } from "../delete-prescriptions-dialog";
-import { PrescriptionDetailsModal } from "../prescription-details-dialog";
+import { DeletePrescriptionDialog } from "../modals/delete-prescriptions-dialog";
+import { PrescriptionDetailsModal } from "../modals/prescription-details-dialog";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Search, Trash2 } from "lucide-react";
 import { capitalizeWords } from "@/utils/capitalize-words";
-import { EditPrescriptionForm } from "../edit-prescription-form";
+import { EditPrescriptionSheet } from "../modals/edit-prescription-sheet";
 
 export interface PrescriptionsTableItemProps {
 	prescription: Prescription;
@@ -50,7 +50,7 @@ export function PrescriptionsTableItem({
 			</TableCell>
 
 			<TableCell>
-				<EditPrescriptionForm prescription={prescription} />
+				<EditPrescriptionSheet prescription={prescription} />
 			</TableCell>
 
 			<TableCell>

@@ -20,7 +20,7 @@ export async function deletePrescription(
 
 		return {
 			success: false,
-			error: "Erro desconhecido",
+			errors: ["Erro desconhecido"],
 			data: null,
 		};
 	}

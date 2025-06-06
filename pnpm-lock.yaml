@@ -153,6 +153,9 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3
         version: 3.3.0
+      '@next/eslint-plugin-next':
+        specifier: ^15.3.3
+        version: 15.3.3
       '@types/js-cookie':
         specifier: ^3.0.6
         version: 3.0.6
@@ -177,6 +180,12 @@ importers:
       eslint-config-next:
         specifier: 15.2.3
         version: 15.2.3(eslint@9.22.0(jiti@1.21.6))(typescript@5.1.6)
+      eslint-plugin-react-hooks:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.22.0(jiti@1.21.6))
+      eslint-plugin-unused-imports:
+        specifier: ^4.1.4
+        version: 4.1.4(@typescript-eslint/eslint-plugin@8.27.0(@typescript-eslint/parser@8.27.0(eslint@9.22.0(jiti@1.21.6))(typescript@5.1.6))(eslint@9.22.0(jiti@1.21.6))(typescript@5.1.6))(eslint@9.22.0(jiti@1.21.6))
       postcss:
         specifier: 8.4.27
         version: 8.4.27
@@ -391,6 +400,9 @@ packages:
 
   '@next/eslint-plugin-next@15.2.3':
     resolution: {integrity: sha512-eNSOIMJtjs+dp4Ms1tB1PPPJUQHP3uZK+OQ7iFY9qXpGO6ojT6imCL+KcUOqE/GXGidWbBZJzYdgAdPHqeCEPA==}
+
+  '@next/eslint-plugin-next@15.3.3':
+    resolution: {integrity: sha512-VKZJEiEdpKkfBmcokGjHu0vGDG+8CehGs90tBEy/IDoDDKGngeyIStt2MmE5FYNyU9BhgR7tybNWTAJY/30u+Q==}
 
   '@next/swc-darwin-arm64@13.4.11':
     resolution: {integrity: sha512-lc3vl7Wo5A6dnLoJKlURHx2Y8wvHPQBy2JmJ88r+xbATYSyy3U+1B0M0ycrtleIP3lmachoeai9V/8ITt+/AQQ==}
@@ -1930,6 +1942,15 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
 
+  eslint-plugin-unused-imports@4.1.4:
+    resolution: {integrity: sha512-YptD6IzQjDardkl0POxnnRBhU1OEePMV0nd6siHaRBbd+lyh6NAhFEobiznKU7kTsSsDeSD62Pe7kAM1b7dAZQ==}
+    peerDependencies:
+      '@typescript-eslint/eslint-plugin': ^8.0.0-0 || ^7.0.0 || ^6.0.0 || ^5.0.0
+      eslint: ^9.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      '@typescript-eslint/eslint-plugin':
+        optional: true
+
   eslint-scope@8.3.0:
     resolution: {integrity: sha512-pUNxi75F8MJ/GdeKtVLSbYg4ZI34J6C0C7sbL4YOp2exGwen7ZsuBqKzUhXd0qMQ362yET3z+uPwKeg/0C2XCQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3370,6 +3391,10 @@ snapshots:
   '@next/env@13.4.11': {}
 
   '@next/eslint-plugin-next@15.2.3':
+    dependencies:
+      fast-glob: 3.3.1
+
+  '@next/eslint-plugin-next@15.3.3':
     dependencies:
       fast-glob: 3.3.1
 
@@ -5017,6 +5042,12 @@ snapshots:
       semver: 6.3.1
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
+
+  eslint-plugin-unused-imports@4.1.4(@typescript-eslint/eslint-plugin@8.27.0(@typescript-eslint/parser@8.27.0(eslint@9.22.0(jiti@1.21.6))(typescript@5.1.6))(eslint@9.22.0(jiti@1.21.6))(typescript@5.1.6))(eslint@9.22.0(jiti@1.21.6)):
+    dependencies:
+      eslint: 9.22.0(jiti@1.21.6)
+    optionalDependencies:
+      '@typescript-eslint/eslint-plugin': 8.27.0(@typescript-eslint/parser@8.27.0(eslint@9.22.0(jiti@1.21.6))(typescript@5.1.6))(eslint@9.22.0(jiti@1.21.6))(typescript@5.1.6)
 
   eslint-scope@8.3.0:
     dependencies:

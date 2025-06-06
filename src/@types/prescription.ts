@@ -22,9 +22,8 @@ export interface PrescriptionBody {
 }
 
 export interface GetPrescriptionsQueryParams {
-	pageIndex?: number;
-	perPage?: number;
-
+	page?: number;
+	itemsPerPage?: number;
 	medicalRecord?: string | null;
 	patientName?: string | null;
 	medicine?: string | null;
@@ -33,8 +32,9 @@ export interface GetPrescriptionsQueryParams {
 export interface GetPrescriptionsResponse {
 	prescriptions: Prescription[];
 	meta: {
-		pageIndex: number;
-		perPage: number;
-		totalCount: number;
+		page: number;
+		itemsPerPage: number;
+		totalItems: number;
+		totalPages: number;
 	};
 }

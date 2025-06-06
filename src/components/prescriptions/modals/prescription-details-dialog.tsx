@@ -1,5 +1,5 @@
 import { Prescription } from "@/@types/prescription";
-import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { DialogContent, DialogHeader, DialogTitle } from "../../ui/dialog";
 import { capitalizeWords } from "@/utils/capitalize-words";
 import { formatDate } from "@/utils/format-date";
 

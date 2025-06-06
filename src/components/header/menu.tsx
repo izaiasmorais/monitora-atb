@@ -9,12 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogOut, Settings } from "lucide-react";
 import { Avatar } from "./avatar";
-import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "@/api/auth/get-profile";
-import Cookies from "js-cookie";
 import { ProfileSkeleton } from "./profile-skeleton";
+import Cookies from "js-cookie";
 import Link from "next/link";
 
 export function Menu() {

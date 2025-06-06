@@ -2,9 +2,9 @@ import { LoaderCircle, Search, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AddPrescriptionSheet } from "../modals/add-prescription-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AddPrescriptionForm } from "../add-prescription-form";
 import { z } from "zod";
 
 const prescriptionsFilterSchema = z.object({
@@ -124,7 +124,7 @@ export function PrescriptionsTableFilters() {
 				Limpar
 			</Button>
 
-			<AddPrescriptionForm />
+			<AddPrescriptionSheet />
 		</form>
 	);
 }

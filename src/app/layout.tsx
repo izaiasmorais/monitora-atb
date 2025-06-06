@@ -1,10 +1,12 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+
 import Providers from "./providers";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
-	title: "Prescrições",
+	title: "MonitoraATB",
 	description: "Dashboard de prescrições de pacientes",
 };
 
@@ -23,7 +25,11 @@ export default function RootLayout({
 				<link rel="icon" href="/image.png" sizes="any" />
 			</head>
 
-			<body>
+			<body
+				className="antialised vsc-initialized"
+				cz-shortcut-listen="true"
+				suppressHydrationWarning
+			>
 				<Providers>{children}</Providers>
 			</body>
 		</html>

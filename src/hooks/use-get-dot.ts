@@ -35,7 +35,9 @@ export function useGetDot() {
 				return;
 			}
 
-			toast.error(response.error);
+			for (const error of response.errors) {
+				toast.error(error);
+			}
 		},
 	});
 

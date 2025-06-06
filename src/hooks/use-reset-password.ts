@@ -46,7 +46,9 @@ export function useResetPassword() {
 					return;
 				}
 
-				toast.error(response.error);
+			for (const error of response.errors) {
+				toast.error(error);
+			}
 			},
 		});
 

@@ -1,11 +1,11 @@
 export type HTTPErrorResponse = {
 	success: false;
-	error: string;
+	errors: string[];
 	data: null;
 };
 
 export type HTTPSuccessResponse<T = null> = {
 	success: true;
-	error: null;
+	errors: null;
 	data: T;
 };
