@@ -10,7 +10,7 @@ export default function SignUp() {
 				<div className="flex items-start p-6 justify-start">
 					<h1 className="flex items-center gap-1 text-2xl leading-tight font-medium">
 						<Image
-							src={"/image.png"}
+							src={"/monitora-atb.png"}
 							alt="Símbolo da Saúde Azul"
 							width={512}
 							height={512}
@@ -36,7 +36,7 @@ export default function SignUp() {
 				<div className="flex items-start p-6 justify-start">
 					<h1 className="lg:hidden flex items-center gap-1 text-2xl leading-tight font-medium">
 						<Image
-							src={"/image.png"}
+							src={"/monitora-atb.png"}
 							alt="Símbolo da Saúde Azul"
 							width={512}
 							height={512}

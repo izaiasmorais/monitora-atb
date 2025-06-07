@@ -40,7 +40,7 @@ export function Sidebar() {
 					</CollapsibleTrigger>
 
 					<Image
-						src={"/image.png"}
+						src={"/monitora-atb.png"}
 						alt="Símbolo da Saúde Azul"
 						width={512}
 						height={512}

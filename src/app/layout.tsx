@@ -22,7 +22,7 @@ export default function RootLayout({
 			suppressHydrationWarning={true}
 		>
 			<head>
-				<link rel="icon" href="/image.png" sizes="any" />
+				<link rel="icon" href="/monitora-atb.png" sizes="any" />
 			</head>
 
 			<body cz-shortcut-listen="true" className="antialiased">
