@@ -25,17 +25,20 @@ export function Notifications() {
 				</Button>
 			</PopoverTrigger>
 
-			<PopoverContent align="end" alignOffset={-16} className="w-full max-w-96 p-4">
+			<PopoverContent align="end" alignOffset={-16} className="w-[400px] p-4">
 				<div className="flex items-center justify-between">
 					<span className="text-sm font-medium">Notificações</span>
-					<Link href={"/configuracoes"} className="text-muted-foreground hover:text-primary">
+					<Link
+						href={"/configuracoes"}
+						className="text-muted-foreground hover:text-primary"
+					>
 						<Settings size={16} />
 					</Link>
 				</div>
 
 				<Tabs defaultValue="new" className="mt-2">
 					<TabsList className="space-x-1 max-h-max w-full p-1 bg-muted/50">
-						<TabsTrigger value="new">Novas (2)</TabsTrigger>
+						<TabsTrigger value="new">Novas (3)</TabsTrigger>
 						<TabsTrigger value="archived">Arquivadas</TabsTrigger>
 					</TabsList>
 				</Tabs>
@@ -50,7 +53,7 @@ export function Notifications() {
 
 						<div className="space-y-1">
 							<p className="text-xs leading-relaxed">
-								O tratamento de <strong>Izaías Lima</strong> chegou ao fim.
+								O tratamento de <strong>Pacient 1</strong> chegou ao fim.
 							</p>
 
 							<time className="text-xs text-muted-foreground">
@@ -66,11 +69,27 @@ export function Notifications() {
 
 						<div className="space-y-1">
 							<p className="text-xs leading-relaxed">
-								O tratamento de <strong>Dário</strong> chegou ao fim.
+								O tratamento de <strong>Paciente 2</strong> chegou ao fim.
 							</p>
 
 							<time className="text-xs text-muted-foreground">
-								1 hora atrás
+								8 hora atrás
+							</time>
+						</div>
+					</div>
+
+					<div className="flex items-start gap-4">
+						<div className="rounded-full border border-primary/10 bg-primary/5 p-2">
+							<ClockAlert className="h-4 w-4 text-red-500" strokeWidth={2} />
+						</div>
+
+						<div className="space-y-1">
+							<p className="text-xs leading-relaxed">
+								O tratamento de <strong>Paciente 3</strong> chegou ao fim.
+							</p>
+
+							<time className="text-xs text-muted-foreground">
+								17 horas atrás
 							</time>
 						</div>
 					</div>

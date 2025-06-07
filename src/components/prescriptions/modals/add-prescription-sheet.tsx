@@ -30,7 +30,7 @@ export function AddPrescriptionSheet() {
 		<Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
 			<SheetTrigger asChild>
 				<Button
-					className="flex items-center gap-2 ml-auto w-full lg:max-w-[200px]"
+					className="flex items-center gap-2 w-full lg:max-w-[200px]"
 					onClick={() => setIsManually(false)}
 				>
 					<Plus className="w-5 h-5" />

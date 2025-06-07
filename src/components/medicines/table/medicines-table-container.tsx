@@ -10,7 +10,7 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { medicinesTableColumns } from "./medicines-table-columns";
 import { SearchInput } from "@/components/ui/search-input";
@@ -83,7 +83,10 @@ export function MedicinesTableContainer() {
 					translateFunction={translateMedicinesTableKeys}
 				/>
 
-				<Button>Adicionar Medicamento</Button>
+				<Button>
+					<Plus />
+					Adicionar Medicamento
+				</Button>
 			</div>
 
 			<MedicinesTable

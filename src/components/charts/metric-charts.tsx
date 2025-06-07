@@ -97,27 +97,35 @@ export function ChartBarInteractive() {
 		});
 	}, [dateRange]);
 
-const averages = React.useMemo(() => {
-	const count = filteredData.length;
-	if (count === 0) {
-		return { dot: 0, lot: 0, ddd: 0, ddg: 0 };
-	}
+	const averages = React.useMemo(() => {
+		const count = filteredData.length;
+		if (count === 0) {
+			return { dot: 0, lot: 0, ddd: 0, ddg: 0 };
+		}
 
-	return {
-		dot: parseFloat(
-			(filteredData.reduce((acc, curr) => acc + curr.dot, 0) / count).toFixed(2)
-		),
-		lot: parseFloat(
-			(filteredData.reduce((acc, curr) => acc + curr.lot, 0) / count).toFixed(2)
-		),
-		ddd: parseFloat(
-			(filteredData.reduce((acc, curr) => acc + curr.ddd, 0) / count).toFixed(2)
-		),
-		ddg: parseFloat(
-			(filteredData.reduce((acc, curr) => acc + curr.ddg, 0) / count).toFixed(2)
-		),
-	};
-}, [filteredData]);
+		return {
+			dot: parseFloat(
+				(filteredData.reduce((acc, curr) => acc + curr.dot, 0) / count).toFixed(
+					2
+				)
+			),
+			lot: parseFloat(
+				(filteredData.reduce((acc, curr) => acc + curr.lot, 0) / count).toFixed(
+					2
+				)
+			),
+			ddd: parseFloat(
+				(filteredData.reduce((acc, curr) => acc + curr.ddd, 0) / count).toFixed(
+					2
+				)
+			),
+			ddg: parseFloat(
+				(filteredData.reduce((acc, curr) => acc + curr.ddg, 0) / count).toFixed(
+					2
+				)
+			),
+		};
+	}, [filteredData]);
 
 	return (
 		<Card className="py-0 bg-muted/20 shadow-none border-muted">
@@ -139,12 +147,15 @@ const averages = React.useMemo(() => {
 							<button
 								key={chart}
 								data-active={activeChart === chart}
-								className="data-[active=true]:bg-muted/50 relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
+								className="data-[active=true]:bg-muted/50 relative z-30 flex flex-1 flex-col
+								justify-center gap-1 border-t px-10 py-4 text-left even:border-l sm:border-t-0
+								sm:border-l sm:px-8 sm:py-6"
 								onClick={() => setActiveChart(chart)}
 							>
-								<span className="text-muted-foreground text-xs">
+								<span className="text-muted-foreground text-sm">
 									{chartConfig[chart].label}
 								</span>
+
 								<span className="text-lg leading-none font-bold sm:text-3xl">
 									{averages[key as keyof typeof averages]}
 								</span>

@@ -18,6 +18,7 @@ import { PrescriptionsTable } from "./prescriptions-table";
 import { TablePagination } from "@/components/table/table-pagination";
 import { TableHideColumnsDropDown } from "@/components/table/table-hide-columns-dropdown";
 import { prescriptions } from "@/mocks/new-prescriptions";
+import { AddPrescriptionSheet } from "@/components/prescriptions/modals/add-prescription-sheet";
 
 export function PrescriptionsTableContainer() {
 	const [sorting, setSorting] = React.useState<SortingState>([
@@ -82,7 +83,7 @@ export function PrescriptionsTableContainer() {
 					translateFunction={(key) => key}
 				/>
 
-				<Button>Nova Prescrição</Button>
+				<AddPrescriptionSheet />
 			</div>
 
 			<PrescriptionsTable

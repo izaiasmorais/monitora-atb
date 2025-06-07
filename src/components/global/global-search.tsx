@@ -43,7 +43,12 @@ export function GlobalSearchCommand() {
 					<CommandGroup heading="Menu">
 						{routeMetadata.map((route) => (
 							<CommandItem asChild key={route.route}>
-								<Link href={route.route} onClick={() => setOpen(false)}>
+								<Link
+									href={route.route}
+									onClick={() => setOpen(false)}
+									className="flex items-center gap-2"
+								>
+									{route.icon}
 									<span>{route.title}</span>
 								</Link>
 							</CommandItem>

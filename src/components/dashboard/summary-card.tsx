@@ -26,7 +26,7 @@ export function SummaryCard({
 					{value}
 				</h1>
 
-				<span className="text-blue-500 font-medium text-sm block mb-1">
+				<span className="text-muted-foreground font-medium text-sm block mb-1">
 					{description}
 				</span>
 			</div>
