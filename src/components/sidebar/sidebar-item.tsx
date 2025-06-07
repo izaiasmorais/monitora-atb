@@ -22,7 +22,7 @@ export function SidebarItem({
 		(pathname === "/" && href === "/") ||
 		(pathname !== "/" && href !== "/" && pathname.startsWith(href))
 			? "text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-blue-950/50"
-			: "text-foreground/90";
+			: "text-foreground/70";
 
 	return (
 		<Link
