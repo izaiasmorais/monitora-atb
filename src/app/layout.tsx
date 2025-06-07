@@ -25,7 +25,7 @@ export default function RootLayout({
 				<link rel="icon" href="/image.png" sizes="any" />
 			</head>
 
-			<body cz-shortcut-listen="true">
+			<body cz-shortcut-listen="true" className="antialiased">
 				<Providers>{children}</Providers>
 			</body>
 		</html>

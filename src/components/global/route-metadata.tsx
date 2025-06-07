@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { getRouteMetadata, type RouteMetadata } from "@/mocks/route-metadata";
+import { getRouteMetadata, type RouteMetadata } from "@/mocks/routes";
 
 export function RouteMetadata() {
 	const pathname = usePathname();

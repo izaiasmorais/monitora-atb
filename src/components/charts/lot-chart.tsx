@@ -1,6 +1,6 @@
 "use client";
 import { useGetLot } from "@/hooks/use-get-lot";
-import { units } from "@/mocks/units";
+import { units } from "@/mocks/hospital-units";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picket";

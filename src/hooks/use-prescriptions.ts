@@ -1,4 +1,4 @@
-import { prescriptionFormData } from "@/mocks/prescription-form-data";
+import { prescriptionFormData } from "@/mocks/prescriptions";
 import { useDoses } from "./use-doses";
 
 export function usePrescriptions() {

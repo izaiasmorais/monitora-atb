@@ -1,4 +1,4 @@
-import { prescriptionFormData } from "@/mocks/prescription-form-data";
+import { prescriptionFormData } from "@/mocks/prescriptions";
 
 export function useDoses() {
 	const allDoses = prescriptionFormData

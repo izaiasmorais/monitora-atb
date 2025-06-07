@@ -22,37 +22,37 @@ import { DateRangePicker } from "@/components/ui/date-range-picker";
 export const description = "An interactive bar chart";
 
 const chartData = [
-	{ date: "2025-05-01", dot: 142, lot: 89, ddd: 78, ddg: 156 },
-	{ date: "2025-05-02", dot: 156, lot: 92, ddd: 85, ddg: 168 },
-	{ date: "2025-05-03", dot: 134, lot: 87, ddd: 72, ddg: 145 },
-	{ date: "2025-05-04", dot: 167, lot: 95, ddd: 91, ddg: 179 },
-	{ date: "2025-05-05", dot: 189, lot: 104, ddd: 98, ddg: 201 },
-	{ date: "2025-05-06", dot: 178, lot: 101, ddd: 94, ddg: 188 },
-	{ date: "2025-05-07", dot: 145, lot: 88, ddd: 76, ddg: 152 },
-	{ date: "2025-05-08", dot: 163, lot: 97, ddd: 89, ddg: 174 },
-	{ date: "2025-05-09", dot: 138, lot: 84, ddd: 71, ddg: 142 },
-	{ date: "2025-05-10", dot: 172, lot: 99, ddd: 93, ddg: 183 },
-	{ date: "2025-05-11", dot: 159, lot: 94, ddd: 86, ddg: 169 },
-	{ date: "2025-05-12", dot: 148, lot: 91, ddd: 81, ddg: 158 },
-	{ date: "2025-05-13", dot: 141, lot: 86, ddd: 74, ddg: 148 },
-	{ date: "2025-05-14", dot: 185, lot: 103, ddd: 96, ddg: 195 },
-	{ date: "2025-05-15", dot: 176, lot: 100, ddd: 92, ddg: 186 },
-	{ date: "2025-05-16", dot: 164, lot: 96, ddd: 88, ddg: 173 },
-	{ date: "2025-05-17", dot: 192, lot: 106, ddd: 101, ddg: 204 },
-	{ date: "2025-05-18", dot: 153, lot: 93, ddd: 84, ddg: 162 },
-	{ date: "2025-05-19", dot: 139, lot: 85, ddd: 73, ddg: 146 },
-	{ date: "2025-05-20", dot: 147, lot: 90, ddd: 80, ddg: 155 },
-	{ date: "2025-05-21", dot: 132, lot: 82, ddd: 69, ddg: 138 },
-	{ date: "2025-05-22", dot: 128, lot: 81, ddd: 67, ddg: 135 },
-	{ date: "2025-05-23", dot: 161, lot: 95, ddd: 87, ddg: 171 },
-	{ date: "2025-05-24", dot: 155, lot: 93, ddd: 83, ddg: 164 },
-	{ date: "2025-05-25", dot: 149, lot: 91, ddd: 79, ddg: 157 },
-	{ date: "2025-05-26", dot: 143, lot: 88, ddd: 75, ddg: 150 },
-	{ date: "2025-05-27", dot: 181, lot: 102, ddd: 95, ddg: 191 },
-	{ date: "2025-05-28", dot: 151, lot: 92, ddd: 82, ddg: 160 },
-	{ date: "2025-05-29", dot: 136, lot: 84, ddd: 70, ddg: 141 },
-	{ date: "2025-05-30", dot: 168, lot: 98, ddd: 90, ddg: 177 },
-	{ date: "2025-05-31", dot: 144, lot: 89, ddd: 77, ddg: 153 },
+	{ date: "2025-05-01", dot: 1.43, lot: 0.9, ddd: 0.78, ddg: 1.57 },
+	{ date: "2025-05-02", dot: 1.56, lot: 0.93, ddd: 0.86, ddg: 1.68 },
+	{ date: "2025-05-03", dot: 1.35, lot: 0.87, ddd: 0.73, ddg: 1.45 },
+	{ date: "2025-05-04", dot: 1.68, lot: 0.95, ddd: 0.92, ddg: 1.79 },
+	{ date: "2025-05-05", dot: 1.9, lot: 1.05, ddd: 0.98, ddg: 2.02 },
+	{ date: "2025-05-06", dot: 1.78, lot: 1.02, ddd: 0.94, ddg: 1.89 },
+	{ date: "2025-05-07", dot: 1.46, lot: 0.89, ddd: 0.77, ddg: 1.52 },
+	{ date: "2025-05-08", dot: 1.64, lot: 0.97, ddd: 0.9, ddg: 1.75 },
+	{ date: "2025-05-09", dot: 1.38, lot: 0.85, ddd: 0.71, ddg: 1.43 },
+	{ date: "2025-05-10", dot: 1.73, lot: 1.0, ddd: 0.93, ddg: 1.83 },
+	{ date: "2025-05-11", dot: 1.59, lot: 0.95, ddd: 0.87, ddg: 1.69 },
+	{ date: "2025-05-12", dot: 1.49, lot: 0.92, ddd: 0.82, ddg: 1.58 },
+	{ date: "2025-05-13", dot: 1.42, lot: 0.86, ddd: 0.75, ddg: 1.49 },
+	{ date: "2025-05-14", dot: 1.85, lot: 1.04, ddd: 0.96, ddg: 1.96 },
+	{ date: "2025-05-15", dot: 1.77, lot: 1.01, ddd: 0.93, ddg: 1.86 },
+	{ date: "2025-05-16", dot: 1.64, lot: 0.96, ddd: 0.89, ddg: 1.74 },
+	{ date: "2025-05-17", dot: 1.93, lot: 1.06, ddd: 1.02, ddg: 2.04 },
+	{ date: "2025-05-18", dot: 1.54, lot: 0.94, ddd: 0.84, ddg: 1.63 },
+	{ date: "2025-05-19", dot: 1.39, lot: 0.86, ddd: 0.74, ddg: 1.47 },
+	{ date: "2025-05-20", dot: 1.48, lot: 0.9, ddd: 0.8, ddg: 1.56 },
+	{ date: "2025-05-21", dot: 1.33, lot: 0.83, ddd: 0.7, ddg: 1.38 },
+	{ date: "2025-05-22", dot: 1.29, lot: 0.82, ddd: 0.68, ddg: 1.35 },
+	{ date: "2025-05-23", dot: 1.61, lot: 0.96, ddd: 0.88, ddg: 1.72 },
+	{ date: "2025-05-24", dot: 1.56, lot: 0.93, ddd: 0.83, ddg: 1.65 },
+	{ date: "2025-05-25", dot: 1.5, lot: 0.91, ddd: 0.8, ddg: 1.57 },
+	{ date: "2025-05-26", dot: 1.43, lot: 0.89, ddd: 0.76, ddg: 1.51 },
+	{ date: "2025-05-27", dot: 1.82, lot: 1.03, ddd: 0.95, ddg: 1.91 },
+	{ date: "2025-05-28", dot: 1.51, lot: 0.93, ddd: 0.83, ddg: 1.61 },
+	{ date: "2025-05-29", dot: 1.37, lot: 0.84, ddd: 0.71, ddg: 1.41 },
+	{ date: "2025-05-30", dot: 1.69, lot: 0.99, ddd: 0.91, ddg: 1.78 },
+	{ date: "2025-05-31", dot: 1.45, lot: 0.9, ddd: 0.77, ddg: 1.54 },
 ];
 
 const chartConfig = {
@@ -97,27 +97,27 @@ export function ChartBarInteractive() {
 		});
 	}, [dateRange]);
 
-	const averages = React.useMemo(() => {
-		const count = filteredData.length;
-		if (count === 0) {
-			return { dot: 0, lot: 0, ddd: 0, ddg: 0 };
-		}
+const averages = React.useMemo(() => {
+	const count = filteredData.length;
+	if (count === 0) {
+		return { dot: 0, lot: 0, ddd: 0, ddg: 0 };
+	}
 
-		return {
-			dot: Math.round(
-				filteredData.reduce((acc, curr) => acc + curr.dot, 0) / count
-			),
-			lot: Math.round(
-				filteredData.reduce((acc, curr) => acc + curr.lot, 0) / count
-			),
-			ddd: Math.round(
-				filteredData.reduce((acc, curr) => acc + curr.ddd, 0) / count
-			),
-			ddg: Math.round(
-				filteredData.reduce((acc, curr) => acc + curr.ddg, 0) / count
-			),
-		};
-	}, [filteredData]);
+	return {
+		dot: parseFloat(
+			(filteredData.reduce((acc, curr) => acc + curr.dot, 0) / count).toFixed(2)
+		),
+		lot: parseFloat(
+			(filteredData.reduce((acc, curr) => acc + curr.lot, 0) / count).toFixed(2)
+		),
+		ddd: parseFloat(
+			(filteredData.reduce((acc, curr) => acc + curr.ddd, 0) / count).toFixed(2)
+		),
+		ddg: parseFloat(
+			(filteredData.reduce((acc, curr) => acc + curr.ddg, 0) / count).toFixed(2)
+		),
+	};
+}, [filteredData]);
 
 	return (
 		<Card className="py-0 bg-muted/20 shadow-none border-muted">

@@ -1,4 +1,4 @@
-import { Database, LayoutDashboard, Settings, Users } from "lucide-react";
+import { Database, LayoutDashboard, Pill, Settings, Users } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 
 export function SidebarContent() {
@@ -19,6 +19,12 @@ export function SidebarContent() {
 					title="Prescrições"
 					href="/prescricoes"
 					icon={<Users size={20} strokeWidth={1.75} />}
+				/>
+
+				<SidebarItem
+					title="Medicamentos"
+					href="/medicamentos"
+					icon={<Pill size={20} strokeWidth={1.75} />}
 				/>
 
 				<SidebarItem
