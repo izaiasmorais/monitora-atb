@@ -145,7 +145,7 @@ export const prescriptionsTableColumns: ColumnDef<Prescription>[] = [
 				className="!p-0 hover:bg-transparent"
 				onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
 			>
-				Data de Criação
+				Data da Prescrição
 				{column.getIsSorted() !== "desc" && (
 					<ArrowUp className="ml-2 h-4 w-4" />
 				)}

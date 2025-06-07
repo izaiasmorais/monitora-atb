@@ -1,6 +1,6 @@
 {
-	"name": "prescriptions",
-	"version": "0.1.0",
+	"name": "monitora-atb",
+	"version": "0.5.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",

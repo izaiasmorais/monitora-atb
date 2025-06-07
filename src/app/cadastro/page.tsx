@@ -16,7 +16,7 @@ export default function SignUp() {
 							height={512}
 							className="w-10 h-10"
 						/>
-						Prescrições
+						MonitoraATB
 					</h1>
 				</div>
 
@@ -42,7 +42,7 @@ export default function SignUp() {
 							height={512}
 							className="w-10 h-10"
 						/>
-						Prescrições
+						MonitoraATB
 					</h1>
 				</div>
 

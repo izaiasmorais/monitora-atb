@@ -7,7 +7,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
 	title: "MonitoraATB",
-	description: "Dashboard de prescrições de pacientes",
+	description: "Uma solução completa para monitorar as terapias de pacientes.",
 };
 
 export default function RootLayout({
