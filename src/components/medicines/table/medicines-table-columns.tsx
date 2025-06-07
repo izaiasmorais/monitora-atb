@@ -108,7 +108,7 @@ export const medicinesTableColumns: ColumnDef<Medicine>[] = [
 				className="!p-0 hover:bg-transparent"
 				onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
 			>
-				Vias Administrativas
+				Vias de Administração
 				{column.getIsSorted() !== "desc" && (
 					<ArrowUp className="ml-2 h-4 w-4" />
 				)}

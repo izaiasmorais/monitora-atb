@@ -68,7 +68,7 @@ export const posologiesTableColumns: ColumnDef<Posology>[] = [
 			</Button>
 		),
 		cell: ({ row }) => (
-			<div className="text-sm text-muted-foreground max-w-[200px] truncate">
+			<div className="text-sm text-muted-foreground">
 				{row.getValue("description")}
 			</div>
 		),

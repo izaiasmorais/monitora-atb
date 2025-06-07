@@ -65,9 +65,9 @@ export const routeMetadata: RouteMetadata[] = [
 	},
 	{
 		route: "/dados/vias-de-administracao",
-		title: "Vias Administrativas",
+		title: "Vias de Administração",
 		description:
-			"Gerencie e visualize todas as vias administrativas cadastradas.",
+			"Gerencie e visualize todas as vias de administração cadastradas.",
 		icon: <Syringe size={20} strokeWidth={1.75} />,
 	},
 	{
