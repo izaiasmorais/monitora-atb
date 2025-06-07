@@ -12,7 +12,7 @@ export function DosesTableHeader({
 	widths = ["w-[50px]", "w-[200px]", "w-[300px]", "w-[150px]", "w-[150px]"],
 }: DosesTableHeaderProps) {
 	return (
-		<TableHeader className="bg-slate-50">
+		<TableHeader className="bg-muted">
 			{table.getHeaderGroups().map((headerGroup) => (
 				<TableRow key={headerGroup.id} className="border-none">
 					{headerGroup.headers.map((header) => {

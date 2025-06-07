@@ -1,9 +1,9 @@
-import { PrescriptionsTable } from "@/components/prescriptions/table/prescriptions-table";
+import { PrescriptionsTableContainer } from "@/components/new-prescriptions/table/prescriptions-table-container";
 
-export default function Prescriptions() {
+export default function PrescriptionsPage() {
 	return (
-		<main className="flex flex-col gap-4">
-			<PrescriptionsTable />
-		</main>
+		<div className="w-full">
+			<PrescriptionsTableContainer />
+		</div>
 	);
 }

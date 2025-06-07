@@ -4,6 +4,7 @@ import { getRouteMetadata, type RouteMetadata } from "@/mocks/routes";
 
 export function RouteMetadata() {
 	const pathname = usePathname();
+	
 	const { title, description } = getRouteMetadata(pathname);
 
 	return (

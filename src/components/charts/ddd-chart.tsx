@@ -1,5 +1,5 @@
 "use client";
-import { units } from "@/mocks/hospital-units";
+import { hospitalUnits } from "@/mocks/hospital-units";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picket";
@@ -19,7 +19,10 @@ export function DddChart() {
 					<form onSubmit={form.handleSubmitForm} className="w-full space-y-4">
 						<Combobox
 							form={form}
-							options={units}
+							options={hospitalUnits.map((unit) => ({
+								label: unit.name,
+								value: unit.id,
+							}))}
 							entity="unit"
 							emptyMessage="Nenhuma unidade encontrada."
 							translatedEntity="Unidade"

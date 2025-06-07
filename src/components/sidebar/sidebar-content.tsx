@@ -1,4 +1,12 @@
-import { Database, LayoutDashboard, Pill, Settings, Users } from "lucide-react";
+import {
+	BotMessageSquare,
+	Calendar,
+	Database,
+	LayoutDashboard,
+	Pill,
+	Settings,
+	SquareActivity,
+} from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 
 export function SidebarContent() {
@@ -18,7 +26,7 @@ export function SidebarContent() {
 				<SidebarItem
 					title="Prescrições"
 					href="/prescricoes"
-					icon={<Users size={20} strokeWidth={1.75} />}
+					icon={<SquareActivity size={20} strokeWidth={1.75} />}
 				/>
 
 				<SidebarItem
@@ -31,6 +39,18 @@ export function SidebarContent() {
 					title="Dados"
 					href="/dados"
 					icon={<Database size={20} strokeWidth={1.75} />}
+				/>
+
+				<SidebarItem
+					title="Calendário"
+					href="/calendario"
+					icon={<Calendar size={20} strokeWidth={1.75} />}
+				/>
+
+				<SidebarItem
+					title="Assistente"
+					href="/assistente"
+					icon={<BotMessageSquare size={20} strokeWidth={1.75} />}
 				/>
 
 				<SidebarItem

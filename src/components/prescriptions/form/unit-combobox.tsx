@@ -2,7 +2,7 @@
 import { PrescriptionFormData } from "../schemas/prescription";
 import { UseFormReturn } from "react-hook-form";
 import { Combobox } from "./combobox";
-import { units } from "@/mocks/hospital-units";
+import { hospitalUnits } from "@/mocks/hospital-units";
 
 export function UnitCombobox({
 	form,
@@ -12,7 +12,10 @@ export function UnitCombobox({
 	return (
 		<Combobox
 			form={form}
-			options={units}
+			options={hospitalUnits.map((unit) => ({
+				label: unit.name,
+				value: unit.id,
+			}))}
 			entity="unit"
 			translatedEntity="Unidade"
 		/>
