@@ -1,10 +1,4 @@
-import {
-	ChartLine,
-	Database,
-	LayoutDashboard,
-	Settings,
-	Users,
-} from "lucide-react";
+import { Database, LayoutDashboard, Settings, Users } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 
 export function SidebarContent() {
@@ -25,12 +19,6 @@ export function SidebarContent() {
 					title="Prescrições"
 					href="/prescricoes"
 					icon={<Users size={20} strokeWidth={1.75} />}
-				/>
-
-				<SidebarItem
-					title="Gráficos"
-					href="/graficos"
-					icon={<ChartLine size={20} strokeWidth={1.75} />}
 				/>
 
 				<SidebarItem

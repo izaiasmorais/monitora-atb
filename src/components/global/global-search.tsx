@@ -1,13 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-	LayoutDashboard,
-	Users,
-	ChartLine,
-	Database,
-	Settings,
-} from "lucide-react";
+import { LayoutDashboard, Users, Database, Settings } from "lucide-react";
 import {
 	CommandDialog,
 	CommandEmpty,
@@ -59,13 +53,6 @@ export function GlobalSearchCommand() {
 							<Link href="/prescricoes" onClick={() => setOpen(false)}>
 								<Users className="mr-2" />
 								<span>Prescrições</span>
-							</Link>
-						</CommandItem>
-
-						<CommandItem asChild>
-							<Link href="/graficos" onClick={() => setOpen(false)}>
-								<ChartLine className="mr-2" />
-								<span>Gráficos</span>
 							</Link>
 						</CommandItem>
 

@@ -10,7 +10,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 			<main className="xl:col-start-2 max-w-[100vw] flex flex-col h-screen">
 				<Header />
 
-				<div className="px-4 py-8 md:p-4 flex-grow overflow-auto">
+				<div className="px-4 py-8 md:p-5 flex-grow overflow-auto">
 					<RouteMetadata />
 
 					{children}

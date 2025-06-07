@@ -8,7 +8,7 @@ export function RouteMetadata() {
 
 	return (
 		<div className="flex flex-col mb-4">
-			<h1 className="text-xl font-semibold">{title}</h1>
+			<h1 className="text-2xl font-semibold">{title}</h1>
 			<span className="text-sm text-muted-foreground">{description}</span>
 		</div>
 	);

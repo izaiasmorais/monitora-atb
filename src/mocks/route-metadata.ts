@@ -12,10 +12,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
 		title: "Prescrições",
 		description: "Gerencie e visualize todas as prescrições médicas.",
 	},
-	"/graficos": {
-		title: "Gráficos",
-		description: "Analise dados através de gráficos e estatísticas.",
-	},
 	"/configuracoes": {
 		title: "Configurações",
 		description: "Configure as preferências do sistema.",

@@ -25,11 +25,7 @@ export default function RootLayout({
 				<link rel="icon" href="/image.png" sizes="any" />
 			</head>
 
-			<body
-				className="antialised vsc-initialized"
-				cz-shortcut-listen="true"
-				suppressHydrationWarning
-			>
+			<body cz-shortcut-listen="true">
 				<Providers>{children}</Providers>
 			</body>
 		</html>
