@@ -12,11 +12,11 @@ export function ChatBot() {
 
 				<div
 					className="flex flex-col p-6 h-[200px] w-[800px] rounded-xl border border-muted
-			shadow-sm justify-between"
+			shadow-sm justify-between bg-muted"
 				>
 					<Input
 						placeholder="Digite sua mensagem aqui"
-						className="!border-none !outline-none !shadow-none !ring-0 p-0"
+						className="!border-none !outline-none !shadow-none !ring-0 p-0 "
 					/>
 
 					<div className="flex items-center gap-2 text-muted-foreground w-full">
